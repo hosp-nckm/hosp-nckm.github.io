@@ -1,3 +1,4 @@
+
 <!-- <!DOCTYPE html> -->
 <html lang="zh-TW">
 <head>
@@ -25,7 +26,7 @@
 <link rel="apple-touch-icon" sizes="128x128" href="static/img/logo.PNG">
 <link rel="apple-touch-icon-precomposed" sizes="128x128" href="static/img/logo.PNG">
 
-<!-- <link rel="stylesheet" href="static/css/main.css">   -->
+<!--<link rel="stylesheet" href="static/css/main.css">   -->
 <!--====== Javascripts & Jquery ======-->
 <!--<script src="static/js/main.js"></script>        
 <script src="static/js/pre.js"></script>--><!--script src="https://www.w3school.com.cn/jquery/jquery-1.11.1.min.js"></script-->
@@ -45,13 +46,15 @@ background:#FFECEC;
 background-size: 100%;
 font:normal bold 4.5vmin/1 "Microsoft JhengHei", serif;
 overflow-y: hidden;
-padding-bottom: 5em;
+/*height: 85%;*/
+padding-bottom: 6em;
+/*margin-bottom: 5em;*/
 }
-#intro,#menu,#sort,#result,#advice,#myself,#finish,#start{
+#intro,#menu,#sort,#result,#advice,#myself,#finish,#start,#video_1,#video_2{
     overflow-y: scroll;    
 }
 
-#intro,#menu,#sort,#result,#advice,#myself,#finish,#start,#print{
+#intro,#menu,#sort,#result,#advice,#myself,#finish,#start,#print,#video_1,#video_2{
 /*position: absolute;*/
 width: 920px;
 height: 100%;
@@ -63,6 +66,18 @@ padding: 5px 20px;
     display:none;
     padding: 30px 20px;
 }
+#video_1,#video_2{    
+    /*border-width: 5px 15px 5px 3.5px;
+    */
+    
+    padding: 0px 0px;
+    width: 100%;
+    position: absolute;
+    top:5px;/*140px;*/
+    right:0%;
+    display:none;
+}
+
 #menu{
     background-color: #B299A4;
     display:none;/*==========================================*/
@@ -1042,7 +1057,7 @@ button:hover {
    /*text-shadow:   0.5px 0.5px #AAAAAA;*/
    }
 /*===================================================================*/
-.start_text{  
+.start_text,.video_text{  
     border-radius: 20px 20px 20px 20px;
     border-width: 15px 10px 35px 10px;    
     border-color:transparent;
@@ -1055,7 +1070,7 @@ button:hover {
     color:black;    
     line-height: 1.3em;
 }
-.start_pic{  
+.start_pic,.video_pic{  
     border-radius: 20px 20px 20px 20px;
     border-width: 0.1px;  
 
@@ -1068,10 +1083,25 @@ button:hover {
   -moz-border-radius: 50px;*/
     color:white;    
 }
-.start_go{       
+.video_pic{
+    opacity: 1;
+    
+    border-width: 105px 100px 305px 100px;
+    width: 100%;
+    border-width: 0px;  
+    background:  url(static/img/video_loading.png) no-repeat center top;
+    background-size:auto 90% ;
+    background-position:  center;
+    
+}
+#table_video{
+    
+    border-width: 0px 0px 0px 0px;
+    width: 100%;
+}
+.start_go,.video_go{       
     height: 3em;
     border-radius: 10px;
-    border-width: 5px 15px 5px 3.5px;
     border-style: solid;
     border-radius:20px;
     font:normal bolder 5vmin/1 "Microsoft JhengHei", serif;
@@ -1082,14 +1112,16 @@ button:hover {
     background:#E972A3;
     color:white;    
     box-shadow: 0px -3px 15px 3px rgb(146, 144, 144);
-    /*box-shadow: 3px -3px 15px 3px rgb(146, 144, 144);*/   
+    /*box-shadow: 3px -3px 15px 3px rgb(146, 144, 144);*/  
+    
+    margin-bottom: 500px; 
 }
-#start_go:active {
+#start_go:active,#video_go:active {
    top: 1px;
    background:#9c1a50;
    position: relative;
 }
-#start_go:hover {
+#start_go:hover,#video_go:hover {
     top: 1px;
    background: #9c1a50;
    position: relative;
@@ -1097,6 +1129,46 @@ button:hover {
    /*text-shadow:   0.5px 0.5px #AAAAAA;*/
    }
 
+
+
+/*==================================================*/
+#floor{  
+    display: flex;
+    justify-content: space-between;     
+    position: fixed;
+    z-index: 3;
+    bottom: 1%;
+    /*top:1620px;*/
+}
+.floor_go{       
+    padding-left: 0%;
+    margin-right:3%;
+    height: 2em;
+    border-radius: 10px;
+    border-width: 5px 15px 5px 3.5px;
+    border-style: solid;
+    border-radius:20px;
+    font:normal bolder 5vmin/1 "Microsoft JhengHei", serif;
+    width: 20%;
+    text-align:center;
+    border-color:transparent;
+    background:#9672e9;
+    color:white;    
+    box-shadow: 0px -3px 15px 3px rgb(146, 144, 144);
+    /*box-shadow: 3px -3px 15px 3px rgb(146, 144, 144);*/   
+}
+#floor_go:active {
+   top: 1px;
+   background:#9c1a50;
+   position: relative;
+}
+#sfloor_go:hover {
+    top: 1px;
+   background: #9c1a50;
+   position: relative;
+   color: white;   
+   /*text-shadow:   0.5px 0.5px #AAAAAA;*/
+   }
 
 #click{
     border-radius: 20px 20px 20px 20px;
@@ -1353,7 +1425,6 @@ else if(click_item.style.backgroundColor=="white"){
         //alert(pt.children[hh].children[0].id);
         /*alert(pt.children[hh].id);
         alert(pt.children[hh].children[0].id);
-
         alert(pt.children[hh].children[0].style.backgroundColor);
         alert(pt.children[hh].children[0].style.color);*/
     ///    pt.children[hh].children[0].style.backgroundColor="white";
@@ -1834,12 +1905,10 @@ function run(key,title,num,order) {
     var demo2 = demo.cloneNode(true);
     demo2.style.display="block";
     document.getElementById("sr1").appendChild(demo2);
-
     var demo = document.getElementById("menu_"+key+"2_s");
     var demo2 = demo.cloneNode(true);
     demo2.style.display="block";
     document.getElementById("sr2").appendChild(demo2);
-
     var demo = document.getElementById("menu_"+key+"3_s");
     var demo2 = demo.cloneNode(true);
     demo2.style.display="block";
@@ -2197,6 +2266,44 @@ function click_bottom(){
     }*/
 }
 
+/*===================================================*/
+
+function fullScreen() {
+
+    var e = document.getElementById("video-wrapper");
+    if (e.requestFullscreen) {
+        e.requestFullscreen();
+    } else if (e.webkitRequestFullscreen) {
+        e.webkitRequestFullscreen();
+    } else if (e.mozRequestFullScreen) {
+        e.mozRequestFullScreen();
+    } else if (e.msRequestFullscreen) {
+        e.msRequestFullscreen();
+    }
+}
+
+function YTStateChange(event) {
+    switch(event.data) {
+        case -1:
+            fullScreen();
+        break;
+        case 1:
+            // some code
+        break;
+        case 2:
+            // some code 
+        break;
+        default:
+        break;
+    }
+}
+
+$(document).ready(function () {
+    var player = new YT.Player( 'video-wrapper', {
+        events: { 'onStateChange': YTStateChange }
+    });
+});
+
 </script>
 <div id="click" onclick="click_bottom();"></div>
 <div id="show" ></div>
@@ -2230,6 +2337,15 @@ function click_bottom(){
     <div class="turn_next" onclick="page(2);">next</div>
 </div>
 <body>
+
+
+    
+     
+    <div id="floor" style="width: 100%;">
+        <div class="floor_go" style='margin-left:3%;' type="button" onclick="window.location.reload();">回首頁</div>
+        <div class="floor_go" style='width: 38%;' type="button" onclick="video_pause();document.getElementById('click').style.display='none';document.getElementById('info-content').style.display='none';document.getElementById('video_1').style.display='block';document.getElementById('video_2').style.display='none';">乳房重建影片 台語版</div>
+        <div class="floor_go" style='width: 38%;' type="button" onclick="video_pause();document.getElementById('click').style.display='none';document.getElementById('info-content').style.display='none';document.getElementById('video_2').style.display='block';document.getElementById('video_1').style.display='none';">乳房重建影片 國語版</div>
+    </div>
 <div id="intro">
     <table border="10"  class="table"  cellspacing=0  bgcolor=white >
         <tr id="row_1">
@@ -2764,9 +2880,100 @@ function click_bottom(){
             <tr id="start_row_c" >
                 <td id="start_go" class="start_go" colspan="1" onclick="page(0);">出發吧</td>
             </tr>            
+    </table>         
+
+</div>
+
+<div id="video_1">
+
+    <table border="0"  id="table_video" class="table_start"  cellspacing=20 style="width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC >
+        <tr id="video_row" style="border: none;">
+            <td style="border: none;height: 10em;"></td>
+        </tr> 
+            <tr id="video_row" >
+                <td id="video_text" class="video_text" colspan="1" >乳房重建 台語版</td>
+            </tr>
+            <tr id="video_row" >
+                
+                <td id="video_pic" class="video_pic" colspan="1" >
+                    <video   id="video_1s" style='border-style:inset;' width="100%" height="540" controls=""><source src="static/video/乳房重建 台語版 最新版1.mp4" type="video/mp4"></video>
+                        <!--iframe src="https://drive.google.com/file/d/1r8rFY7-RB6aQrnLVgkdrNYJ-Fmas9ixl/preview" width="100%" height="540"  allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe-->
+                    </td>
+            </tr>   
+            <tr id="video_row" style="border: none;">
+                <td style="border: none;height: 5em;"></td>
+            </tr>
+            <tr id="video_row_c" >
+                <td id="video_go" class="video_go" colspan="1" onclick="video_pause();document.getElementById('video_1').style.display='none';if(new_user){document.getElementById('click').style.display='block';document.getElementById('info-content').style.display='block';}">關閉影片</td>
+            </tr>   
+            <tr id="video_row" style="border: none;">
+                <td style="border: none;height: 50em;"></td>
+            </tr>              
     </table>    
 
 </div>
+<div id="video_2">
+
+    <table border="0"  id="table_video" class="table_start"  cellspacing=20 style="width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC >
+        <tr id="video_row" style="border: none;">
+            <td style="border: none;height: 10em;"></td>
+        </tr> 
+            <tr id="video_row" >
+                <td id="video_text" class="video_text" colspan="1" >乳房重建 國語版</td>
+            </tr>
+            <tr id="video_row" >
+                <td id="video_pic" class="video_pic" colspan="1" >
+                    <video  id="video_2s" style='border-style:inset;' width="100%" height="540" controls=""><source src="static/video/乳房重建衛教影片 國語版 實驗組 最新版.mp4" type="video/mp4"></video>
+                    <!--iframe src="https://drive.google.com/file/d/1gnrmF_N03I4zIXemGS7CDJh9l84D4eFI/preview" width="100%" height="540" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe-->
+                </td>
+            </tr> 
+            <tr id="video_row" style="border: none;">
+                <td style="border: none;height: 5em;"></td>
+            </tr> 
+            <tr id="video_row_c" >
+                <td id="video_go" class="video_go" colspan="1" onclick="video_pause();document.getElementById('video_2').style.display='none';if(new_user){document.getElementById('click').style.display='block';document.getElementById('info-content').style.display='block';}">關閉影片</td>             
+            </tr>    
+            <tr id="video_row" style="border: none;">
+                <td style="border: none;height: 50em;"></td>
+            </tr>          
+    </table>      
+<div> 
+
+<!--停止所有播放中的iframe視頻-->
+<script language="javascript" type="text/javascript" src="jquery-1.8.2.js"></script>
+<script language="javascript" type="text/javascript">
+function video_pause(){
+    document.getElementById("video_1s").pause();
+    document.getElementById("video_2s").pause();
+}
+
+/*$(function(){
+    $('.video_go').click(function(){ 
+        $("iframe").each(function() { 
+        var src= $(this).attr('src');
+        $(this).attr('src',src);  
+});  
+    });
+});*/
+</script>
+
+<!--全螢幕設定 allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"   -->
+<style>
+    .mejs-container-fullscreen { 
+    background-color: #fff !important; 
+} 
+
+.mejs-container-fullscreen .mejs-mediaelement, 
+.mejs-container-fullscreen video { 
+    height: 530px !important; 
+    top: 500px !important; 
+} 
+
+.mejs-container.mejs-container-fullscreen .mejs-controls { 
+    bottom: auto !important; 
+    top: 1000px !important; /* video top + video height - controls height (30px) */ 
+} 
+</style>
 <script>
 /*google_ad_client = "ca-pub-2783044520727903";
 /* jQuery_demo */
@@ -2822,6 +3029,5 @@ var i=0;
   })();*/
 
 </script>
-
 </body>
 </html>
