@@ -30,7 +30,7 @@ var cacheFiles = [
   "static/video/乳房重建衛教影片 國語版 實驗組 最新版_1.mp4",
   "https://code.jquery.com/jquery-3.5.0.js",
   {
-    url: './home.html',
+    url: './home_PWA.html',
     revision: '00000001' // 加revision，版本改了以後，sw.js 在 application 上會更新
   }
 ];
