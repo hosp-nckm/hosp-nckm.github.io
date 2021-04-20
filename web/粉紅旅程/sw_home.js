@@ -34,4 +34,4 @@ var cacheFiles = [
     revision: '00000001' // 加revision，版本改了以後，sw.js 在 application 上會更新
   }
 ];
-workbox.precaching.precacheAndRoute(cacheFiles);
+workbox.precaching.precacheAndRoute(cacheFiles); 
