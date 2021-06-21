@@ -2,7 +2,7 @@
 　"short_name": "PWA_learn",
 　"name": "PWA_learn",
 　"icons": [{
-　　"src":"icon.png",
+　　"src":"static/img/icon.png",
 　　"sizes": "192×192",
 　　"type": "image/png"
 　　}],
