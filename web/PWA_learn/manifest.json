@@ -3,14 +3,14 @@
   "name": "PWA_learn",
   "icons": [
     {
-      "src": "/static/img/icon.png",
+      "src": "/web/PWA_learn/static/img/icon.png",
       "type": "image/png",
       "sizes": "192x192"
     }
   ],
-  "start_url": "/home.html?source=pwa",
+  "start_url": "/web/PWA_learn/home.html?source=pwa",
   "background_color": "#FFFFFF",
   "display": "standalone",
-  "scope": "/web/PWA_learn/",
+  "scope": "/",
   "theme_color": "#000000"  
 }
