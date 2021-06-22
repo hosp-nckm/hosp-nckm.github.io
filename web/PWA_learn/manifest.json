@@ -1,14 +1,16 @@
 {
-　"name": "PWA_learn",
-　"short_name": "PWA_learn",
-　"icons": [{
-　　"src":"static/img/icon.png",
-　　"sizes": "192×192",
-　　"type": "image/png"
-　　}],
-　"start_url": "/home.html",
-  "scope": "/web/PWA_learn/",
-　"background_color": "#FFFFFF",
-　"theme_color": "#000000",
-　"display": "standalone"
+  "short_name": "PWA",
+  "name": "PWA_learn",
+  "icons": [
+    {
+      "src": "/static/img/icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/?source=pwa",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#000000"  
 }
