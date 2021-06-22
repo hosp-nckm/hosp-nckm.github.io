@@ -8,9 +8,9 @@
       "sizes": "192x192"
     }
   ],
-  "start_url": "/?source=pwa",
+  "start_url": "/home.html?source=pwa",
   "background_color": "#FFFFFF",
   "display": "standalone",
-  "scope": "/",
+  "scope": "/web/PWA_learn/",
   "theme_color": "#000000"  
 }
