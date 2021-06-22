@@ -3,12 +3,12 @@
   "name": "PWA_learn",
   "icons": [
     {
-      "src": "/web/PWA_learn/static/img/icon.png",
+      "src": "/static/img/icon.png",
       "type": "image/png",
       "sizes": "192x192"
     }
   ],
-  "start_url": "/web/PWA_learn/home.html?source=pwa",
+  "start_url": "/?source=pwa",
   "background_color": "#FFFFFF",
   "display": "standalone",
   "scope": "/",
