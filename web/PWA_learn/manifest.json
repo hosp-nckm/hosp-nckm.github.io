@@ -3,7 +3,7 @@
   "name": "PWA_learn",
   "icons": [
     {
-      "src": "/static/img/icon.png",
+      "src": "/web/PWA_learn/static/img/icon.png",
       "type": "image/png",
       "sizes": "192x192"
     }
