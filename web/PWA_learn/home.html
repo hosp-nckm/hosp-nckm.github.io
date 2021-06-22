@@ -13,7 +13,33 @@
 
   <!-- JavaScript -->
   <script>
-    
+        // 支援serviceWorker才存入sw.js檔
+    if('serviceWorker' in navigator) {
+      
+      console.log("will service worker register?")
+      // window load後才執行，以免增加頁面讀取的時間
+      window.addEventListener('load', function() {
+        
+        // 建立sw.js
+        navigator.serviceWorker.register('/web/PWA_learn/sw_home.js')
+          .then(function(reg) {
+            console.log(reg.scope); // 看這支sw.js執行的範圍
+          })
+          // 註冊失敗
+          .catch(function(err) {
+            console.log('error: ', err);
+          });
+       
+        // 附上刪除sw.js的寫法
+        /*navigator.serviceWorker.getRegistrations().then(function(reg) {
+          for(var reg of reg) {
+            reg.unregister()
+          }
+        });*/
+        
+      });
+    }
+
   </script>
 </head>
 <body>
