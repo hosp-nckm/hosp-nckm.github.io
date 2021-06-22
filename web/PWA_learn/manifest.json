@@ -7,6 +7,7 @@
 　　"type": "image/png"
 　　}],
 　"start_url": "/home.html",
+  "scope": "/web/PWA_learn/",
 　"background_color": "#FFFFFF",
 　"theme_color": "#000000",
 　"display": "standalone"
