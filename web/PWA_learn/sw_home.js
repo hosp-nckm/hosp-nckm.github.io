@@ -1,7 +1,7 @@
 self.addEventListener('install', function(event) {
   self.skipWaiting();
   
-  var offlinePage = new Request('offline.html');
+  var offlinePage = new Request('home.html');
   event.waitUntil(
   fetch(offlinePage).then(function(response) {
     return caches.open('offline2').then(function(cache) {
