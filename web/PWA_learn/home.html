@@ -46,7 +46,12 @@
             });
         }*/
       </script-->
-  <script>
+    <script>
+      if('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/web/PWA_learn/serviceWorker.js');
+}
+    </script>
+  <!--script>
         // 支援serviceWorker才存入sw.js檔
     if('serviceWorker' in navigator) {
       
@@ -74,7 +79,7 @@
       });
     }
 
-  </script>
+  </script-->
 </head>
 <body>
   <h2>PWA 測試</h2>
