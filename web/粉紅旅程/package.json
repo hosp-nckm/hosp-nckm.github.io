@@ -1,18 +1,24 @@
 {
-  "name": "粉紅旅程_APP",
-  "version": "2.0.0",
+  "name": "pinkjourney",
+  "version": "1.0.0",
   "description": "",
   "main": "sw_home_v1.js",
   "scripts": {
-    "build": "node build",
     "deploy": "node --version",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "sw-precache": "^5.2.1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hosp-nckm/hosp-nckm.github.io.git"
+
   },
-  "dependencies": {}
+  "keywords": [
+    "粉紅旅程PWA"
+  ],
+  "author": "Chang Yu-Ling <alice310ch@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hosp-nckm/hosp-nckm.github.io/issues"
+  },
+  "homepage": "https://github.com/hosp-nckm/hosp-nckm.github.io#readme"
 }
