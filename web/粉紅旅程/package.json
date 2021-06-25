@@ -4,6 +4,7 @@
   "description": "",
   "main": "sw_home_v1.js",
   "scripts": {
+    "build": "node build",
     "deploy": "node --version",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
