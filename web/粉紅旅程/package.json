@@ -1,0 +1,16 @@
+{
+  "name": "粉紅旅程",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sw_home_v1.js",
+  "scripts": {
+    "deploy": "node --version",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sw-precache": "^5.2.1"
+  }
+}
