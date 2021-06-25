@@ -1,0 +1,21 @@
+{
+    "short_name": "粉紅旅程",
+    "name": "粉紅旅程_APP",
+    "icons": [
+      {
+        "src": "/web/粉紅旅程/static/img/icon_192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/web/粉紅旅程/static/img/icon_128.png",
+        "type": "image/png",
+        "sizes": "128x128"
+      }
+    ],
+    "start_url": "/web/粉紅旅程/home_PWA_v1.html?source=pwa",
+    "background_color": "#FFFFFF",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#000000"   
+  }
