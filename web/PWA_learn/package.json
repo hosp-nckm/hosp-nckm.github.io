@@ -2,9 +2,9 @@
   "name": "PWA_learn",
   "version": "2.0.0",
   "description": "",
-  "main": "sw_home.js",
+  "main": "serviceWorker.js",
   "scripts": {
-    "deploy": "npm run built",
+    "deploy": "node --version",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
