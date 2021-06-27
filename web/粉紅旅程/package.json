@@ -31,7 +31,7 @@
   "bugs": {
     "url": "https://github.com/hosp-nckm/hosp-nckm.github.io/issues"
   },
-  "homepage": "https://hosp-nckm.github.io/?source=pwa",
+  "homepage": "/build",
   "browserslist": {
     "production": [
       ">0.2%",
