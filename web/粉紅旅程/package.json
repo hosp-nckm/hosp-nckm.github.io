@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "pinkjourney_v1.0.0",
   "main": "sw_home_v1.js",
-  "dependencies": {
-    "@types/react": "^17.0.11",
-    "@types/react-dom": "^17.0.8",
+  "dependencies": {    
     "gh-pages": "^3.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -31,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/hosp-nckm/hosp-nckm.github.io/issues"
   },
-  
+  "homepage": "https://hosp-nckm.github.io/web/%E7%B2%89%E7%B4%85%E6%97%85%E7%A8%8B/",
   "browserslist": {
     "production": [
       ">0.2%",
