@@ -2,7 +2,7 @@
   "name": "pinkjourney",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://hosp-nckm.github.io/web/%E7%B2%89%E7%B4%85%E6%97%85%E7%A8%8B/",
+  "homepage": "https://hosp-nckm.github.io/",
   "description": "pinkjourney_v1.0.0",
   "main": "sw_home_v1.js",
   "dependencies": {
