@@ -14,7 +14,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d .",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
@@ -31,7 +31,7 @@
   "bugs": {
     "url": "https://github.com/hosp-nckm/hosp-nckm.github.io/issues"
   },
-  "homepage": "https://hosp-nckm.github.io/web/粉紅旅程/home_PWA_v1.html?source=pwa",
+  "homepage": "https://hosp-nckm.github.io/?source=pwa",
   "browserslist": {
     "production": [
       ">0.2%",
