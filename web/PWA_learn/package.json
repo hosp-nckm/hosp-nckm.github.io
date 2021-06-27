@@ -2,7 +2,7 @@
   "name": "PWA_learn",
   "version": "2.0.0",
   "description": "",
-  "main": "serviceWorker.js",
+  "main": "sw_home.js",
   "scripts": {
     "deploy": "gh-pages -d .",
     "test": "echo \"Error: no test specified\" && exit 1"
