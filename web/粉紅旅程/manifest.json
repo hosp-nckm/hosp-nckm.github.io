@@ -13,7 +13,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "https://hosp-nckm.github.io/web/粉紅旅程/?source=pwa",
+  "start_url": "https://hosp-nckm.github.io/web/粉紅旅程/home_PWA.html?source=pwa",
   "background_color": "#FFECEC",
   "display": "standalone",
   "scope": "/粉紅旅程/",
