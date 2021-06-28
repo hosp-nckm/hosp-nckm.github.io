@@ -81,18 +81,20 @@
 
   </script>
 </head>
+  <script>
+    window.onload = function(){ /** all code goes here **/
+    // Detect iOS and if it is, add the crossorigin to the video player so that it is working as expected
+        if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Mac') != -1 && navigator.userAgent.indexOf('Chrome') == -1){
+            document.getElementById("video_1s").setAttribute("crossorigin", "true");
+        };
+    };    
+  </script>
 <body>
   <h2>PWA 測試</h2>
-  <p>step 4 manifest.json favicon.ico  v2 +video try setAttribute 後</p>
+  <p>step 4 manifest.json favicon.ico  v2 +video try setAttribute 後 window.onload</p>
   <!-- 網頁內文 -->
   <img src="static/img/dog.jpg" title="dog">
   <img src="static/img/cat.jpg" title="cat">
   <video preload="auto"  id="video_1s" style='border-style:inset;' width="100%" height="540" controls=""><source src="static/video/乳房重建 台語版.mp4" type="video/mp4"></video>
 </body>
-  <script>
-    // Detect iOS and if it is, add the crossorigin to the video player so that it is working as expected
-  if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Mac') != -1 && navigator.userAgent.indexOf('Chrome') == -1){
-    document.getElementById("video_1s").setAttribute("crossorigin", "true");
-};
-  </script>
 </html>
