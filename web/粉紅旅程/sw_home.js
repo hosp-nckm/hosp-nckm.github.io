@@ -6,6 +6,8 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
 var cacheFiles = [
   "static/img/favicon.ico",
   "static/img/logo.PNG",
+  "static/img/icon_192.png",
+  "static/img/icon_128.png",
   "static/js/html2canvas.js",
   "static/js/jsPdf.debug.js",
   "static/js/RowSorter.js",
