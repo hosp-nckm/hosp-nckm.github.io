@@ -1358,12 +1358,6 @@ table tr.sorting-row td {background-color: #8b8;}
 var new_user=1;
 const statusList = JSON.parse(localStorage.getItem('new_user')) || [];
 
-   // Detect iOS and if it is, add the crossorigin to the video player so that it is working as expected
-   if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Mac') != -1 && navigator.userAgent.indexOf('Chrome') == -1){
-    document.getElementById("video_1s").setAttribute("crossorigin", "true");
-    document.getElementById("video_2s").setAttribute("crossorigin", "true");
-};
-
 $( document ).ready(function() {
     //localStorage.setItem('new_user', 1);
     //alert(localStorage.getItem('new_user'));
