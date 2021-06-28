@@ -1,6 +1,6 @@
 {
-  "short_name": "粉紅旅程",
-  "name": "粉紅旅程",
+  "short_name": "粉紅旅程_app",
+  "name": "粉紅旅程_app",
   "icons": [
     {
       "src": "/static/img/logo.PNG",
@@ -13,9 +13,9 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "https://hosp-nckm.github.io/web/粉紅旅程/home_PWA.html?source=pwa",
+  "start_url": "home_PWA.html?source=pwa",
   "background_color": "#FFECEC",
   "display": "standalone",
-  "scope": "/粉紅旅程/",
+  "scope": "/web/粉紅旅程/",
   "theme_color": "#000000"
 }
