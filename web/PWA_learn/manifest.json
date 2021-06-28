@@ -6,6 +6,16 @@
       "src": "/web/PWA_learn/static/img/icon.png",
       "type": "image/png",
       "sizes": "192x192"
+    },
+    {
+      "src": "/web/PWA_learn/static/img/icon_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/web/PWA_learn/static/img/icon_128.png",
+      "type": "image/png",
+      "sizes": "128x128"
     }
   ],
   "start_url": "/web/PWA_learn/home.html?source=pwa",

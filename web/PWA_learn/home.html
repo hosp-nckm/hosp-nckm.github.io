@@ -1,66 +1,1331 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html lang="zh-TW">
 <head>
-  <META NAME="Author" CONTENT="ARTER">
-  <meta charset="utf-8" />
-  <title>PWA 測試</title>
-  <link href="/web/PWA_learn/static/img/icon.png" rel="shortcut icon">
-  <link rel="manifest" href="/web/PWA_learn/manifest.json">
-  <!-- CSS 樣式 -->
-  <style type="text/css">
+<META NAME="Author" CONTENT="Chang Yu-Ling">
+<meta charset="utf-8">
 
-  </style>
+<!--主要I是強制讓文件的寬度與裝置寬度保持1:1，最大寬度1.0，禁止螢幕縮放。-->
+<!---meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport"==>
+<!這個也是iphone私有標籤，允許全屏瀏覽。-->
+<!--meta content="yes" name="apple-mobile-web-app-capable"-->
+<!--iphone的私有標籤，iphone頂端狀態條的樣式。-->
+<meta content="black" name="apple-mobile-web-app-status-bar-style"-->
+<!--禁止數字自動識別為電話號碼，這個比較有用，因為一串數字在iphone上會顯示成藍色，樣式加成別的顏色也是不生效的。-->
+<!--meta content="telephone=no" name="format-detection"-->
+<!--禁止email識別-->
+<meta content="email=no" name="format-detection">
 
-  <!-- JavaScript -->
-    <!--script>
-      
-      /* 判断当前浏览器是否支持serviceWorker */
-    if ('serviceWorker' in navigator) {
-        /* 当页面加载完成就创建一个serviceWorker */
-        window.addEventListener('load', function () {
-            /* 创建并指定对应的执行内容 */
-            /* scope 参数是可选的，可以用来指定你想让 service worker 控制的内容的子目录。 在这个例子里，我们指定了 '/'，表示 根网域下的所有内容。这也是默认值。 */
-            navigator.serviceWorker.register('/web/PWA_learn/serviceWorker.js', {scope: '/'})
-                .then(function (registration) {
- 
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                })
-                .catch(function (err) {
- 
-                    console.log('ServiceWorker registration failed: ', err);
-                });
-        });
-    }
-      /*
-        // 進行 service-wroker 註冊
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker
-                    .register('/web/PWA_learn/service-wroker.js')
-                    .then(registration => {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch(registrationError => {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
-        }*/
-      </script>
-    <script>
-      if('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/web/PWA_learn/serviceWorker.js');
+<meta name="keywords" content="粉紅旅程, 乳癌, 乳房腫瘤, 乳癌手術, 乳房手術, 切除">
+
+<title>粉紅旅程</title>
+<link href="/web/PWA_learn/static/img/icon_192.png" rel="shortcut icon">
+<link rel="manifest" href="/web/PWA_learn/manifest.json">
+
+
+<link rel="Bookmark" href="/web/PWA_learn/static/img/favicon.ico"/>
+    
+<link rel="icon" sizes="192x192" href="/web/PWA_learn/static/img/icon_192.png">
+<link rel="icon" sizes="128x128" href="/web/PWA_learn/static/img/icon_128.png">
+<link rel="apple-touch-icon" sizes="128x128" href="/web/PWA_learn/static/img/icon_128.png">
+<link rel="apple-touch-icon-precomposed" sizes="128x128" href="/web/PWA_learn/static/img/icon_128.png">
+
+<!--<link rel="stylesheet" href="static/css/main.css">   --> 
+<!--====== Javascripts & Jquery ======-->
+<!--<script src="static/js/main.js"></script>        
+<script src="static/js/pre.js"></script>--><!--script src="https://www.w3school.com.cn/jquery/jquery-1.11.1.min.js"></script-->
+<script type="text/javascript" src="/web/PWA_learn/static/js/html2canvas.js"></script>
+<script type="text/javascript" src="/web/PWA_learn/static/js/jsPdf.debug.js"></script>
+
+<!--link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css"-->
+<script type="text/javascript" src="/web/PWA_learn/static/js/RowSorter.js"></script>
+<!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/lumen/bootstrap.min.css"-->
+
+<script>
+    // 支援serviceWorker才存入sw.js檔
+if('serviceWorker' in navigator) {
+  
+  console.log("will service worker register?")
+  // window load後才執行，以免增加頁面讀取的時間
+  window.addEventListener('load', function() {
+    
+    // 建立sw.js
+    navigator.serviceWorker.register('/web/PWA_learn/sw_home.js')
+      .then(function(reg) {
+        console.log(reg.scope); // 看這支sw.js執行的範圍
+      })
+      // 註冊失敗
+      .catch(function(err) {
+        console.log('error: ', err);
+      });
+   
+    // 附上刪除sw.js的寫法
+    /*navigator.serviceWorker.getRegistrations().then(function(reg) {
+      for(var reg of reg) {
+        reg.unregister()
+      }
+    });*/
+    
+  });
 }
-    </script-->
-  <script>
-        // 支援serviceWorker才存入sw.js檔
-    if('serviceWorker' in navigator) {
+
+</script>
+
+</head>
+<style type="text/css">
+body{
+background:#FFECEC;
+background-size: 100%;
+font:normal bold 4.5vmin/1 "Microsoft JhengHei", serif;
+overflow-y: hidden;
+/*height: 85%;*/
+padding-bottom: 6em;
+/*margin-bottom: 5em;*/
+}
+#intro,#menu,#sort,#result,#advice,#myself,#finish,#start,#video_1,#video_2{
+    overflow-y: scroll;    
+}
+
+#intro,#menu,#sort,#result,#advice,#myself,#finish,#start,#print,#video_1,#video_2{
+/*position: absolute;*/
+width: 920px;
+height: 100%;
+margin: 0 auto;
+padding: 5px 20px;
+}
+#print{
+    background: #FFECEC;
+    display:none;
+    padding: 30px 20px;
+}
+#video_1,#video_2{    
+    /*border-width: 5px 15px 5px 3.5px;
+    */
+    
+    padding: 0px 0px;
+    width: 100%;
+    position: absolute;
+    top:5px;/*140px;*/
+    right:0%;
+    display:none;
+}
+
+#menu{
+    background-color: #B299A4;
+    display:none;/*==========================================*/
+}
+#result{
+    background-color:#B9B9FF;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+#append{
+    background-color:transparent;
+    height: 5em;
+    display: none;
+}
+#append2{
+    background-color:black;
+    height: 6em;
+    display: none;
+}
+#append3{
+    background-color:transparent;
+    height: 6em;
+    display: none;
+}
+#intro,#sort,#result,#advice,#myself,#finish{
+    display:none;
+}
+#result{
+    padding: 0px 0px;
+}
+
+.table{
+    width:100%;
+    border-color:#9393FF;
+    border-style:solid;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.table_menu{    
+    width:100%;
+    border-color:#FFECEC;
+    border-style:solid;
+    border-radius: 10px;
+}
+
+.type{    
+    width: 15%;
+    height: 7em;
+    padding:0px 0px 0px 0px;
+    margin:0px 0px 0px 0px;
+    text-align:center;
+    line-height: 30pt;
+    font:normal bolder 4vmin/1 "Microsoft JhengHei", serif;
+}
+.intro{    
+    width: 85%;
+    height: 7em;  
+    padding: 0px 0px 0px 0px;  
+    margin: 0px 0px 0px 0px;
+    text-align:center;
+    line-height: 30pt;
+    font:normal bolder 4.5vmin/1 "Microsoft JhengHei", serif;
+}
+
+.type_text, .intro_text{  
+    width: 100%;  
+    line-height: 1.5em;
+}
+
+#menu_a1,#menu_a2,#menu_a3{
+    display:none;
+}
+
+#div1, #div2, #div3{
+    border-style:none;   
+    display: inline-flex;
+    top:0%;
+    height: 2.5em;
+    border-style:solid; 
+    padding: 0 0;     position: relative;
+    /*display: flex;
+    /*justify-content: flex-start;
+    display: flex;*/
+    flex-wrap: center;
+    border-style:none;   
+
+}
+.intro_item{
+    width: auto;height:70%;padding: 0 0; 
+    
+    position: relative;
+    top:0px;
+    left:0px;
+    
+}
+#div1{
+    top:7px;
+    width: 3%;
+
+}
+#div2{
+    width: 45%;
+}
+#div3{
+    top:-12px;
+    width: 45%;
+}
+.intro_table{
+    position: relative;
+    border-style:none;   
+    border-top-style:solid;   
+    border-width:1px;
+    border-color:#9393FF;
+}
+#row_1:active,#row_2:active,#row_3:active {
+   top: 0.2px;
+   position: relative;  
+   box-shadow:  0px 0px 50px 5px  rgb(180, 180, 162);  
+}
+#row_1:hover,#row_2:hover,#row_3:hover {
+    top: 0.2px;
+   position: relative;    
+   box-shadow:  0px 0px 50px 5px  rgb(180, 180, 162);
+   /*text-shadow:   0.5px 0.5px #AAAAAA;*/
+   }
+
+
+#menu_b1,#menu_b2,#menu_b3{
+    display:none;
+}
+#menu_c1,#menu_c2,#menu_c3{
+    display:none;
+}
+#menu_d1,#menu_d2,#menu_d3{
+    display:none;
+}
+
+#div_d1, #div_d2{
+    border-style:none;   
+    display: inline-flex;
+    top:0%;
+    height: 3.5em;
+    border-style:solid; 
+    padding: 0 0;     position: relative;
+    margin:0 0;
+    /*display: flex;
+    /*justify-content: flex-start;
+    display: flex;*/
+    flex-wrap: center;
+    border-style:none;  
+
+}
+#div_d1{
+    top:0px;
+    left:-10px;
+    width: 30%;
+    background-color: #FFECEC;   
+    border-right-style:solid;   
+    border-width:1px;
+    border-color:#9393FF;
+
+}
+#div_d2{
+    /*top:-19px;*/
+    width: 66%;
+}
+.intro_table{
+    position: relative;
+    border-style:none;   
+    border-top-style:solid;   
+    border-width:1px;padding: 0 0; 
+    margin:0 0;
+    border-color:#9393FF;
+}
+#menu_e1,#menu_e2,#menu_e3{
+    display:none;
+}
+#menu_f1,#menu_f2,#menu_f3{
+    display:none;
+}
+#menu_g1,#menu_g2,#menu_g3{
+    display:none;
+}
+#menu_h1,#menu_h2,#menu_h3{
+    display:none;
+}
+#menu_i1,#menu_i2,#menu_i3{
+    display:none;
+}
+#menu_j1,#menu_j2,#menu_j3{
+    display:none;
+}
+
+button{
+    width: 100%;
+    height: 4em;  
+    padding: 0px 0px 0px 0px;  
+    margin: 0px 0px 0px 0px;
+    border-radius: 10px;
+    border-style: none;
+    padding-left: 2em;
+    text-align:center;
+    line-height: 30pt;
+    font:normal bolder 4vmin/1 "Microsoft JhengHei", serif;
+}
+button:active {
+   top: 0.2px;
+   position: relative;  
+   box-shadow:  0px 0px 15px 3px  rgb(250, 246, 4);  
+}
+button:hover {
+    top: 0.2px;
+   position: relative;    
+   box-shadow:  0px 0px 15px 3px  rgb(250, 246, 4);
+   /*text-shadow:   0.5px 0.5px #AAAAAA;*/
+   }
+.menu_td{    
+    width: 50%;
+    border-radius: 10px;
+    border-style: none;
+}
+.menu_td:active {
+   top: 0.2px;
+   position: relative; 
+   box-shadow:  0px 0px 15px 3px  rgb(250, 246, 4);
+}
+.menu_td:hover {
+    top: 0.2px;
+   position: relative;   
+   box-shadow:  0px 0px 15px 3px  rgb(250, 246, 4);
+   }
+/*  BTN_select  */
+.BTN1_select{    
+    background:  url(static/img/menu_1.png) no-repeat left top,#5A5AAD;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:white;    
+}
+.BTN2_select{    
+    background:  url(static/img/menu_2.png) no-repeat left top,#5A5AAD;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:white;    
+}
+.BTN3_select{    
+    background:  url(static/img/menu_3.png) no-repeat left top,#5A5AAD;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:white;    
+}
+.BTN4_select{    
+    background:  url(static/img/menu_4.png) no-repeat left top,#5A5AAD;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:white;    
+}
+.BTN5_select{    
+    background:  url(static/img/menu_5.png) no-repeat left top,#5A5AAD;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:white;    
+}
+.BTN6_select{    
+    background:  url(static/img/menu_6.png) no-repeat left top,#5A5AAD;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:white;    
+}
+.BTN7_select{    
+    background:  url(static/img/menu_7.png) no-repeat left top,#5A5AAD;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:white;    
+}
+.BTN8_select{    
+    background:  url(static/img/menu_8.png) no-repeat left top,#5A5AAD;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:white;    
+}
+.BTN9_select{    
+    background:  url(static/img/menu_9.png) no-repeat left top,#5A5AAD;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:white;    
+}
+.BTN10_select{    
+    background:  url(static/img/menu_10.png) no-repeat left top,#5A5AAD;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:white;    
+}
+/*  BTN_original  */
+.BTN1_original{    
+    background:  url(static/img/menu_1.png) no-repeat left top,white;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:black;    
+}
+.BTN2_original{    
+    background:  url(static/img/menu_2.png) no-repeat left top,white;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:black;    
+}
+.BTN3_original{    
+    background:  url(static/img/menu_3.png) no-repeat left top,white;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:black;    
+}
+.BTN4_original{    
+    background:  url(static/img/menu_4.png) no-repeat left top,white;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:black;    
+}
+.BTN5_original{    
+    background:  url(static/img/menu_5.png) no-repeat left top,white;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:black;    
+}
+.BTN6_original{    
+    background:  url(static/img/menu_6.png) no-repeat left top,white;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:black;    
+}
+.BTN7_original{    
+    background:  url(static/img/menu_7.png) no-repeat left top,white;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:black;    
+}
+.BTN8_original{    
+    background:  url(static/img/menu_8.png) no-repeat left top,white;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:black;    
+}
+.BTN9_original{    
+    background:  url(static/img/menu_9.png) no-repeat left top,white;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:black;    
+}
+.BTN10_original{    
+    background:  url(static/img/menu_10.png) no-repeat left top,white;
+    background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;
+    color:black;    
+}
+
+#header{
+    z-index: 10;
+    height:auto;
+    visibility:hidden;
+
+}
+.turn_next,.turn_pre,.header_text{    
+    position: relative;
+    width: 20%;
+    display: inline;
+}
+.turn_next{
+    right:0px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.turn_pre{
+    left:0px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.header_text{
+    width: 50%;  
+    line-height: 1.5em;
+}
+.turn_next,.turn_pre,.header_mid{
+    display: inline-flex;
+    top:0%;
+    height: 3em;
+    border-style:solid; 
+    padding: 0 0;     position: relative;
+    margin:0 0;
+    flex-wrap: center;
+    text-align:center;      
+    border-width:0.5px;
+    border-style:none;        
+}
+.turn_pre{   
+    position: relative; 
+    top:-10px;
+    left:-20px;
+    width: 15%;
+    background-color: #FFECEC; 
+    border-width:1px;
+    background:  url(static/img/turn_pre.PNG) no-repeat left top;
+    background-size:100% 100%;
+    color:transparent;
+    visibility:hidden;
+
+}
+/*.turn_pre:active {
+   top: 0.2px;
+   position: relative;
+}*/
+.turn_pre:hover {
+    top: 0.2px;
+   position: relative;   
+   box-shadow:  0px 0px 50px 5px  rgb(180, 180, 162);  
+   /*text-shadow:   0.5px 0.5px #AAAAAA;*/
+   }
+
+.turn_next{ 
+    position: relative; 
+    top:-10px;
+    left:93px;
+    width: 15%;
+    background-color: #FFECEC;   
+    background:  url(static/img/turn_next.PNG) no-repeat left top;
+    background-size:100% 100%;
+    color: transparent;
+    /*background-position:  8px center,0 0;*/
+}
+/*.turn_next:active {
+   top: 0.2px;
+   position: relative;
+}*/
+.turn_next:hover {
+    top: 0.2px;
+   position: relative;   
+   box-shadow:  0px 0px 50px 5px  rgb(180, 180, 162);  
+   /*text-shadow:   0.5px 0.5px #AAAAAA;*/
+   }
+
+
+.header_mid{ 
+    position: relative; 
+    left:32px;
+    width: 60%;
+    /*top:-19px;*/
+}
+.header_text{
+    width: 100%;
+    text-align:center;
+    color:white;
+    background-color:#5A5AAD;
+
+    
+}
+#header{    
+    width: 920px;
+    height: 3em;
+    margin: 0 auto;
+    padding: 1px 20px;
+    background-color:#5A5AAD;
+    border-radius:10px;
+}
+
+
+.sort_text,.sort_num{
+    width: 100%;
+    height: 4em;  
+    padding: 0px 0px 0px 0px;  
+    margin: 0px 0px 0px 0px;
+    border-radius: 10px;
+    border-style: none;
+    padding-left: 2em;
+    text-align:center;
+    font:normal bolder 4vmin/1 "Microsoft JhengHei", serif;
       
+    background:  transparent;
+    /*background-size:2.5em auto ,100% 100%;
+    background-position:  8px center,0 0;*/
+    color:black;    
+    
+    line-height: 4em;
+}
+.sort_td,.order_td{    
+    width: 90%;
+    border-radius: 0px;
+    border-style: none;
+    border-color: rgba(212, 197, 197, 0.801);
+    border-bottom-style: solid;
+}
+.order_td{ 
+    width: 10%;
+}
+
+.table_result{    
+    width:20%;    
+    margin-bottom: 20px;
+
+    width:100%;
+    border-color:#FFECEC;
+    border-style:solid;
+    border-radius: 0px;
+}
+.result_td{    
+    width: 29vw;
+    border-radius: 0px;
+    border-width: 0.1px;
+    border-color:#B9B9FF;
+    border-style: solid;
+}
+.result_num_td{    
+    width: 10%;
+    border-radius: 0px;
+    border-width: 0.1px;
+    border-color:#B9B9FF;
+    background-color:#E972A3;
+    border-style: solid;
+    font:normal bolder 2.5vmin/1 "Microsoft JhengHei", serif;
+}
+
+.result{    
+    width: 27.5vw;
+    height: 7em;  
+    padding: 0px 0px 0px 0px;  
+    margin: 0px 0px 0px 0px;
+    text-align:center;
+    line-height: 30pt;
+    font:normal bolder 3.5vmin/1 "Microsoft JhengHei", serif;
+}
+.result_text{  
+    width: 100%;  
+    text-align:center;
+    line-height: 7em;
+    position: relative; 
+    left: 0px;
+    top: 0px;
+}
+
+.result_table{    
+    width: 27.5vw;
+    height: 3.5em;
+    padding: 0px 0px 0px 0px;  
+    margin: 0px 0px 0px 0px;      
+    border-top-style:solid;   
+    border-width:1px;
+    border-color:#9393FF;
+    
+    position: relative; 
+    left: 0px;
+    top: 0px;
+
+}
+
+#sr_row{
+    pointer-events: none;
+}
+
+#div_d1_s, #div_d2_s{
+    border-style:none;   
+    display: inline-flex;
+    top:0%;
+    height: 3.5em;
+    border-style:solid; 
+    top:-20px;
+    padding: 0 0;     position: relative;
+    margin:0 0;
+    /*display: flex;
+    /*justify-content: flex-start;
+    display: flex;*/
+    flex-wrap: center;
+    border-style:none;
+    /*border-color: black;  
+    border-width: 0px;*/
+
+}
+#div_d1_s{
+    position: relative;
+    top:0px;
+    left:0px;
+    width: 7vw;
+    background-color:transparent;  
+    font-size: 2.5vmin/1; 
+    border-right-style:solid;   
+    border-width:1px;
+    border-color:#9393FF;
+    
+
+}
+#div_d2_s{
+    /*top:-19px;*/
+    background-color:transparent; 
+    left:-5px;
+    width: 18.15vw;
+    position: relative;
+    top:0px;
+    left:0px;
+}
+
+#menu_a1_s,#menu_a2_s,#menu_a3_s{
+    width: 100%;
+    display:none;
+}
+#menu_b1_s,#menu_b2_s,#menu_b3_s{
+    display:none;
+}
+#menu_c1_s,#menu_c2_s,#menu_c3_s{
+    display:none;
+}
+#menu_d1_s,#menu_d2_s,#menu_d3_s{
+    display:none;
+}
+#menu_e1_s,#menu_e2_s,#menu_e3_s{
+    display:none;
+}
+#menu_f1_s,#menu_f2_s,#menu_f3_s{
+    display:none;
+}
+#menu_g1_s,#menu_g2_s,#menu_g3_s{
+    display:none;
+}
+#menu_h1_s,#menu_h2_s,#menu_h3_s{
+    display:none;
+}
+#menu_i1_s,#menu_i2_s,#menu_i3_s{
+    display:none;
+}
+#menu_j1_s,#menu_j2_s,#menu_j3_s{
+    display:none;
+}
+#div1_s, #div2_s, #div3_s{
+    border-style:none;   
+    display: inline-flex;
+    top:0%;
+    height: 2em;
+    border-style:solid; 
+    padding: 0 0;     position: relative;
+    /*display: flex;
+    /*justify-content: flex-start;
+    display: flex;*/
+    flex-wrap: center;
+    border-style:none;   
+    /*border-style:solid; 
+    border-color: black;*/
+
+}
+#div1_s{
+    top:7px;
+    width: 3%;    
+    width: 0.8vw;
+
+}
+#div2_s{
+    width: 45%;
+    width: 10vw;
+}
+#div3_s{
+    top:-12px;
+    width: 45%;
+    width: 12.2vw;
+}
+/*============================================================*/
+#advice_main{
+    width: 100%;
+    height: 70%;/*20em;*/
+    overflow-y: scroll;
+}
+.table_advice,.table_advice_sub,.table_advice_add{    
+    width:100%;
+    border-color:#FFECEC;
+    border-style:solid;
+    border-radius: 10px;
+}
+.advice_td{    
+    height: 4em;
+    border-radius: 0px;
+    border-width: 5px 15px 5px 3.5px;
+    border-color:#6A6AFF;
+    border-style: solid;
+    background-color:white;
+    border-radius: 0px 10px 0px 0px;
+    font:normal bolder 5vmin/1 "Microsoft JhengHei", serif;
+    width: 70%;
+    text-align:center;
+    box-shadow: 3px -3px 15px 3px rgb(146, 144, 144);
+}
+.advice_num_td{   
+    height: 4em;
+    border-radius: 0px;
+    border-width: 0.1px;
+    border-color:#6A6AFF;
+    background-color:#6A6AFF;
+    border-style: solid;
+    border-radius: 10px 0px 0px 0px;
+    color: black;
+    font:normal bolder 5vmin/1 "Microsoft JhengHei", serif; 
+    width: 20%;
+    text-align:center;
+    box-shadow: -3px -3px 15px 3px rgb(146, 144, 144);
+}
+
+/*.result{    
+    width: 100%;
+    height: 7em;  
+    padding: 0px 0px 0px 0px;  
+    margin: 0px 0px 0px 0px;
+    text-align:center;
+    line-height: 30pt;
+    font:normal bolder 3.5vmin/1 "Microsoft JhengHei", serif;
+}*/
+.advice_text{  
+    width: 100%;  
+    text-align:center;
+    line-height: 7em;
+    font:normal bolder 5vmin/1 "Microsoft JhengHei", serif; 
+    border-style: none; 
+    background-color:white;
+    height: 7em;
+    box-shadow:  0px 5px 15px 3px  rgb(146, 144, 144);
+}
+.advice_input_p{
+    border-style: none;
+    background-color:transparent;
+    width: 100%;
+    height: 4em;
+    text-align:center;
+    font:normal bolder 5vmin/1 "Microsoft JhengHei", serif;
+}
+::placeholder {
+  color: rgb(202, 192, 192);    
+  line-height: 3.5em;
+  font:normal bolder 5vmin/1 "Microsoft JhengHei", serif;
+}
+.advice_input_t{
+    border-style: none;
+    background-color:transparent;
+    width: 100%;
+    height: 7em;  
+    text-align:center;
+    font:normal bolder 5vmin/1 "Microsoft JhengHei", serif;
+    padding: 10px 20px;
+    overflow-y: hidden;
+}
+.advice_input_t::-webkit-input-placeholder{
+      height: 7em;line-height:3em;
+    }    /* 使用webkit核心的瀏覽器 */
+    .advice_input_t:-moz-placeholder{
+      height: 7em;line-height: 3em;
+    }                  /* Firefox版本4-18 */
+    .advice_input_t::-moz-placeholder{
+      height: 7em;line-height: 3em;
+    }                  /* Firefox版本19+ */
+    .advice_input_t:-ms-input-placeholder{
+      height: 7em;line-height: 3em;
+    }
+.advice_print,.advice_add{
+    position: relative;
+    bottom: 10px;
+    height: 4em;
+    border-radius: 0px;
+    border-width: 5px 15px 5px 3.5px;
+    border-style: solid;
+    background-color:white;
+    border-radius:10px;
+    padding-left: 120px;
+    font:normal bolder 5vmin/1 "Microsoft JhengHei", serif;
+    width: 50%;
+    text-align:center;
+    /*box-shadow: 3px -3px 15px 3px rgb(146, 144, 144);*/
+}
+.advice_add{       
+    border-color:#5A5AAD;
+    background:  url(static/img/add.png) no-repeat left top,#5A5AAD;
+    background-size:auto 80% ,100% 100%;
+    background-position:  8px center,0 0;
+    color:white;  
+    box-shadow:  0px 5px 15px 3px  rgb(146, 144, 144);
+  
+}
+.advice_add:active {
+   top: 1px;
+   position: relative;
+    background:  url(static/img/add.png) no-repeat left top,#1b1b5f;       
+    border-color:#1b1b5f;
+    background-size:auto 80% ,100% 100%;
+    background-position:  8px center,0 0;
+}
+.advice_add:hover {
+    top: 1px;
+   position: relative;
+    background:  url(static/img/add.png) no-repeat left top,#1b1b5f;     
+    border-color:#1b1b5f;
+    background-size:auto 80% ,100% 100%;
+    background-position:  8px center,0 0;
+   /*text-shadow:   0.5px 0.5px #AAAAAA;*/
+   }
+
+.advice_print{       
+    border-color:#E972A3;
+    background:  url(static/img/print.png) no-repeat left top,#E972A3;
+    background-size:auto 80% ,100% 100%;
+    background-position:  8px center,0 0;
+    color:white;   
+    box-shadow:  0px 5px 15px 3px  rgb(146, 144, 144);
+ 
+}
+.advice_print:active {
+   top: 1px;
+   position: relative;
+   background:  url(static/img/print.png) no-repeat left top,#9c1a50;     
+    border-color:#9c1a50;
+    background-size:auto 80% ,100% 100%;
+    background-position:  8px center,0 0;
+}
+.advice_print:hover {
+    top: 1px;
+   position: relative;
+   background:  url(static/img/print.png) no-repeat left top,#9c1a50;   
+    border-color:#9c1a50;
+    background-size:auto 80% ,100% 100%;
+    background-position:  8px center,0 0;
+   /*text-shadow:   0.5px 0.5px #AAAAAA;*/
+   }
+/*=========================================================*/
+
+.myself_td{   
+    height: 4em;
+    border-radius: 0px;
+    border-width: 0.1px;
+    border-color:#6A6AFF;
+    background-color:#6A6AFF;
+    border-style: none;
+    border-radius: 20px 20px 0px 0px;
+    color:white; 
+    font:normal bolder 5vmin/1 "Microsoft JhengHei", serif; 
+    width: 20%;
+    text-align:center;
+    box-shadow: 0px -3px 15px 3px rgb(146, 144, 144);
+}
+.myself_text{  
+    width: 100%;  
+    text-align:center;
+    line-height: 7em;
+    font:normal bolder 5vmin/1 "Microsoft JhengHei", serif; 
+    border-style: none; 
+    background-color:white;
+    border-color:#6A6AFF;
+    border-style: solid;
+    border-radius: 0px 0px 0px 0px;
+    border-width: 5px 10px 60px 10px;
+    height: 7em;
+    box-shadow:  0px 5px 15px 3px  rgb(146, 144, 144);
+       
+}
+.myself_input_t{
+    border-style: none;
+    background-color:transparent;
+    width: 900%;
+    height: 7em;  
+    text-align:center;
+    font:normal bolder 5vmin/1 "Microsoft JhengHei", serif;
+    padding: 10px 20px;
+    overflow-y: hidden;
+}
+.myself_print{       
+    height: 4em;
+    border-radius: 0px;
+    border-width: 5px 15px 5px 3.5px;
+    border-style: solid;
+    border-top-style: none;
+    border-color:#6A6AFF;
+    border-radius:10px;
+    padding-left: 120px;
+    font:normal bolder 5vmin/1 "Microsoft JhengHei", serif;
+    width: 80%;
+    text-align:center;
+    width: 80%;
+    box-shadow: 3px 3px 15px 3px rgb(146, 144, 144); 
+    border-top-style: none;
+}
+.myself_print{           
+    border-radius: 0px 0px 10px 10px;
+    border-width: 15px 20px 35px 20px;
+    border-color:#6A6AFF;
+    background:  url(static/img/print.png) no-repeat left top,#E972A3;
+    background-size:auto 80% ,100% 100%;
+    background-position:  8px center,0 0;
+    /*-webkit-border-radius: 50px;
+  -moz-border-radius: 50px;*/
+    color:white;    
+}
+.myself_print:active {
+   top: 1px;
+   position: relative;
+   background:  url(static/img/print.png) no-repeat left top,#9c1a50;
+    background-size:auto 80% ,100% 100%;
+    background-position:  8px center,0 0;
+}
+.myself_print:hover {
+    top: 1px;
+   position: relative;
+   background:  url(static/img/print.png) no-repeat left top,#9c1a50;
+    background-size:auto 80% ,100% 100%;
+    background-position:  8px center,0 0;
+   /*text-shadow:   0.5px 0.5px #AAAAAA;*/
+   }
+
+/*==============================================================*/
+.finish_print{       
+    height: 4em;
+    border-radius: 10px;
+    border-width: 5px 15px 5px 3.5px;
+    border-style: solid;
+    border-color:#6A6AFF;
+    border-radius:10px;
+    padding-left: 120px;
+    font:normal bolder 5vmin/1 "Microsoft JhengHei", serif;
+    width: 80%;
+    text-align:center;
+    width: 80%;
+    box-shadow: 0px -3px 15px 3px rgb(146, 144, 144);
+    /*box-shadow: 3px -3px 15px 3px rgb(146, 144, 144);*/   
+}
+.finish_print{  
+    border-radius: 20px 20px 20px 20px;
+    border-width: 15px 10px 35px 10px;    
+    border-color:transparent;
+    background:  url(static/img/print.png) no-repeat left top,#E972A3;
+    background-size:auto 90% ,100% 100%;
+    background-position:  8px center,0 0;
+    /*-webkit-border-radius: 50px;
+  -moz-border-radius: 50px;*/
+    color:white;   
+    box-shadow: 0px -3px 15px 3px rgb(146, 144, 144); 
+}
+.finish_print:active {
+   top: 1px;
+   position: relative;
+   background:  url(static/img/print.png) no-repeat left top,#9c1a50;
+    background-size:auto 90% ,100% 100%;
+    background-position:  8px center,0 0;
+  
+}
+.finish_print:hover {
+    top: 1px;
+   position: relative;
+   background:  url(static/img/print.png) no-repeat left top,#9c1a50;
+    background-size:auto 90% ,100% 100%;
+    background-position:  8px center,0 0;
+    
+   /*text-shadow:   0.5px 0.5px #AAAAAA;*/
+   }
+.finish_end{       
+    height: 4em;
+    border-radius: 10px;
+    border-width: 5px 15px 5px 3.5px;
+    border-style: solid;
+    border-color:#6A6AFF;
+    border-radius:20px;
+    font:normal bolder 5vmin/1 "Microsoft JhengHei", serif;
+    width: 80%;
+    text-align:center;
+    width: 80%; 
+    border-color:transparent;
+    background: #6A6AFF;
+    color:white;    
+    box-shadow: 0px -3px 15px 3px rgb(146, 144, 144);
+    /*box-shadow: 3px -3px 15px 3px rgb(146, 144, 144);*/   
+}
+.finish_end:active {
+   top: 1px;
+   position: relative;   
+   background: #1b1b5f;
+  
+}
+.finish_end:hover {
+    top: 1px;
+   position: relative;   
+   background: #1b1b5f;
+    
+   /*text-shadow:   0.5px 0.5px #AAAAAA;*/
+   }
+/*===================================================================*/
+.start_text,.video_text{  
+    border-radius: 20px 20px 20px 20px;
+    border-width: 15px 10px 35px 10px;    
+    border-color:transparent;
+    background:  transparent;
+    background-size:100% 100%;
+    background-position: 0 0;
+    font:normal bolder 4.5vmin/1 "Microsoft JhengHei", serif;  
+    /*-webkit-border-radius: 50px;
+  -moz-border-radius: 50px;*/
+    color:black;    
+    line-height: 1.3em;
+}
+.start_pic,.video_pic{  
+    border-radius: 20px 20px 20px 20px;
+    border-width: 0.1px;  
+
+    height: 20em;  
+    border-color:transparent;
+    background:  url(static/img/logo.PNG) no-repeat center top;
+    background-size:auto 90% ;
+    background-position:  center;
+    /*-webkit-border-radius: 50px;
+  -moz-border-radius: 50px;*/
+    color:white;    
+}
+.video_pic{
+    opacity: 1;
+    
+    border-width: 105px 100px 305px 100px;
+    width: 100%;
+    border-width: 0px;  
+    background:  url(static/img/video_loading.png) no-repeat center top;
+    background-size:auto 90% ;
+    background-position:  center;
+    
+}
+#table_video{
+    
+    border-width: 0px 0px 0px 0px;
+    width: 100%;
+}
+.start_go,.video_go{       
+    height: 3em;
+    border-radius: 10px;
+    border-style: solid;
+    border-radius:20px;
+    font:normal bolder 5vmin/1 "Microsoft JhengHei", serif;
+    width: 80%;
+    text-align:center;
+    width: 80%; 
+    border-color:transparent;
+    background:#E972A3;
+    color:white;    
+    box-shadow: 0px -3px 15px 3px rgb(146, 144, 144);
+    /*box-shadow: 3px -3px 15px 3px rgb(146, 144, 144);*/  
+    
+    margin-bottom: 500px; 
+}
+#start_go:active,#video_go:active {
+   top: 1px;
+   background:#9c1a50;
+   position: relative;
+}
+#start_go:hover,#video_go:hover {
+    top: 1px;
+   background: #9c1a50;
+   position: relative;
+   color: white;   
+   /*text-shadow:   0.5px 0.5px #AAAAAA;*/
+   }
+
+
+
+/*==================================================*/
+#floor{  
+    display: flex;
+    justify-content: space-between;     
+    position: fixed;
+    z-index: 3;
+    bottom: 1%;
+    /*top:1620px;*/
+}
+.floor_go{       
+    padding-left: 0%;
+    margin-right:3%;
+    height: 2em;
+    border-radius: 10px;
+    border-width: 5px 15px 5px 3.5px;
+    border-style: solid;
+    border-radius:20px;
+    font:normal bolder 5vmin/1 "Microsoft JhengHei", serif;
+    width: 20%;
+    text-align:center;
+    border-color:transparent;
+    background:#9672e9;
+    color:white;    
+    box-shadow: 0px -3px 15px 3px rgb(146, 144, 144);
+    /*box-shadow: 3px -3px 15px 3px rgb(146, 144, 144);*/   
+}
+#floor_go:active {
+   top: 1px;
+   background:#9c1a50;
+   position: relative;
+}
+#sfloor_go:hover {
+    top: 1px;
+   background: #9c1a50;
+   position: relative;
+   color: white;   
+   /*text-shadow:   0.5px 0.5px #AAAAAA;*/
+   }
+
+#click{
+    border-radius: 20px 20px 20px 20px;
+    border-width: 1px;  
+    position: fixed;
+    top: 5em;
+
+    width: 5em;
+    height: 5em;  
+    border-color:red;
+    background:  url(static/img/onclick.png) no-repeat center top;
+    background-size:auto 90% ;
+    background-position:  center;
+    z-index: 10;    
+    /*box-shadow: 0px -3px 15px 3px rgb(146, 144, 144);*/
+    animation: clk_start 0.5s infinite;
+    transform: rotate(-10deg);
+
+    pointer-events: none; /*使div可被穿透*/
+}
+.button-content:before{ 
+    content:''; 
+    float: left; 
+    width: 0; 
+    height: 0; 
+    border-width: 50px; 
+    border-style: solid; 
+    position:absolute;
+    top: -3em;
+    right: 6em;
+    border-color: transparent  rgba(0, 0, 0, 0.6) transparent transparent; 
+    transform: rotate(90deg); /*順時針旋轉90°*/
+    z-index: 5;
+
+    pointer-events: none; /*使div可被穿透*/
+}
+.button-content{  
+    width: 530px;  
+    height: 80px;  
+    background-color: rgba(0, 0, 0, 0.6);
+    font-size: xx-large;  
+    line-height: 2.5em;  
+    text-align: center;  
+    border-radius: 10px;
+    position: fixed;  
+    top: 35em;  
+    right: 2em; 
+    color:white;
+    padding-left: 0;
+    z-index: 5;
+
+    pointer-events: none; /*使div可被穿透*/
+}  
+@keyframes clk_hidden {
+  0% {display: none;}
+  100% {display: none;}
+}
+@keyframes clk_print {
+  0% {top: 7em;right:300px;}
+  75% {top: 6.5em;right:300px;}
+  85% {top: 6.8em;right:300px;}
+  100% {top: 6.5em;right:300px;}
+}
+@keyframes clk_pre {
+  0% {top: 20px;}
+  75% {top: 0px;}
+  85% {top: 15px;}
+  100% {top: 0px;}
+}
+@keyframes clk_next {
+  0% {top: 50px;right:10px;transform: rotate(20deg);}
+  75% {top: 30px;right:10px;transform: rotate(20deg);}
+  85% {top: 45px;right:10px;transform: rotate(20deg);}
+  100% {top: 30px;right:10px;transform: rotate(20deg);}
+}
+@keyframes clk_start {
+  0% {top: 20em;right:145px;}
+  75% {top: 19.5em;right:145px;}
+  85% {top: 19.8em;right:145px;}
+  100% {top: 19.5em;right:145px;}
+}
+@keyframes clk_menu1 {
+  0% {top: 10em;right:445px;}
+  75% {top: 9.5em;right:445px;}
+  85% {top: 9.8em;right:445px;}
+  100% {top: 9.5em;right:445px;}
+}
+@keyframes clk_menu2 {
+  0% {top: 14em;right:35px;}
+  75% {top: 13.5em;right:35px;}
+  85% {top: 13.8em;right:35px;}
+  100% {top: 13.5em;right:35px;}
+}
+@keyframes clk_intro1 {
+  0% {top: 14em;right:35px;}
+  75% {top: 13.5em;right:35px;}
+  85% {top: 13.8em;right:35px;}
+  100% {top: 13.5em;right:35px;}
+}
+@keyframes clk_intro2 {
+  0% {top: 14em;right:35px;}
+  75% {top: 13.5em;right:35px;}
+  85% {top: 13.8em;right:35px;}
+  100% {top: 13.5em;right:35px;}
+}
+/*=============================================*/
+
+/*table.table_menu {cursor: move;}*/
+table tr.sorting-row td {background-color: #8b8;}
+/*#sort { margin: 50px auto; }*/
+</style>
+
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<!--script>
+    // 支援serviceWorker才存入sw.js檔
+    if('serviceWorker' in navigator) {
       console.log("will service worker register?")
       // window load後才執行，以免增加頁面讀取的時間
       window.addEventListener('load', function() {
         
         // 建立sw.js
-        navigator.serviceWorker.register('/web/PWA_learn/sw_home.js')
+        navigator.serviceWorker.register('/web/粉紅旅程/sw_home_v1.js')
           .then(function(reg) {
             console.log(reg.scope); // 看這支sw.js執行的範圍
           })
@@ -78,21 +1343,1871 @@
         
       });
     }
-
-  </script>
+  </script-->
+  
   <script>
+    window.onload = function(){ /** all code goes here **/
     // Detect iOS and if it is, add the crossorigin to the video player so that it is working as expected
-  if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Mac') != -1 && navigator.userAgent.indexOf('Chrome') == -1){
-    document.getElementById("video_1s").setAttribute("crossorigin", "true");
-};
+        if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Mac') != -1 && navigator.userAgent.indexOf('Chrome') == -1){
+            document.getElementById("video_1s").setAttribute("crossorigin", "true");
+            document.getElementById("video_2s").setAttribute("crossorigin", "true");
+        };
+    };    
   </script>
-</head>
+<script>
+var new_user=1;
+const statusList = JSON.parse(localStorage.getItem('new_user')) || [];
+
+   // Detect iOS and if it is, add the crossorigin to the video player so that it is working as expected
+   if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Mac') != -1 && navigator.userAgent.indexOf('Chrome') == -1){
+    document.getElementById("video_1s").setAttribute("crossorigin", "true");
+    document.getElementById("video_2s").setAttribute("crossorigin", "true");
+};
+
+$( document ).ready(function() {
+    //localStorage.setItem('new_user', 1);
+    //alert(localStorage.getItem('new_user'));
+if(localStorage.getItem('new_user')==0){
+    new_user=0;  //清除使用者大腸問卷身分資料
+    //document.getElementById("click").style.animation="clk_hidden 0.5s infinite"; 
+    document.getElementById("click").style.display="none"; 
+    document.getElementById("info-content").style.display="none"; 
+    //document.getElementById("click").style.animation="clk_hidden 0.5s infinite"; 
+    //document.getElementById("info-content").style.animation="clk_hidden 0.5s infinite";   
+}
+/*if(localStorage.getItem('reload')!=0){
+    setTimeout(function(){
+        location.reload();
+},50);
+localStorage.setItem('reload', 0);  
+}*/
+});
+/*
+function getCookie(cname)
+{
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0; i<ca.length; i++) 
+  {
+    var c = ca[i].trim();
+    if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+  }
+  return "";
+}
+var new_user=1;
+function checkCookie()
+{
+  var username=getCookie("new_user");
+  if (username==0 )
+  {
+    new_user=0;
+    alert(new_user);
+  }
+  else 
+  {    
+    new_user=1;
+    alert(new_user);
+  }
+}
+function setCookie(cname,cvalue,exdays)
+{
+  var d = new Date();
+  d.setTime(d.getTime()+(exdays*24*60*60*1000));
+  var expires = "expires="+d.toGMTString();
+  document.cookie = cname + "=" + cvalue + "; " + expires;
+}*/
+/*===== 點Ans選項反應 ====================================================================================================*/
+var ans_temp="";
+let type_list=[];
+let total_type_list=[];
+let last_type_list=[];
+let splice_type_list=[];
+var type_num=0;
+var order=['a','b','c','d','e','f','g','h','i','j'];
+var order_title=['外觀','疤痕大小','觸感','對自我的感覺','穿衣的方便性','花費','手術風險及合併鎮','術後返家照顧','術後生活影響','與伴侶的親密感'];
+
+var have_choose_second=1;
+click_menu_twice=0;
+click_intro_twice=0;
+
+function getValue() {
+ans_temp=window.event.srcElement.id;         //回傳ans選項 id
+ans_temp_value=window.event.srcElement.value;//回傳ans選項 內容
+
+var Items = document.getElementsByTagName("button");
+//alert(ans_temp);
+//alert((parseInt(ans_temp_value)-1).toString());
+for (var i =0; i<Items.length; i++){
+var btn = Items[i];
+//點選的選項 改變css
+if (btn.id==ans_temp && type_list.indexOf(parseInt(ans_temp_value)-1)<0){
+    btn.className=btn.id+"_select";
+    type_list.push(parseInt(ans_temp_value)-1);    
+    //total_type_list.push(parseInt(ans_temp_value)-1);
+    type_num=type_list.length;
+    }  
+else {//if(type_list.indexOf(parseInt(btn.value)-1)<0){
+    //其餘的選項 還原css
+    if(type_list.indexOf(parseInt(btn.value)-1)<0){
+        btn.className=btn.id+"_original";
+    }
+    if(type_list.indexOf(parseInt(btn.value)-1)>=0 && btn.id==ans_temp){             
+        btn.className=btn.id+"_original";   
+        //alert("delete "+(parseInt(btn.value)-1).toString());
+        type_list.splice(type_list.indexOf(parseInt(btn.value)-1),1);
+        type_num=type_list.length;
+        //total_type_list.splice(type_list.indexOf(parseInt(btn.value)-1),1);
+    }
+
+    }                
+}
+
+if(click_menu_twice==0 && new_user){
+    document.getElementById("click").style.animation="clk_menu2 0.5s infinite"; 
+        document.getElementById("info-content").style.top="25.5em";   
+        document.getElementById("info-content").style.left="13.5em";                          
+        document.getElementById("info-content").innerText="再一次，請依序 點選 其次在意的項目";
+        click_menu_twice=1;
+}
+else if(click_menu_twice==1 && new_user){
+    document.getElementById("click").style.animation="clk_next 0.5s infinite"; 
+        document.getElementById("info-content").style.top="7em";   
+        document.getElementById("info-content").style.left="15em";                          
+        document.getElementById("info-content").innerText="如果完成選擇，請前往下一頁";
+        click_menu_twice=2;
+}
+//alert(type_list);
+}
+
+var ans_temp_sub=""
+let select=[];
+function result_change_color(click_item){
+
+    var colorbg="";
+//alert(click_item.id);
+if(click_item.style.backgroundColor=="rgb(90, 90, 173)"){
+    colorbg="rgb(90, 90, 173)";
+    have_choose_second=0;
+    //alert("Y");
+    click_item.style.backgroundColor="white";
+    click_item.style.color="black";
+    pt=click_item.parentNode.parentNode;   
+    for(var h=0;h<3;h++){
+        hh=h+1;
+        if(pt.children[hh].children[0].style.backgroundColor!="white"){
+            have_choose_second=1;break;
+        }
+    }
+}
+else if(click_item.style.backgroundColor=="white"){
+    colorbg="white";
+    //alert("N"); 
+    ///pt=click_item.parentNode.parentNode;   
+    ///for(var h=0;h<3;h++){
+    ///    hh=h+1;
+        //alert(pt.children[hh].children[0].id);
+        /*alert(pt.children[hh].id);
+        alert(pt.children[hh].children[0].id);
+        alert(pt.children[hh].children[0].style.backgroundColor);
+        alert(pt.children[hh].children[0].style.color);*/
+    ///    pt.children[hh].children[0].style.backgroundColor="white";
+    ///    pt.children[hh].children[0].style.color="black";
+    ///}
+    click_item.style.backgroundColor="#5A5AAD";
+    click_item.style.color="white";
+    have_choose_second=1;
+    have_choose=1;
+}
+return colorbg;
+}
+
+
+function getsubchoose() {
+var click_item=window.event.srcElement;
+//alert(click_item.style.top);
+//alert(click_item.style.left);
+//alert(click_item.id);
+while(click_item.id[0]!="m"){
+    click_item=click_item.parentNode;
+}
+//alert(click_item.parentNode.parentNode.id)
+var cbg;
+if(click_item.parentNode.parentNode.id=="sr_row"){
+    cbg=result_change_color(click_item);
+}
+
+
+ans_temp_sub=click_item.id;         //回傳ans選項 id
+ans_temp_sub_praent=click_item.parentNode.id;         //回傳ans選項 id
+ans_temp_sub_value=click_item.value;//回傳ans選項 內容
+
+
+
+var double_click=0;//檢查按第２次表示取消選擇
+//alert(document.getElementById(ans_temp_sub_praent).style.backgroundColor)
+//alert(ans_temp_sub);
+
+/*if(click_item.parentNode.parentNode.id=="sr_row"){
+    alert(click_item.id);
+    alert(cbg);
+}*/
+
+if((document.getElementById(ans_temp_sub_praent).style.backgroundColor=="rgb(90, 90, 173)"&&click_item.parentNode.parentNode.id!="sr_row")||cbg=="rgb(90, 90, 173)"){
+    //alert("y-n");
+    //select.splice(select.indexOf(ans_temp_sub[5]),1);
+    var target=select[select.indexOf(ans_temp_sub[5])+1];
+    //alert(target);
+    select[select.indexOf(ans_temp_sub[5])+1]=target.replace(ans_temp_sub[6].toString(), '');
+    //.splice(target.indexOf(ans_temp_sub[6].toString()),1);
+    target=select[select.indexOf(ans_temp_sub[5])+1];
+    if(target.length==0){        
+        //alert(select.indexOf(ans_temp_sub[5]));
+    select.splice(select.indexOf(ans_temp_sub[5]),1);            
+    select.splice(select.indexOf(''),1);
+    }
+    double_click=1;
+    //click_item.parentNode.style.backgroundColor="white";
+    if(click_item.parentNode.parentNode.id!="sr_row"){
+    document.getElementById(ans_temp_sub_praent).style.backgroundColor="white";
+    document.getElementById(ans_temp_sub_praent).style.color="black";
+    }
+}
+else if(select.indexOf(ans_temp_sub[5])<0){
+    //alert("y-st");
+    select.push(ans_temp_sub[5]);
+    select.push(ans_temp_sub[6].toString());
+    
+    if(click_item.parentNode.parentNode.id!="sr_row"){
+    document.getElementById(ans_temp_sub_praent).style.backgroundColor="#5A5AAD";
+    document.getElementById(ans_temp_sub_praent).style.color="white";
+    }
+}
+else{
+    //alert("y-su");
+    //alert("123");
+    select[select.indexOf(ans_temp_sub[5])+1]=select[select.indexOf(ans_temp_sub[5])+1]+ans_temp_sub[6].toString();
+    //select.splice(select.indexOf(ans_temp_sub[5])+1,1,ans_temp_sub[6]);
+    
+    if(click_item.parentNode.parentNode.id!="sr_row"){
+    document.getElementById(ans_temp_sub_praent).style.backgroundColor="#5A5AAD";
+    document.getElementById(ans_temp_sub_praent).style.color="white";
+    }
+}
+//alert(select);
+    /*var Items = document.getElementsByClassName("intro");
+    for (var i =0; i<Items.length; i++){
+    var btn = Items[i];
+    //點選的選項 改變css
+    if (btn.parentNode.id==ans_temp_sub_praent && double_click==0){  
+        //alert(document.getElementById(btn.id).parentNode.id)      ;
+        document.getElementById(document.getElementById(btn.id).parentNode.id).style.backgroundColor="#5A5AAD";
+        document.getElementById(document.getElementById(btn.id).parentNode.id).style.color="white";
+        }  
+        //其餘的選項 還原css
+    else {    
+        document.getElementById(document.getElementById(btn.id).parentNode.id).style.backgroundColor="white";
+        document.getElementById(document.getElementById(btn.id).parentNode.id).style.color="black";
+        }                
+    }*/
+
+
+    if((click_menu_twice==3 ||click_menu_twice==5) && new_user){
+        document.getElementById("click").style.animation="clk_next 0.5s infinite"; 
+        document.getElementById("info-content").style.top="7em";   
+        document.getElementById("info-content").style.left="15em";                          
+        document.getElementById("info-content").innerText="如果完成選擇，請前往下一頁";
+        click_menu_twice=click_menu_twice+1;
+}
+}
+var back_page=0;
+function page(x) {
+    //alert(click_menu_twice);
+    if((document.getElementById("intro").style.display=="block") && new_user){
+        document.getElementById("click").style.animation="clk_next 0.5s infinite"; 
+        document.getElementById("info-content").style.top="7em";   
+        document.getElementById("info-content").style.left="15em";                          
+        document.getElementById("info-content").innerText="如果完成選擇，請前往下一頁";
+}
+if((click_menu_twice==2 ) && new_user){
+    document.getElementById("click").style.animation="clk_intro1 0.5s infinite"; 
+        document.getElementById("info-content").style.top="25.5em";   
+        document.getElementById("info-content").style.left="15em";                          
+        document.getElementById("info-content").innerText="選擇偏好的項目";
+        
+        click_menu_twice=click_menu_twice+1;
+}
+if((click_menu_twice==4) && new_user){
+    document.getElementById("click").style.animation="clk_intro2 0.5s infinite"; 
+        document.getElementById("info-content").style.top="25.5em";   
+        document.getElementById("info-content").style.left="15em";                          
+        document.getElementById("info-content").innerText="請選擇偏好的項目";
+        
+        click_menu_twice=click_menu_twice+1;
+}
+/*if(click_menu_twice==6 && new_user){
+    document.getElementById("click").style.animation="clk_next 0.5s infinite"; 
+        document.getElementById("info-content").style.top="7em";   
+        document.getElementById("info-content").style.left="15em";                          
+        document.getElementById("info-content").innerText="確認選擇順序後，請前往下一頁";
+        
+        click_menu_twice=click_menu_twice+1;
+}*/
+
+    if(x==0){
+        document.getElementById("header").style.visibility="visible";
+        //document.getElementById("turn_pre").style.visibility="hidden";
+        document.getElementById("start").style.display="none";
+        document.getElementById("menu").style.display="block";
+
+        /////////////////////////////////////////
+        if(new_user){
+            document.getElementById("click").style.animation="clk_menu1 0.5s infinite"; 
+            document.getElementById("info-content").style.top="21em";   
+            document.getElementById("info-content").style.left="5em";                          
+            document.getElementById("info-content").innerText="請點選 最在意的項目";
+        }                 
+    }
+    if(document.getElementById("finish").style.display=="block" && x==1){     
+        if(new_user){
+                    document.getElementById("click").style.animation="clk_next 0.5s infinite"; 
+                    document.getElementById("info-content").style.top="7em";   
+                    document.getElementById("info-content").style.left="15em";                          
+                    document.getElementById("info-content").innerText="填寫自我意見後，請前往下一頁";
+                }
+        
+        document.getElementById("header").style.visibility="visible";
+        //document.getElementById("turn_pre").style.visibility="hidden";
+        document.getElementById("menu").style.display="none";
+        document.getElementById("intro").style.display="none";
+        document.getElementById("sort").style.display="none";  
+        document.getElementById("result").style.display="none"; 
+        document.getElementById("advice").style.display="none";  
+        document.getElementById("myself").style.display="block";    
+        document.getElementById("finish").style.display="none";              
+        //intro_select();
+        //back_page=back_page-1;
+    }
+    else if(document.getElementById("myself").style.display=="block" && x==1){   
+        if(new_user){
+                    document.getElementById("click").style.animation="clk_next 0.5s infinite"; 
+                    document.getElementById("info-content").style.top="7em";   
+                    document.getElementById("info-content").style.left="15em";                          
+                    document.getElementById("info-content").innerText="填寫重要他人意見後，請前往下一頁";
+                }
+        
+        document.getElementsByClassName("header_text")[0].innerText="重要他人意見";
+        //document.getElementById("turn_pre").style.visibility="hidden";
+        document.getElementById("menu").style.display="none";
+        document.getElementById("intro").style.display="none";
+        document.getElementById("sort").style.display="none";  
+        document.getElementById("result").style.display="none"; 
+        document.getElementById("advice").style.display="block";  
+        document.getElementById("myself").style.display="none";      
+        //intro_select();
+        //back_page=back_page-1;
+    }
+    else if(document.getElementById("advice").style.display=="block" && x==1){    
+        if(new_user){
+                    document.getElementById("click").style.animation="clk_next 0.5s infinite"; 
+                    document.getElementById("info-content").style.top="7em";   
+                    document.getElementById("info-content").style.left="15em";                          
+                    document.getElementById("info-content").innerText="確認選擇內容後，請前往下一頁";
+                }
+        
+        document.getElementsByClassName("header_text")[0].innerText="結果";
+        //document.getElementById("turn_pre").style.visibility="hidden";
+        document.getElementById("menu").style.display="none";
+        document.getElementById("intro").style.display="none";
+        document.getElementById("sort").style.display="none";  
+        document.getElementById("result").style.display="block"; 
+        document.getElementById("advice").style.display="none";      
+        //intro_select();
+        //back_page=back_page-1;
+    }
+    else if(document.getElementById("result").style.display=="block" && x==1){    
+        if(new_user){
+                    document.getElementById("click").style.animation="clk_next 0.5s infinite"; 
+                    document.getElementById("info-content").style.top="7em";   
+                    document.getElementById("info-content").style.left="15em";                          
+                    document.getElementById("info-content").innerText="確認選擇順序後，請前往下一頁";
+                    
+                    click_menu_twice=click_menu_twice-1;
+                }        
+
+       document.getElementsByClassName("header_text")[0].innerText="在意項目的排序";
+       if(new_user){
+       document.getElementById("click").style.animation="clk_next 0.5s infinite"; 
+        document.getElementById("info-content").style.top="7em";   
+        document.getElementById("info-content").style.left="15em";   
+       } 
+
+        //document.getElementById("turn_pre").style.visibility="hidden";
+        document.getElementById("menu").style.display="none";
+        document.getElementById("intro").style.display="none";
+        document.getElementById("sort").style.display="block";  
+        document.getElementById("result").style.display="none";      
+        //intro_select();
+        //back_page=back_page-1;
+    }
+    else if(document.getElementById("sort").style.display=="block" && x==1){
+        //document.getElementById("turn_pre").style.visibility="hidden";
+        //alert("back");
+        ans_temp="BTN"+((total_type_list[total_type_list.length-1]+1).toString());
+        document.getElementById("menu").style.display="none";
+        document.getElementById("intro").style.display="block";
+        document.getElementById("sort").style.display="none";                 
+        document.getElementById("result").style.display="none"; 
+        intro_select();
+        //back_page=back_page-1;
+    }
+    else if(x==1){  
+        back_page=back_page+1;
+        //alert(splice_type_list[splice_type_list.length-1]);
+    if(type_list.length==0){
+        pre();
+    }
+    if(type_list.length!=type_num){
+        pre();
+    //alert(back_page);
+    }    
+    if(type_num==type_list.length && back_page==type_num){    
+    document.getElementById("turn_pre").style.visibility="hidden";
+    document.getElementById("intro").style.display="none";
+    document.getElementById("menu").style.display="block";
+    type_select();
+    }
+    else{         
+        /////alert("type_list");
+        /////alert(type_list);
+        ans_temp="BTN"+(type_list[0]+1).toString();  
+        //alert(ans_temp);
+        intro_select();
+    }
+    //alert(type_list);
+    //alert(select);
+    }
+    if(x==2){
+        var have_choose=0;//檢查是否有做選擇
+        //alert(type_num);
+        //alert(type_list.length);
+        if((type_list.length==0 && document.getElementById("menu").style.display=="block") || (total_type_list.length==0 && type_list.length==0)){
+            alert("請選擇 至少一個選項 ~");
+        }
+        else if(type_num==type_list.length){           
+        total_type_list = type_list.map(x => x);
+        //alert(type_list);
+        document.getElementById("turn_pre").style.visibility="visible";
+        document.getElementById("intro").style.display="block";
+        document.getElementById("menu").style.display="none";
+        ans_temp="BTN"+(type_list[0]+1).toString();    
+        next();
+            intro_select(); 
+        }
+        else {
+            for(var j=1;j<=3;j++){
+                //alert("row_"+(j).toString());
+                if(document.getElementById("row_"+(j).toString()).style.backgroundColor=="rgb(90, 90, 173)" && document.getElementById("row_"+(j).toString()).style.color=="white")
+                {
+                    //alert(j);
+                    have_choose=1;
+                break;
+                }
+            }   
+            if(type_list.length>0 && have_choose==1){ 
+                //alert(type_list.length);
+            ans_temp="BTN"+(type_list[0]+1).toString();    
+
+            next();
+
+            intro_select();   
+            }      
+            //document.getElementById("advice").style.display=="block" && document.getElementById("myself").style.display!="block"
+            else if((have_choose==0 && document.getElementById("intro").style.display=="block")||(have_choose_second==0 && document.getElementById("result").style.display=="block")){
+                alert("請選擇 一個選項 ~");
+            }
+            else if(type_list.length==0 && document.getElementById("sort").style.display!="block" && document.getElementById("result").style.display!="block" && document.getElementById("advice").style.display!="block" && document.getElementById("myself").style.display!="block"){
+                //alert(type_list.length);
+                if(click_menu_twice==6 && new_user){
+                    document.getElementById("click").style.animation="clk_next 0.5s infinite"; 
+                    document.getElementById("info-content").style.top="7em";   
+                    document.getElementById("info-content").style.left="15em";                          
+                    document.getElementById("info-content").innerText="確認選擇順序後，請前往下一頁";
+                    
+                    click_menu_twice=click_menu_twice+1;
+                }
+                //alert(type_list);
+                document.getElementById("turn_pre").style.visibility="visible";
+                document.getElementById("intro").style.display="none";
+                document.getElementById("menu").style.display="none";
+                document.getElementById("sort").style.display="block";
+                sort_select();
+            }
+            else if(type_list.length==0 && document.getElementById("sort").style.display=="block"){    
+                document.getElementById("info-content").innerText="確認選擇內容後，請前往下一頁";            
+                document.getElementById("turn_pre").style.visibility="visible";
+                document.getElementById("intro").style.display="none";
+                document.getElementById("menu").style.display="none";
+                document.getElementById("sort").style.display="none";
+                document.getElementById("result").style.display="block";
+                result_show();
+                localStorage.setItem('new_user', 0);
+            }
+            else if(type_list.length==0 && document.getElementById("result").style.display=="block"){    
+                document.getElementById("info-content").innerText="填寫重要他人意見後，請前往下一頁";            
+                document.getElementsByClassName("header_text")[0].innerText="重要他人意見";
+                document.getElementById("turn_pre").style.visibility="visible";
+                document.getElementById("intro").style.display="none";
+                document.getElementById("menu").style.display="none";
+                document.getElementById("sort").style.display="none";
+                document.getElementById("result").style.display="none";
+                document.getElementById("advice").style.display="block";
+                //result_show();
+            }
+            else if(type_list.length==0 && document.getElementById("advice").style.display=="block"){
+                document.getElementById("info-content").innerText="填寫自我意見後，請前往下一頁";                 
+                document.getElementsByClassName("header_text")[0].innerText="我有話要說";
+                document.getElementById("turn_pre").style.visibility="visible";
+                document.getElementById("intro").style.display="none";
+                document.getElementById("menu").style.display="none";
+                document.getElementById("sort").style.display="none";
+                document.getElementById("result").style.display="none";
+                document.getElementById("advice").style.display="none";
+                document.getElementById("myself").style.display="block";
+                //result_show();
+            }
+            else if(type_list.length==0 && document.getElementById("myself").style.display=="block"){    
+                
+                document.getElementById("info-content").innerText="列印整體結果";  
+                if(new_user){
+                document.getElementById("click").style.animation="clk_print 0.5s infinite"; 
+                document.getElementById("info-content").style.top="15em";   
+                document.getElementById("info-content").style.left="7em";  
+                new_user=1;
+                localStorage.setItem('new_user', 0);
+
+                }           
+
+                document.getElementById("header").style.visibility="hidden";
+                /*document.getElementById("turn_pre").style.visibility="visible";*/
+                document.getElementById("intro").style.display="none";
+                document.getElementById("menu").style.display="none";
+                document.getElementById("sort").style.display="none";
+                document.getElementById("result").style.display="none";
+                document.getElementById("advice").style.display="none";
+                document.getElementById("myself").style.display="none";
+                document.getElementById("finish").style.display="block";
+                //result_show();
+            }
+        }
+    
+        //alert(type_list.length);
+
+    }
+}
+//total_type_list=[0,3,5];
+function result_show(){   
+
+    //alert(select);
+    //alert(total_type_list);
+    
+    parent=document.getElementById("sr_table")
+    child_num=document.getElementById("sr_table").childNodes.length;
+    //alert(child_num);
+    while(child_num>2){
+        parent.removeChild(parent.lastChild);
+        child_num=parent.childNodes.length;
+    }
+    
+
+    document.getElementsByClassName("header_text")[0].innerText="結果";
+    for(var k=0;k<total_type_list.length;k++){        
+        key=order[total_type_list[k]];
+        title=total_type_list[k];
+        num=select[select.indexOf(key)+1];
+        //alert(key+num.toString());
+        run(key,title,num,k+1);
+    }
+    //alert(document.getElementById("sr_table").childNodes.length);
+    
+}
+
+function select_color(demo2){    
+    //alert(demo2.id);
+    demo2.style.backgroundColor="#5A5AAD";
+    demo2.style.color="white";
+}
+function run(key,title,num,order) {
+    var obj = document.getElementById("sr_row");
+    var wrapper = obj.cloneNode(true);    
+
+    wrapper.children[0].innerText=order.toString()+"\t"+order_title[title];
+
+    var demo = document.getElementById("menu_"+key+"1_s");
+    var demo2 = demo.cloneNode(true);
+    demo2.style.display="block";
+    demo2.style.backgroundColor="white";
+    if(num.indexOf('1')>=0){
+        select_color(demo2);
+    }
+    wrapper.children[1].appendChild(demo2);
+
+    var demo = document.getElementById("menu_"+key+"2_s");
+    var demo2 = demo.cloneNode(true);
+    demo2.style.display="block";
+    demo2.style.backgroundColor="white";
+    if(num.indexOf('2')>=0){
+        select_color(demo2);
+    }
+    wrapper.children[2].appendChild(demo2);
+
+    var demo = document.getElementById("menu_"+key+"3_s");
+    var demo2 = demo.cloneNode(true);
+    demo2.style.display="block";
+    demo2.style.backgroundColor="white";
+    if(num.indexOf('3')>=0){
+        select_color(demo2);
+    }
+    wrapper.children[3].appendChild(demo2);
+    
+    document.getElementById("sr_table").appendChild(wrapper);
+
+    //wrapper.style.display="table-cell";//不需此行
+
+    //alert(document.getElementById("sr_row").children.length);
+    /*alert(wrapper.children.length);
+    alert(wrapper.children[0].id);
+    alert(wrapper.children[1].id);
+    alert(wrapper.children[2].id);
+    alert(wrapper.children[3].id);
+    //alert(wrapper.childNodes[4].id);
+    //alert(wrapper.childNodes[5].id);*/
+
+
+    /*key="b";
+    var demo = document.getElementById("menu_"+key+"1_s");
+    var demo2 = demo.cloneNode(true);
+    demo2.style.display="block";
+    document.getElementById("sr1").appendChild(demo2);
+    var demo = document.getElementById("menu_"+key+"2_s");
+    var demo2 = demo.cloneNode(true);
+    demo2.style.display="block";
+    document.getElementById("sr2").appendChild(demo2);
+    var demo = document.getElementById("menu_"+key+"3_s");
+    var demo2 = demo.cloneNode(true);
+    demo2.style.display="block";
+    document.getElementById("sr3").appendChild(demo2);*/
+}
+//run();
+function advice_add(){
+    /*alert("add");    
+    alert(document.getElementById("advice").children.length);
+    for(var k=0;k<document.getElementById("advice").children.length;k++){
+        alert(document.getElementById("advice").children[k].id);
+    }*/
+    var demo = document.getElementById("table_advice_add");
+    var ref = document.getElementById("table_advice_sub");
+    var demo2 = demo.cloneNode(true);
+    demo2.style.display="table";
+    document.getElementById("advice_main").appendChild(demo2,ref);
+}
+
+function sort_select(){ /* ================= bug============================================================ */
+    document.getElementsByClassName("header_text")[0].innerText="在意的項目排序";
+
+    var sort_order=0;
+    var Items = document.getElementsByClassName("sort_text");
+    //alert(Items.length);
+    for (var i =0; i<Items.length; i++){
+    var btn = Items[i];
+    sort_order=sort_order+1;
+    //alert(btn.parentNode.className);
+    //alert(btn.getAttribute("value"));
+    if (i<total_type_list.length){
+               
+       btn.parentElement.parentElement.style.display="table-row";  
+        //var children = btn.parentNode.length;
+        //alert(btn.id);
+       //alert(document.getElementById(btn.id).innerText);
+       btn.innerText=order_title[total_type_list[i]]; //換標題; 
+       document.getElementById(btn.id).innerText=(i+1).toString(); //換標題;
+    }
+    else{   
+        btn.innerText=""; //換標題; 
+       document.getElementById(btn.id).innerText=""; //換標題;       
+       btn.parentElement.parentElement.style.display="none";     
+    }
+
+    }
+}
+
+
+function pre(){
+    //alert(splice_type_list);
+    type_list.unshift(splice_type_list[splice_type_list.length-1]);
+    splice_type_list.pop();    
+}
+
+function next(){
+    last_type_list = type_list.map(x => x);    
+            //alert("last_type_list");
+            //alert(last_type_list);
+            splice_type_list.push(type_list[0]);
+            //alert("splice_type_list");
+            //alert(splice_type_list);
+            type_list.splice(0,1); 
+            if(type_list.length==0){
+                back_page=0;
+            }
+}
+
+
+function type_select(){      
+    //type_list = last_type_list.map(x => x);
+    //title=order_title[parseInt(ans_temp.substring(3))-1]; //換標題
+    //alert(title);
+    //alert(document.getElementsByClassName("header_text")[0].innerText);
+    document.getElementsByClassName("header_text")[0].innerText="關於乳房重建手術的選擇\n您考量的因素為(可複選)";
+
+
+    var Items = document.getElementsByTagName("button");
+    //alert(ans_temp);
+    for (var i =0; i<Items.length; i++){
+    var btn = Items[i];
+    
+    //alert((btn.id).substring(3));
+    temp=parseInt(btn.value)-1;
+    //alert(temp);
+    //點選的選項 改變css
+    if (type_list.indexOf(temp)>=0){
+        btn.className=btn.id+"_select";
+        }  
+        //其餘的選項 還原css
+    else {
+        btn.className=btn.id+"_original";
+        }                
+    }         
+}
+
+
+function intro_select(){  
+    //alert(ans_temp);
+    title=order_title[parseInt(ans_temp.substring(3))-1]; //換標題
+    //alert(title);
+    //alert(document.getElementsByClassName("header_text")[0].innerText);
+    document.getElementsByClassName("header_text")[0].innerText=title;
+    //document.getElementsByClassName("header_text")[0].style.lineHeight="3em";
+
+    var Items = document.getElementsByClassName("intro");
+    for (var i =0; i<Items.length; i++){
+    var btn = Items[i];
+    if (btn.id[5]==order[parseInt(ans_temp.substring(3))-1]){
+    document.getElementById("menu_"+btn.id[5]+"1").style.display="table-cell";
+    document.getElementById("menu_"+btn.id[5]+"2").style.display="table-cell";
+    document.getElementById("menu_"+btn.id[5]+"3").style.display="table-cell";
+    }
+    else{        
+    document.getElementById("menu_"+btn.id[5]+"1").style.display="none";
+    document.getElementById("menu_"+btn.id[5]+"2").style.display="none";
+    document.getElementById("menu_"+btn.id[5]+"3").style.display="none";
+    }
+
+    temp=order[parseInt(ans_temp.substring(3))-1];
+    
+        //var target=btn.id.substring(5);
+        if(btn.id.substring(5).indexOf(temp)>=0){
+            //alert(btn.id.substring(5));
+            //alert(temp);
+            if (select.indexOf(btn.id[5])>=0 && select[select.indexOf(btn.id[5])+1].indexOf(btn.id[6].toString())>=0){
+            document.getElementById(document.getElementById(btn.id).parentNode.id).style.backgroundColor="#5A5AAD";
+            document.getElementById(document.getElementById(btn.id).parentNode.id).style.color="white";   
+            } 
+            else{
+                //alert(temp+" "+btn.id[5].toString()+btn.id[6].toString());
+                document.getElementById(document.getElementById(btn.id).parentNode.id).style.backgroundColor="white";
+                document.getElementById(document.getElementById(btn.id).parentNode.id).style.color="black";
+            }
+        }
+
+    }
+}
+
+function do_print(filename){
+    html2canvas(document.getElementById("print"), {
+    onrendered:function(canvas) {
+
+            var contentWidth = canvas.width;
+            var contentHeight = canvas.height;
+
+            //一页pdf显示html页面生成的canvas高度;
+            var pageHeight = contentWidth / 595.28 * 896.89;
+            //未生成pdf的html页面高度
+            var leftHeight = contentHeight;
+            //pdf页面偏移
+            var position = 0;
+            //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+            var imgWidth = 555.28;
+            var imgHeight = 555.28/contentWidth * contentHeight;
+
+            var pageData = canvas.toDataURL('image/jpeg', 1.0);
+
+            var pdf = new jsPDF('', 'pt', 'a4');
+            //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+            //当内容未超过pdf一页显示的范围，无需分页
+            if (leftHeight < pageHeight) {
+                pdf.addImage(pageData, 'JPEG', 20, 20, imgWidth, imgHeight );
+            } else {
+                while(leftHeight > 0) {
+                    pdf.addImage(pageData, 'JPEG', 20, position, imgWidth, imgHeight)
+                    leftHeight -= pageHeight;
+                    position -= 840.89;
+                    //避免添加空白页
+                    if(leftHeight > 0) {
+                        pdf.addPage();
+                    }
+                }
+            }
+
+            pdf.save(filename+'.pdf');
+            }
+    })
+}
+
+function print(print_type) {
+
+    if(print_type==1){
+    //alert("yes");
+    /*document.getElementById("result").style.display="block";*/
+    var demo = document.getElementById("result");
+    /*document.getElementById("result").style.display="none";*/
+    var demo2 = demo.cloneNode(true);
+    demo2.style.display="block";
+    var demo = document.getElementById("append");
+    /*document.getElementById("result").style.display="none";*/
+    var demo3 = demo.cloneNode(true);
+    demo3.style.display="block";
+
+    /*document.getElementById("print").appendChild(demo2);*/    
+    //alert(demo2.children[0].children.length);
+    
+    var page=1;
+    var term=0;
+    var doappend=0;
+    if(((demo2.children[0].children.length-1)%5)==0 && (demo2.children[0].children.length-1)!=10){
+        page=0;
+    }
+    while(term<((demo2.children[0].children.length-1)/5+page)){
+        var line=0;
+    while(demo2.children[0].children.length>0 && line<6){
+        document.getElementById("print").children[0].appendChild(demo2.children[0].children[0]);
+        line++;        
+    } 
+    if(page==1 && doappend==0){
+            document.getElementById("print").children[0].appendChild(demo3);
+            doappend=1;
+        }
+    //alert(demo2.children[0].children.length);
+    document.getElementById("print").style.display="block";
+    /*document.getElementById("print").appendChild(demo2);   */
+
+    
+            term++;
+
+    }    
+    filename="整體結果";         
+    do_print(filename);    
+    
+            parent=document.getElementById("print").children[0];
+            child_num=parent.childNodes.length;
+            while(child_num>0){
+                    parent.removeChild(parent.lastChild);
+                    child_num=parent.childNodes.length;
+                }
+                //alert(child_num)
+            document.getElementById("print").style.display="none";
+            //alert(demo2.children[0].children.length);
+            /*document.body.appendChild(demo2);*/  
+
+
+
+        document.getElementById("click").style.display="none"; 
+        document.getElementById("info-content").style.display="none";
+    }
+    
+    if(print_type==2){
+    //alert("yes");
+    /*document.getElementById("result").style.display="block";*/
+    var demo = document.getElementById("myself");
+    /*document.getElementById("result").style.display="none";*/
+    var demo2 = demo.cloneNode(true);
+    demo2.style.display="block";
+    
+    
+    //document.getElementById("print").children[0].appendChild(demo2.children[0].children[0]);
+    
+    while(demo2.children[0].children.length>0){
+        document.getElementById("print").children[0].appendChild(demo2.children[0].children[0]);            
+    } 
+    //alert(demo2.children[0].children.length);
+    
+    //alert(demo2.children[0].children.length);
+    document.getElementById("print").style.display="block";
+    
+    
+    filename="自我意見";         
+    do_print(filename);    
+    
+            parent=document.getElementById("print").children[0];
+            child_num=parent.childNodes.length;
+            while(child_num>0){
+                    parent.removeChild(parent.lastChild);
+                    child_num=parent.childNodes.length;
+                }
+                //alert(child_num)
+            document.getElementById("print").style.display="none";
+            //alert(demo2.children[0].children.length);
+            /*document.body.appendChild(demo2);*/  
+    }
+
+    if(print_type==3){
+    //alert("yes");
+    /*document.getElementById("result").style.display="block";*/
+    var demo = document.getElementById("advice");
+    /*document.getElementById("result").style.display="none";*/
+    var demo2 = demo.cloneNode(true);
+    demo2.style.display="block";
+    
+
+    /*document.getElementById("print").appendChild(demo2);*/    
+    //alert(demo2.children[0].children.length);
+    
+    var page=1;
+    var term=0;
+    var doappend=0;
+    if(((demo2.children[0].children.length-1)%2)==0){
+        page=0;
+    }
+    document.getElementById("print").children[0].appendChild(demo2.children[0].children[0]);
+    while(demo2.children[0].children.length>0){
+        var line=0;
+    while(demo2.children[0].children.length>0 && line<2){
+        document.getElementById("print").children[0].appendChild(demo2.children[0].children[0]);
+        line++;        
+    } 
+    //alert(demo2.children[0].children.length);
+    if(demo2.children[0].children.length>0){
+            var demo = document.getElementById("append3");
+            /*document.getElementById("result").style.display="none";*/
+            var demo3 = demo.cloneNode(true);
+            demo3.style.display="block";
+            document.getElementById("print").children[0].appendChild(demo3);
+            doappend=1;
+        }
+    //alert(demo2.children[0].children.length);
+    document.getElementById("print").style.display="block";
+    /*document.getElementById("print").appendChild(demo2);   */
+
+    
+            term++;
+
+    }    
+    filename="他人意見";         
+    do_print(filename);    
+    
+            parent=document.getElementById("print").children[0];
+            child_num=parent.childNodes.length;
+            while(child_num>0){
+                    parent.removeChild(parent.lastChild);
+                    child_num=parent.childNodes.length;
+                }
+                //alert(child_num)
+            document.getElementById("print").style.display="none";
+            //alert(demo2.children[0].children.length);
+            /*document.body.appendChild(demo2);*/  
+    }
+
+
+
+}
+
+function click_bottom(){   
+    //alert("123") ;
+    //alert(document.getElementById("click").style.animation);
+    if(document.getElementById("click").style.animation=="0.5s ease 0s infinite normal none running clk_next"||document.getElementById("click").style.animation=="clk_next 0.5s infinite"){
+        page(2);
+    }
+    if(document.getElementById("click").style.animation==""||document.getElementById("click").style.animation==""){
+        page(0);
+    }
+    /*if(document.getElementById("click").style.animation=="0.5s ease 0s infinite normal none running clk_menu1"||document.getElementById("click").style.animation=="clk_menu1 0.5s infinite"){
+        document.getElementById("BTN3").click();
+    }*
+    if(document.getElementById("click").style.animation=="0.5s ease 0s infinite normal none running clk_menu2"||document.getElementById("click").style.animation=="clk_menu2 0.5s infinite"){
+        document.getElementById("BTN6").click();
+    }*/
+    /*if(document.getElementById("click").style.animation=="0.5s ease 0s infinite normal none running clk_intro"||document.getElementById("click").style.animation=="clk_intro 0.5s infinite"){
+        document.getElementById("menu_c2").click();
+    }*/
+}
+
+/*===================================================*/
+
+/*function fullScreen() {
+    var e = document.getElementById("video-wrapper");
+    if (e.requestFullscreen) {
+        e.requestFullscreen();
+    } else if (e.webkitRequestFullscreen) {
+        e.webkitRequestFullscreen();
+    } else if (e.mozRequestFullScreen) {
+        e.mozRequestFullScreen();
+    } else if (e.msRequestFullscreen) {
+        e.msRequestFullscreen();
+    }
+}
+function YTStateChange(event) {
+    switch(event.data) {
+        case -1:
+            fullScreen();
+        break;
+        case 1:
+            // some code
+        break;
+        case 2:
+            // some code 
+        break;
+        default:
+        break;
+    }
+}
+$(document).ready(function () {
+    var player = new YT.Player( 'video-wrapper', {
+        events: { 'onStateChange': YTStateChange }
+    });
+});*/
+function reload(){    
+    new_user=0;
+    document.getElementById("click").style.display="none"; 
+    document.getElementById("info-content").style.display="none"; 
+    
+    document.getElementById("intro").style.display="none"; 
+    document.getElementById("sort").scrollTop="0";
+    document.getElementById("sort").style.display="none";
+    document.getElementById("result").scrollTop="0";
+    document.getElementById("result").style.display="none";
+    
+    document.getElementById("advice_main").innerHTML='<table border="10"  id="table_advice" class="table_advice"  cellspacing=0 style="width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC ><tr id="advice_row"><td class="advice_num_td" colspan="1">意見</td><td class="advice_td" colspan="1"><input id="advice_input_p1" class="advice_input_p" placeholder="老公"/></td></tr><tr id="advice_row"><td class="advice_text" colspan="2"><textarea id="advice_input_t1" rows="2" name="S1" cols="20" class="advice_input_t" placeholder="不管老婆做什麼決定 只希望她健康就好 我們要攜手走一輩子"></textarea></td></tr></table><table border="10"  id="table_advice" class="table_advice"  cellspacing=0 style="width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC ><tr id="advice_row"><td class="advice_num_td" colspan="1">意見</td><td class="advice_td" colspan="1"><input id="advice_input_p2" class="advice_input_p" placeholder="女兒"/></td></tr><tr id="advice_row"><td class="advice_text" colspan="2"><textarea id="advice_input_t2" rows="2" name="S1" cols="20" class="advice_input_t" placeholder="媽媽不管變成什麼樣子，都是我最愛的媽媽"></textarea></td></tr></table><table border="10"  id="table_advice_add" class="table_advice"  cellspacing=0 style="display: none;width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC ><tr id="advice_row"><td class="advice_num_td" colspan="1">意見</td><td class="advice_td" colspan="1"><input id="advice_input_p3"  class="advice_input_p" placeholder="女兒"/></td></tr><tr id="advice_row"><td class="advice_text" colspan="2"><textarea id="advice_input_t3" rows="2" name="S1" cols="20" class="advice_input_t" placeholder="媽媽不管變成什麼樣子，都是我最愛的媽媽"></textarea></td></tr></table>';
+    
+    document.getElementById("advice_main").scrollTop="0";
+    document.getElementById("advice").style.display="none";
+    document.getElementById("myself").style.display="none"; 
+    document.getElementById("finish").scrollTop="0";
+    document.getElementById("finish").style.display="none";
+    document.getElementById("menu").style.display="none"; 
+
+    document.getElementById("video_1s").pause();
+    document.getElementById("video_1s").currentTime = 0;
+    document.getElementById("video_2s").pause();
+    document.getElementById("video_2s").currentTime = 0;
+    document.getElementById("video_1").style.display="none";
+    document.getElementById("video_2").style.display="none";  
+
+
+    ans_temp="";
+    type_list=[];
+    total_type_list=[];
+    last_type_list=[];
+    splice_type_list=[];
+    type_num=0;
+    have_choose_second=1;
+    click_menu_twice=0;
+    click_intro_twice=0;
+    ans_temp_sub=""
+    select=[];
+    back_page=0;
+
+    document.getElementById("menu_a1_s").style.display="none";
+    document.getElementById("menu_a2_s").style.display="none"; 
+    document.getElementById("menu_a3_s").style.display="none";
+    document.getElementById("menu_b1_s").style.display="none";
+    document.getElementById("menu_b2_s").style.display="none"; 
+    document.getElementById("menu_b3_s").style.display="none";
+    document.getElementById("menu_c1_s").style.display="none";
+    document.getElementById("menu_c2_s").style.display="none"; 
+    document.getElementById("menu_c3_s").style.display="none";
+    document.getElementById("menu_d1_s").style.display="none";
+    document.getElementById("menu_d2_s").style.display="none"; 
+    document.getElementById("menu_d3_s").style.display="none";
+    document.getElementById("menu_e1_s").style.display="none";
+    document.getElementById("menu_e2_s").style.display="none"; 
+    document.getElementById("menu_e3_s").style.display="none";
+    document.getElementById("menu_f1_s").style.display="none";
+    document.getElementById("menu_f2_s").style.display="none"; 
+    document.getElementById("menu_f3_s").style.display="none";
+    document.getElementById("menu_g1_s").style.display="none";
+    document.getElementById("menu_g2_s").style.display="none"; 
+    document.getElementById("menu_g3_s").style.display="none";
+    document.getElementById("menu_h1_s").style.display="none";
+    document.getElementById("menu_h2_s").style.display="none"; 
+    document.getElementById("menu_h3_s").style.display="none";
+    document.getElementById("menu_h1_s").style.display="none";
+    document.getElementById("menu_h2_s").style.display="none"; 
+    document.getElementById("menu_h3_s").style.display="none";
+    document.getElementById("menu_i1_s").style.display="none";
+    document.getElementById("menu_i2_s").style.display="none"; 
+    document.getElementById("menu_i3_s").style.display="none";
+    document.getElementById("menu_j1_s").style.display="none";
+    document.getElementById("menu_j2_s").style.display="none"; 
+    document.getElementById("menu_j3_s").style.display="none";
+    var Items = document.getElementsByTagName("button");
+//alert(ans_temp);
+//alert((parseInt(ans_temp_value)-1).toString());
+    for (var i =0; i<Items.length; i++){
+    var btn = Items[i];
+            btn.className=btn.id+"_original";
+    }
+
+    document.getElementsByClassName("header_text")[0].innerHTML="關於乳房重建手術的選擇<br>您考量的因素為(可複選)";
+    document.getElementById("print").innerHTML='<table id="sr_table_p" border="0"  class="table_result"  cellspacing=0 style="width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC ></table>';
+    document.getElementById("print").style.display="none";
+    document.getElementById("append").style.display="none";
+    document.getElementById("append3").style.display="none"; 
+    document.getElementById("header").style.visibility="hidden";
+    document.getElementById("turn_pre").style.visibility="hidden";
+    document.getElementById("start").style.display="block";
+
+    document.getElementById("advice_input_ts").value="";
+
+    document.getElementById("advice_input_p1").value="";
+    document.getElementById("advice_input_t1").value="";
+    document.getElementById("advice_input_p2").value="";
+    document.getElementById("advice_input_t2").value="";
+    document.getElementById("advice_input_p3").value="";
+    document.getElementById("advice_input_t3").value="";
+}
+
+</script>
+<div id="click" onclick="click_bottom();"></div>
+<div id="show" ></div>
+<div id="info-content" class="button-content">準備好開始，請點選出發！</div> 
+<div id="print">
+    <table id="sr_table_p" border="0"  class="table_result"  cellspacing=0 style="width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC >
+        <!--tr id="sr_row0_p">
+            　<td id="sr0_p" class="result_num_td" colspan="2" style="text-align:center;background-color:#B9B9FF;font:normal bolder 2.5vmin/1 'Microsoft JhengHei', serif;">排序</td>
+            　<td id="sr1_p" class="result_td" colspan="2" style="text-align:center;background-color:#B9B9FF;font:normal bolder 2.5vmin/1 'Microsoft JhengHei', serif;">不重建</td>
+            　<td id="sr2_p" class="result_td" colspan="2" style="text-align:center;background-color:#B9B9FF;font:normal bolder 2.5vmin/1 'Microsoft JhengHei', serif;">植入體重建</td>
+            　<td id="sr3_p" class="result_td" colspan="2" style="text-align:center;background-color:#B9B9FF;font:normal bolder 2.5vmin/1 'Microsoft JhengHei', serif;">自體皮瓣重建</td>
+        </tr-->
+    </table>
+</div>
+<div id="append">
+    
+</div>
+<div id="append3">
+    
+</div>
+
+<!--button id="renderPdf" onclick="print(2);">DOWNLOAD PDF</button-->
+<!--input type="button" id="double" value="RUN" onclick="run('d',2,1);"-->
+<div id="header">
+    <div class="turn_pre" id="turn_pre" onclick="page(1);">pre</div>
+    <div class="header_mid" onclick="page(1);">
+        <span class="header_text" >
+        關於乳房重建手術的選擇<br>您考量的因素為(可複選)
+    </span>
+    </div>
+    <div class="turn_next" onclick="page(2);">next</div>
+</div>
 <body>
-  <h2>PWA 測試</h2>
-  <p>step 4 manifest.json favicon.ico  v2</p>
-  <!-- 網頁內文 -->
-  <img src="static/img/dog.jpg" title="dog">
-  <img src="static/img/cat.jpg" title="cat">
-  <video preload="auto"  id="video_1s" style='border-style:inset;' width="100%" height="540" controls=""><source src="static/video/乳房重建 台語版.mp4" type="video/mp4"></video>
+
+
+    
+     
+    <div id="floor" style="width: 100%;">
+        <div class="floor_go" style='margin-left:3%;' type="button" onclick="reload();/*window.location.reload();*/">回首頁</div>
+        <div class="floor_go" style='width: 38%;' type="button" onclick="video_pause();document.getElementById('click').style.display='none';document.getElementById('info-content').style.display='none';document.getElementById('video_1').style.display='block';document.getElementById('video_2').style.display='none';">乳房重建影片 台語版</div>
+        <div class="floor_go" style='width: 38%;' type="button" onclick="video_pause();document.getElementById('click').style.display='none';document.getElementById('info-content').style.display='none';document.getElementById('video_2').style.display='block';document.getElementById('video_1').style.display='none';">乳房重建影片 國語版</div>
+    </div>
+<div id="intro">
+    <table border="10"  class="table"  cellspacing=0  bgcolor=white >
+        <tr id="row_1">
+        　<td class="type" colspan="2"><span class="type_text">乳房<br>切除<br>不重建</span></td>
+
+          <td id="menu_a1" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >外觀上與手術前差異較大，看起來<br>較不對稱</span>
+          </td>
+          <td id="menu_b1" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >20-30公分<br>從胸部延伸至腋下的傷口</span>
+          </td>
+          <td id="menu_c1" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >X</span>
+          </td>
+          <td id="menu_d1" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <div class="intro_table">                
+                <div id="div_d1">
+                    <span class="intro_text" style="line-height: 3.5em;">優點</span>
+                </div>
+                <div id="div_d2">
+                    <span class="intro_text" style="line-height: 3.5em;">乳房是胸前裝飾品</span>
+                </div>
+            </div>
+            <div class="intro_table">
+                <div id="div_d1">
+                    <span class="intro_text" style="line-height: 3.5em;">缺點</span>
+                </div>
+                <div id="div_d2">
+                    <span class="intro_text" style="line-height: 3.5em;">身體不完整</span>
+                </div>
+            </div>
+          </td>
+          <td id="menu_e1" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >穿衣選擇受限制</span>
+          </td>
+          <td id="menu_f1" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >健保給付費用較低</span>
+          </td>
+          <td id="menu_g1" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >手術合併症</span>
+          </td>
+          <td id="menu_h1" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >手及肩部術後復健</span>
+          </td>
+          <td id="menu_i1" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >患肢活動受限<br>需穿戴義乳增加穿衣選擇性</span>
+          </td>
+          <td id="menu_j1" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >可能須重新適應與伴侶的親密關係</span>
+          </td>
+
+        </tr>
+        <tr id="row_2">
+        　<td class="type" colspan="2"><span class="type_text">植入體<br>重建</span></td> 
+
+          <td id="menu_a2" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >外觀上看起來較對稱</span>
+          </td>
+          <td id="menu_b2" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >3-5公分<br>在腋下及乳暈</span>
+          </td>
+          <td id="menu_c2" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >觸感較圓順Q彈</span>
+          </td>
+          <td id="menu_d2" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <div class="intro_table">                
+                <div id="div_d1">
+                    <span class="intro_text" style="line-height: 3.5em;">優點</span>
+                </div>
+                <div id="div_d2">
+                    <span class="intro_text" style="line-height: 3.5em;">覺得自己較正常與完整</span>
+                </div>
+            </div>
+            <div class="intro_table">
+                <div id="div_d1">
+                    <span class="intro_text" style="line-height: 3.5em;">缺點</span>
+                </div>
+                <div id="div_d2">
+                    <span class="intro_text" style="line-height: 3.5em;">身體有異物存在</span>
+                </div>
+            </div>
+          </td>
+          <td id="menu_e2" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >穿衣選擇較不受限制</span>
+          </td>
+          <td id="menu_f2" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >健保不給付費，約15萬</span>
+          </td>
+          <td id="menu_g2" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >手術合併症<br>莢膜攣縮</span>
+          </td>
+          <td id="menu_h2" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >手及肩部術後復健<br>及按摩</span>
+          </td>
+          <td id="menu_i2" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >患肢活動受限<br>植入物需長期按摩</span>
+          </td>
+          <td id="menu_j2" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >維持與伴侶的親密關係</span>
+          </td>
+
+        </tr>
+        <tr id="row_3">
+        　<td class="type" colspan="2"><span class="type_text">皮瓣<br>重建</span></td>
+
+          <td id="menu_a3" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >外觀上看起來較對稱</span>
+          </td>
+
+          <td id="menu_b3" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0 >
+            <span class="intro_text" style="line-height: 1.5em;">3-5公分，在腋下及乳暈</span>
+
+            <div class="intro_table">
+                <div id="div1" >
+                    <img class="intro_item" src="static/img/intro_item.PNG">
+                </div>
+                <div id="div2">
+                    <span class="intro_text" style="line-height: 2.5em;">闊背肌</span>
+                </div>
+                <div id="div3">
+                    <span class="intro_text" style="line-height: 1.25em;">背部疤痕<br>約15公分</span>
+                </div>
+            </div>
+            <div class="intro_table">
+                <div id="div1" >
+                    <img class="intro_item" src="static/img/intro_item.PNG">
+                </div>
+                <div id="div2">
+                    <span class="intro_text" style="line-height: 2.5em;">橫腹直肌</span>
+                </div>
+                <div id="div3">
+                    <span class="intro_text" style="line-height: 1.25em;">腹部疤痕<br>約20-30公分</span>
+                </div>
+            </div>
+          </td>
+          <td id="menu_c3" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >觸感較擬真自然</span>
+          </td>
+          <td id="menu_d3" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <div class="intro_table">                
+                <div id="div_d1">
+                    <span class="intro_text" style="line-height: 3.5em;">優點</span>
+                </div>
+                <div id="div_d2">
+                    <span class="intro_text" style="line-height: 3.5em;">覺得自己較正常與完整</span>
+                </div>
+            </div>
+            <div class="intro_table">
+                <div id="div_d1">
+                    <span class="intro_text" style="line-height: 3.5em;">缺點</span>
+                </div>
+                <div id="div_d2">
+                    <span class="intro_text" style="line-height: 3.5em;">X</span>
+                </div>
+            </div>
+          </td>
+          <td id="menu_e3" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >穿衣選擇較不受限制</span>
+          </td>
+          <td id="menu_f3" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >健保不給付費，約20萬</span>
+          </td>
+          <td id="menu_g3" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >手術合併症<br>脂肪皮瓣壞死<br>疝氣</span>
+          </td>
+          <td id="menu_h3" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >手及肩部術後復健</span>
+          </td>
+          <td id="menu_i3" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >患肢活動受限<br>取皮瓣處肌肉較無力<br>橫腹直肌移植：一個月內腹部不宜過度伸展</span>
+          </td>
+          <td id="menu_j3" colspan="2" class="intro"   onclick="getsubchoose();" cellpadding=0>
+            <span class="intro_text" >維持與伴侶的親密關係</span>
+          </td>
+
+
+        </tr>
+    </table> 
+
+<!--
+<table border="10"  class="table"  cellspacing=15 style="width:100%;border-color:transparent;" bgcolor=transparent >
+<tr>
+　<td colspan="2"><button id="BTN2" class="button_original" type="button" value='2' onclick='getValue()'>{{info2}}</button></td>
+</tr>
+</table> 
+-->
+</div>
+<div id="menu">
+    <table border="10"  class="table_menu"  cellspacing=10 style="width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC >
+        <tr>
+        　<td class="menu_td" colspan="2"><button id="BTN1" class="BTN1_original" type="button" value='1' onclick='getValue()'>外觀</button></td>
+        　<td class="menu_td" colspan="2"><button id="BTN2" class="BTN2_original" type="button" value='2' onclick='getValue()'>疤痕大小</button></td>
+        </tr>
+        <tr>
+            　<td class="menu_td" colspan="2"><button id="BTN3" class="BTN3_original" type="button" value='3' onclick='getValue()'>觸感</button></td>
+            　<td class="menu_td" colspan="2"><button id="BTN4" class="BTN4_original" type="button" value='4' onclick='getValue()'>對自我的感覺</button></td>
+        </tr>
+        <tr>
+            　<td class="menu_td" colspan="2"><button id="BTN5" class="BTN5_original" type="button" value='5' onclick='getValue()'>穿衣的方便性</button></td>
+            　<td class="menu_td" colspan="2"><button id="BTN6" class="BTN6_original" type="button" value='6' onclick='getValue()'>花費</button></td>
+        </tr>
+        <tr>
+            　<td class="menu_td" colspan="2"><button id="BTN7" class="BTN7_original" type="button" value='7' onclick='getValue()'>手術風險及<br>合併症</button></td>
+            　<td class="menu_td" colspan="2"><button id="BTN8" class="BTN8_original" type="button" value='8' onclick='getValue()'>術後返家照顧</button></td>
+        </tr>
+        <tr>
+            　<td class="menu_td" colspan="2"><button id="BTN9" class="BTN9_original" type="button" value='9' onclick='getValue()'>術後生活影響</button></td>
+            　<td class="menu_td" colspan="2"><button id="BTN10" class="BTN10_original" type="button" value='10' onclick='getValue()'>與伴侶的<br>親密感</button></td>
+        </tr>
+    </table>
+</div>
+<div id="sort" onmouseover="drag();" ontouchend="drag();" onclick="drag();">
+    <table id="sample_table" border="10"  class="table table-bordered table-striped" cellspacing=0 style="width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC >
+        <tr>
+        　<td class="order_td" colspan="2" ><div id="sort1" class="sort_num"  value='100' ></div></td>        
+        　<td class="sort_td" colspan="2" ><div id="sort1" class="sort_text"  value='1' ></div></td>
+        </tr>
+        <tr>
+        　<td class="order_td" colspan="2"><div id="sort2" class="sort_num"  value='200' ></div></td>
+        　<td class="sort_td" colspan="2"><div id="sort2" class="sort_text"  value='2' ></div></td>
+        </tr>
+        <tr>
+            　<td class="order_td" colspan="2"><div id="sort3" class="sort_num"  value='300' ></div></td>
+            　<td class="sort_td" colspan="2"><div id="sort3" class="sort_text"  value='3' ></div></td>
+        </tr>
+        <tr>
+            　<td class="order_td" colspan="2"><div id="sort4" class="sort_num"  value='400' ></div></td>
+            　<td class="sort_td" colspan="2"><div id="sort4" class="sort_text"  value='4' ></div></td>
+        </tr>
+        <tr>
+            　<td class="order_td" colspan="2"><div id="sort5" class="sort_num"  value='500' ></div></td>
+            　<td class="sort_td" colspan="2"><div id="sort5" class="sort_text"  value='5' ></div></td>
+        </tr>
+        <tr>
+            　<td class="order_td" colspan="2"><div id="sort6" class="sort_num"  value='600' ></div></td>
+            　<td class="sort_td" colspan="2"><div id="sort6" class="sort_text"  value='6' ></div></td>
+        </tr>
+        <tr>
+            　<td class="order_td" colspan="2"><div id="sort7" class="sort_num"  value='700' ></div></td>
+            　<td class="sort_td" colspan="2"><div id="sort7" class="sort_text"  value='7' ></div></td>
+        </tr>
+        <tr>
+            　<td class="order_td" colspan="2"><div id="sort8" class="sort_num"  value='800' ></div></td>
+            　<td class="sort_td" colspan="2"><div id="sort8" class="sort_text"  value='8' ></div></td>
+        </tr>
+        <tr>
+            　<td class="order_td" colspan="2"><div id="sort9" class="sort_num"  value='900' ></div></td>
+            　<td class="sort_td" colspan="2"><div id="sort9" class="sort_text"  value='9' ></div></td>
+        </tr>
+        <tr>
+            　<td class="order_td" colspan="2"><div id="sort10" class="sort_num"  value='1000' ></div></td>
+            　<td class="sort_td" colspan="2"><div id="sort10" class="sort_text"  value='10' ></div></td>
+        </tr>
+    </table>
+</div>
+<div id="result">
+    <table id="sr_table" border="0"  class="table_result"  cellspacing=0 style="width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC >
+        <tr id="sr_row0" style="pointer-events: none;">
+            　<td id="sr0" class="result_num_td" colspan="2" style="text-align:center;background-color:#B9B9FF;font:normal bolder 2.5vmin/1 'Microsoft JhengHei', serif;">排序</td>
+            　<td id="sr1" class="result_td" colspan="2" style="text-align:center;background-color:#B9B9FF;font:normal bolder 2.5vmin/1 'Microsoft JhengHei', serif;">不重建</td>
+            　<td id="sr2" class="result_td" colspan="2" style="text-align:center;background-color:#B9B9FF;font:normal bolder 2.5vmin/1 'Microsoft JhengHei', serif;">植入體重建</td>
+            　<td id="sr3" class="result_td" colspan="2" style="text-align:center;background-color:#B9B9FF;font:normal bolder 2.5vmin/1 'Microsoft JhengHei', serif;">自體皮瓣重建</td>
+        </tr>
+        <tr id="sr_row">
+        　<td id="sr0" class="result_num_td" colspan="2"></td>
+        　<td id="sr1" class="result_td" colspan="2"></td>
+        　<td id="sr2" class="result_td" colspan="2"></td>
+        　<td id="sr3" class="result_td" colspan="2"></td>
+        </tr> 
+        
+        <tr id="sr_row1">
+          <td id="menu_a1_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text"  style="line-height: 2.3em;" >外觀上與手術前差異較大，看起來較不對稱</span>
+          </td>
+          <td id="menu_b1_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 2.3em;" >20-30公分從胸部延伸至腋下的傷口</span>
+          </td>
+          <td id="menu_c1_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" >X</span>
+          </td>
+          <td id="menu_d1_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <div class="result_table" style="border-top-style:none;">                
+                <div id="div_d1_s">
+                    <span class="result_text" style="line-height: 3.5em;">優</span>
+                </div>
+                <div id="div_d2_s">
+                    <span class="result_text"  style="width: 18.15vw;line-height: 1em;">乳房是胸前裝飾品</span>
+                </div>
+            </div>
+            <div class="result_table">
+                <div id="div_d1_s">
+                    <span class="result_text" style="line-height: 3.5em;">缺</span>
+                </div>
+                <div id="div_d2_s">
+                    <span class="result_text" style="width: 18.15vw;line-height: 1em;">身體不完整</span>
+                </div>
+            </div>
+          </td>
+          <td id="menu_e1_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" >穿衣選擇受限制</span>
+          </td>
+          <td id="menu_f1_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 3.5em;">健保給付費用較低</span>
+          </td>
+          <td id="menu_g1_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" >手術合併症</span>
+          </td>
+          <td id="menu_h1_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 3.5em;">手及肩部術後復健</span>
+          </td>
+          <td id="menu_i1_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 2.3em;">患肢活動受限需穿戴義乳增加穿衣選擇性</span>
+          </td>
+          <td id="menu_j1_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 2.3em;">可能須重新適應與伴侶的親密關係</span>
+          </td>
+
+          <td id="menu_a2_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 3.5em;">外觀上看起來較對稱</span>
+          </td>
+          <td id="menu_b2_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 3.5em;">3-5公分在腋下及乳暈</span>
+          </td>
+          <td id="menu_c2_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" >觸感較圓順Q彈</span>
+          </td>
+          <td id="menu_d2_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <div class="result_table" style="border-top-style:none;">                
+                <div id="div_d1_s">
+                    <span class="result_text" style="line-height: 3.5em;">優</span>
+                </div>
+                <div id="div_d2_s">
+                    <span class="result_text" style="line-height: 1em;">覺得自己較正常與完整</span>
+                </div>
+            </div>
+            <div class="result_table">
+                <div id="div_d1_s">
+                    <span class="result_text" style="line-height: 3.5em;">缺</span>
+                </div>
+                <div id="div_d2_s">
+                    <span class="result_text" style="line-height: 1em;">身體有異物存在</span>
+                </div>
+            </div>
+          </td>
+          <td id="menu_e2_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 3.5em;">穿衣選擇較不受限制</span>
+          </td>
+          <td id="menu_f2_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 3.5em;">健保不給付費，約15萬</span>
+          </td>
+          <td id="menu_g2_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 3.5em;">手術合併症<BR>莢膜攣縮</span>
+          </td>
+          <td id="menu_h2_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 3.5em;">手及肩部術後復健及按摩</span>
+          </td>
+          <td id="menu_i2_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 3.5em;">患肢活動受限植入物需長期按摩</span>
+          </td>
+          <td id="menu_j2_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 3.5em;">維持與伴侶的親密關係</span>
+          </td>
+          
+          <td id="menu_a3_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 3.5em;">外觀上看起來較對稱</span>
+          </td>
+
+          <td id="menu_b3_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0 >
+            <span class="result_text" style="line-height: 1.2em;font-size: smaller;font:normal bolder 3vmin/1 'Microsoft JhengHei', serif;">3-5公分，在腋下及乳暈</span>
+
+            <div class="result_table" style="height: 2.5em;">
+                <div id="div1_s" >
+                    <img class="intro_item" src="static/img/intro_item.PNG">
+                </div>
+                <div id="div2_s">
+                    <span class="result_text" style="line-height: 2em;font-size: smaller;font:normal bolder 2.5vmin/1 'Microsoft JhengHei', serif;">闊背肌</span>
+                </div>
+                <div id="div3_s">
+                    <span class="result_text" style="line-height: 1em;font-size: smaller;font:normal bolder 2.3vmin/1 'Microsoft JhengHei', serif;">背部疤痕約15公分</span>
+                </div>
+            </div>
+            <div class="result_table" style="height: 2.5em;">
+                <div id="div1_s" >
+                    <img class="intro_item" src="static/img/intro_item.PNG">
+                </div>
+                <div id="div2_s">
+                    <span class="result_text" style="line-height: 2em;font-size: smaller;font:normal bolder 2.5vmin/1 'Microsoft JhengHei', serif;">橫腹直肌</span>
+                </div>
+                <div id="div3_s">
+                    <span class="result_text" style="line-height: 1em;font-size: smaller;font:normal bolder 2.3vmin/1 'Microsoft JhengHei', serif;">腹部疤痕約20-30公分</span>
+                </div>
+            </div>
+          </td>
+          <td id="menu_c3_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" >觸感較擬真自然</span>
+          </td>
+          <td id="menu_d3_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <div class="result_table" style="border-top-style:none;">                
+                <div id="div_d1_s">
+                    <span class="result_text" style="line-height: 3.5em;">優</span>
+                </div>
+                <div id="div_d2_s">
+                    <span class="result_text" style="line-height: 1em;">覺得自己較正常與完整</span>
+                </div>
+            </div>
+            <div class="result_table">
+                <div id="div_d1_s">
+                    <span class="result_text" style="line-height: 3.5em;">缺</span>
+                </div>
+                <div id="div_d2_s">
+                    <span class="result_text" style="line-height: 3.5em;">X</span>
+                </div>
+            </div>
+          </td>
+          <td id="menu_e3_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 3.5em;">穿衣選擇較不受限制</span>
+          </td>
+          <td id="menu_f3_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 3.5em;">健保不給付費，約20萬</span>
+          </td>
+          <td id="menu_g3_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 2.3em;">手術合併症<BR>脂肪皮瓣壞死<BR>疝氣</span>
+          </td>
+          <td id="menu_h3_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 3.5em;">手及肩部術後復健</span>
+          </td>
+          <td id="menu_i3_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 1.4em;">患肢活動受限取皮瓣處肌肉較無力橫腹直肌移植：一個月內腹部不宜過度伸展</span>
+          </td>
+          <td id="menu_j3_s" colspan="2" class="result"   onclick="getsubchoose();" cellpadding=0>
+            <span class="result_text" style="line-height: 3.5em;">維持與伴侶的親密關係</span>
+          </td>
+        </tr> 
+    </table>
+
+</div>
+<div id="advice">
+    <div id="advice_main">
+    <table border="10"  id="table_advice" class="table_advice"  cellspacing=0 style="width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC >
+        <tr id="advice_row">
+            　<td class="advice_num_td" colspan="1">意見</td>
+            　<td class="advice_td" colspan="1">
+                <input id="advice_input_p1" class="advice_input_p" placeholder="老公"/>
+              </td>
+            </tr> 
+            <tr id="advice_row">
+                　<td class="advice_text" colspan="2">                    
+                    <textarea id="advice_input_t1" rows="2" name="S1" cols="20" class="advice_input_t" placeholder="不管老婆做什麼決定 只希望她健康就好 我們要攜手走一輩子"></textarea>
+                  </td>
+            </tr>             
+    </table>
+    <table border="10"  id="table_advice" class="table_advice"  cellspacing=0 style="width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC >
+        <tr id="advice_row">
+            　<td class="advice_num_td" colspan="1">意見</td>
+            　<td class="advice_td" colspan="1">
+                <input id="advice_input_p2" class="advice_input_p" placeholder="女兒"/>
+              </td>
+            </tr> 
+            <tr id="advice_row">
+                　<td class="advice_text" colspan="2">                    
+                    <textarea id="advice_input_t2" rows="2" name="S1" cols="20" class="advice_input_t" placeholder="媽媽不管變成什麼樣子，都是我最愛的媽媽"></textarea>
+                  </td>
+            </tr> 
+    </table>
+
+    <table border="10"  id="table_advice_add" class="table_advice"  cellspacing=0 style="display: none;width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC >
+        <tr id="advice_row">
+            　<td class="advice_num_td" colspan="1">意見</td>
+            　<td class="advice_td" colspan="1">
+                <input id="advice_input_p3" class="advice_input_p" placeholder="女兒"/>
+              </td>
+            </tr> 
+            <tr id="advice_row">
+                　<td class="advice_text" colspan="2">                    
+                    <textarea id="advice_input_t3" rows="2" name="S1" cols="20" class="advice_input_t" placeholder="媽媽不管變成什麼樣子，都是我最愛的媽媽"></textarea>
+                  </td>
+            </tr> 
+    </table>
+    </div>
+
+    <table border="10"  id="table_advice_sub" class="table_advice_sub"  cellspacing=10 style="width:100%;border-color:transparent;border-style: solid;" bgcolor=transparent >
+        <tr id="advice_row">
+            　<td class="advice_print" colspan="1" onclick="print(3);">列印意見</td>
+            　<td class="advice_add" colspan="1" onclick="advice_add();">新增意見</td>
+            </tr> 
+    </table>
+
+</div>
+<div id="myself">
+    <table border="0"  id="table_myself" class="table_advice"  cellspacing=0 style="width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC >
+        <tr id="myself_row">
+            　<td class="myself_td" colspan="1">親愛的勇者，您還有其他想法嗎？</td>            　
+            </tr> 
+            <tr id="myself_row">
+                　<td class="myself_text" colspan="1">                    
+                    <textarea id="advice_input_ts" rows="2" name="S1" cols="20" class="advice_input_t" placeholder="自我意見"></textarea>
+                  </td>
+            </tr> 
+            <tr id="myself_row" >
+                <td id="myself_print" class="myself_print" colspan="1" onclick="print(2);">列印我有話要說</td>
+            </tr>            
+    </table>    
+
+</div>
+<div id="finish">
+    <table border="10"  id="table_finish" class="table_finish"  cellspacing=70 style="width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC >
+        
+            <tr id="finish_row" >
+                <td id="finish_print" class="finish_print" colspan="1" onclick="print(1);">列印整體結果</td>
+            </tr>
+            <tr id="finish_row" >
+                <td id="finish_print" class="finish_print" colspan="1" onclick="print(2);">列印自我意見</td>
+            </tr>   
+            <tr id="finish_row" >
+                <td id="finish_print" class="finish_print" colspan="1" onclick="print(3);">列印他人意見</td>
+            </tr>   
+            <tr id="finish_row" >
+                <td id="finish_print" class="finish_end" colspan="1" onclick="alert('請關閉頁面');window.close();top.close();" >完成</td>
+            </tr>            
+    </table>    
+
+</div>
+<div id="start">
+    <table border="10"  id="table_start" class="table_start"  cellspacing=20 style="width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC >
+        
+            <tr id="start_row" >
+                <td id="start_text" class="start_text" colspan="1" >接下來要請您思考您可能會在意的問題,進而 比較、澄清您心中的想法與感受,若旅程途中 有任何不適、疑問或是建議,請您隨時提出, 讓我們一起度過</td>
+            </tr>
+            <tr id="start_row" >
+                <td id="start_pic" class="start_pic" colspan="1" ></td>
+            </tr>   
+            <tr id="start_row_c" >
+                <td id="start_go" class="start_go" colspan="1" onclick="page(0);">出發吧</td>
+            </tr>            
+    </table>         
+
+</div>
+
+<div id="video_1">
+
+    <table border="0"  id="table_video" class="table_start"  cellspacing=20 style="width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC >
+        <tr id="video_row" style="border: none;">
+            <td style="border: none;height: 10em;"></td>
+        </tr> 
+            <tr id="video_row" >
+                <td id="video_text" class="video_text" colspan="1" >乳房重建 台語版</td>
+            </tr>
+            <tr id="video_row" >
+                
+                <td id="video_pic" class="video_pic" colspan="1" >
+                    <video preload="auto"  id="video_1s" style='border-style:inset;' width="100%" height="540" controls=""><source src="static/video/乳房重建 台語版.mp4" type="video/mp4"></video>
+                        <!--iframe src="https://drive.google.com/file/d/1r8rFY7-RB6aQrnLVgkdrNYJ-Fmas9ixl/preview" width="100%" height="540"  allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe-->
+                    </td>
+            </tr>   
+            <tr id="video_row" style="border: none;">
+                <td style="border: none;height: 5em;"></td>
+            </tr>
+            <tr id="video_row_c" >
+                <td id="video_go" class="video_go" colspan="1" onclick="video_pause();document.getElementById('video_1').style.display='none';if(new_user){document.getElementById('click').style.display='block';document.getElementById('info-content').style.display='block';}">關閉影片</td>
+            </tr>   
+            <tr id="video_row" style="border: none;">
+                <td style="border: none;height: 50em;"></td>
+            </tr>              
+    </table>    
+
+</div>
+<div id="video_2">
+
+    <table border="0"  id="table_video" class="table_start"  cellspacing=20 style="width:100%;border-color:#FFECEC;border-style: solid;" bgcolor=#FFECEC >
+        <tr id="video_row" style="border: none;">
+            <td style="border: none;height: 10em;"></td>
+        </tr> 
+            <tr id="video_row" >
+                <td id="video_text" class="video_text" colspan="1" >乳房重建 國語版</td>
+            </tr>
+            <tr id="video_row" >
+                <td id="video_pic" class="video_pic" colspan="1" >
+                    <video preload="auto" id="video_2s" style='border-style:inset;' width="100%" height="540" controls=""><source src="static/video/乳房重建衛教影片 國語版 實驗組.mp4" type="video/mp4"></video>
+                    <!--iframe src="https://drive.google.com/file/d/1gnrmF_N03I4zIXemGS7CDJh9l84D4eFI/preview" width="100%" height="540" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe-->
+                </td>
+            </tr> 
+            <tr id="video_row" style="border: none;">
+                <td style="border: none;height: 5em;"></td>
+            </tr> 
+            <tr id="video_row_c" >
+                <td id="video_go" class="video_go" colspan="1" onclick="video_pause();document.getElementById('video_2').style.display='none';if(new_user){document.getElementById('click').style.display='block';document.getElementById('info-content').style.display='block';}">關閉影片</td>             
+            </tr>    
+            <tr id="video_row" style="border: none;">
+                <td style="border: none;height: 50em;"></td>
+            </tr>          
+    </table>      
+</div> 
+
+<!--停止所有播放中的iframe視頻-->
+<!--script language="javascript" type="text/javascript" src="jquery-1.8.2.js"></script-->
+<script language="javascript" type="text/javascript">
+function video_pause(){
+    document.getElementById("video_1s").pause();
+    document.getElementById("video_2s").pause();
+}
+
+/*$(function(){
+    $('.video_go').click(function(){ 
+        $("iframe").each(function() { 
+        var src= $(this).attr('src');
+        $(this).attr('src',src);  
+});  
+    });
+});*/
+</script>
+
+<!--全螢幕設定 allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"   -->
+<style>
+    .mejs-container-fullscreen { 
+    background-color: #fff !important; 
+} 
+
+.mejs-container-fullscreen .mejs-mediaelement, 
+.mejs-container-fullscreen video { 
+    height: 530px !important; 
+    top: 500px !important; 
+} 
+
+.mejs-container.mejs-container-fullscreen .mejs-controls { 
+    bottom: auto !important; 
+    top: 1000px !important; /* video top + video height - controls height (30px) */ 
+} 
+</style>
+<script>
+/*google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+/*google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;*/
+
+/*try {
+  fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
+    return true;
+  }).catch(function(e) {
+    var carbonScript = document.createElement("script");
+    carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+    carbonScript.id = "_carbonads_js";
+    document.getElementById("carbon-block").appendChild(carbonScript);
+  });
+} catch (error) {
+  console.log(error);
+}*/
+RowSorter("#sample_table");
+function drag(){    
+let resort_type_list=[];
+var i=0;
+//total_type_list=[];
+//splice_type_list=[];
+    while(i<total_type_list.length){
+        var cont=document.getElementById('sample_table').children[0].children[i].children[1].innerHTML;
+        var type_temp=order_title.indexOf(cont.substring(cont.indexOf('">')+2, cont.indexOf('</div>')));
+        //alert("@"+cont.substring(cont.indexOf('">')+2, cont.indexOf('</div>'))+"@");
+	//alert(type_temp);
+        resort_type_list.push(parseInt(type_temp));
+        //splice_type_list.push(parseInt(type_temp));
+    //alert(document.getElementById('sample_table').children[0].children[1].children[1].innerText);
+    i=i+1;
+    }
+            
+    total_type_list = resort_type_list.map(x => x);
+    splice_type_list= resort_type_list.map(y => y);
+    //alert(total_type_list);
+    //alert(splice_type_list);
+    sort_select();
+}
+
+  /*var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);*/
+
+  /*(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();*/
+
+</script>
 </body>
 </html>
