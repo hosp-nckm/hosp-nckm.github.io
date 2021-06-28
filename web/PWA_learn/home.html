@@ -1355,6 +1355,17 @@ table tr.sorting-row td {background-color: #8b8;}
     };    
   </script>
 <script>
+window.addEventListener("error", handleError, true);
+
+function handleError(evt) {
+    if (evt.message) { // Chrome sometimes provides this
+      alert("error: "+evt.message +" at linenumber: "+evt.lineno+" of file: "+evt.filename);
+    } else {
+      alert("error: "+evt.type+" from element: "+(evt.srcElement || evt.target));
+    }
+}
+</script>
+<script>
 var new_user=1;
 const statusList = JSON.parse(localStorage.getItem('new_user')) || [];
 
