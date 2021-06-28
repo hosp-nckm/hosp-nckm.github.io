@@ -3,12 +3,12 @@
   "name": "粉紅旅程_app",
   "icons": [
     {
-      "src": "/static/img/icon_192.png",
+      "src": "/web/粉紅旅程/static/img/icon_192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/static/img/icon_128.png",
+      "src": "/web/粉紅旅程/static/img/icon_128.png",
       "type": "image/png",
       "sizes": "128x128"
     }
