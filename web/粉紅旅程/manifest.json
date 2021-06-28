@@ -3,14 +3,14 @@
   "name": "粉紅旅程_app",
   "icons": [
     {
-      "src": "/static/img/logo.PNG",
+      "src": "/static/img/icon_192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/static/img/logo.PNG",
+      "src": "/static/img/icon_128.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "128x128"
     }
   ],
   "start_url": "home_PWA.html?source=pwa",
