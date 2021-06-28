@@ -1,0 +1,17 @@
+{
+  "short_name": "PWA",
+  "name": "PWA_learn",
+  "icons": [
+    {
+      "src": "/web/PWA_learn/static/img/icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/web/PWA_learn/home.html?source=pwa",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#000000",   
+  "prefer_related_applications":false
+}
