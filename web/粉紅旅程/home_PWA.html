@@ -62,7 +62,6 @@ width: 920px;
 height: 100%;
 margin: 0 auto;
 padding: 5px 20px;
-z-index: 2;
 }
 #print{
     background: #FFECEC;
@@ -78,8 +77,7 @@ z-index: 2;
     position: absolute;
     top:5px;/*140px;*/
     right:0%;
-    /*display:none;*/
-    z-index: 1;
+    display:none;
 }
 
 #menu{
@@ -2369,14 +2367,12 @@ function reload(){
     document.getElementById("finish").style.display="none";
     document.getElementById("menu").style.display="none"; 
 
-    /*document.getElementById("video_1s").pause();
+    document.getElementById("video_1s").pause();
     document.getElementById("video_1s").currentTime = 0;
     document.getElementById("video_2s").pause();
-    document.getElementById("video_2s").currentTime = 0;*/
-    document.getElementById('video_1').style.zIndex='1';
-    document.getElementById('video_2').style.zIndex='1';
-    //document.getElementById("video_1").style.display="none";
-    //document.getElementById("video_2").style.display="none"; 
+    document.getElementById("video_2s").currentTime = 0;
+    document.getElementById("video_1").style.display="none";
+    document.getElementById("video_2").style.display="none"; 
 
 
     ans_temp="";
@@ -2491,8 +2487,8 @@ function reload(){
      
     <div id="floor" style="width: 100%;">
         <div class="floor_go" style='margin-left:3%;' type="button" onclick="reload();/*window.location.reload();*/">回首頁</div>
-        <div class="floor_go" style='width: 38%;' type="button" onclick="video_pause();document.getElementById('click').style.display='none';document.getElementById('info-content').style.display='none';document.getElementById('video_1').style.zIndex='2';document.getElementById('video_2').style.zIndex='1';/*document.getElementById('video_1').style.display='block';document.getElementById('video_2').style.display='none';*/">乳房重建影片 台語版</div>
-        <div class="floor_go" style='width: 38%;' type="button" onclick="video_pause();document.getElementById('click').style.display='none';document.getElementById('info-content').style.display='none';document.getElementById('video_2').style.zIndex='2';document.getElementById('video_1').style.zIndex='1';/*document.getElementById('video_2').style.display='block';document.getElementById('video_1').style.display='none';*/">乳房重建影片 國語版</div>
+        <div class="floor_go" style='width: 38%;' type="button" onclick="video_pause();document.getElementById('click').style.display='none';document.getElementById('info-content').style.display='none';document.getElementById('video_1').style.display='block';document.getElementById('video_2').style.display='none';">乳房重建影片 台語版</div>
+        <div class="floor_go" style='width: 38%;' type="button" onclick="video_pause();document.getElementById('click').style.display='none';document.getElementById('info-content').style.display='none';document.getElementById('video_2').style.display='block';document.getElementById('video_1').style.display='none';">乳房重建影片 國語版</div>
     </div>
 <div id="intro">
     <table border="10"  class="table"  cellspacing=0  bgcolor=white >
@@ -3052,7 +3048,7 @@ function reload(){
                 <td style="border: none;height: 5em;"><button style="height: 2em;width:25%;text-align:center;padding-left: 0%;background-color:#D0D0D0" type="button" onclick="document.getElementById('video_1s').load();">加載影片</button></td>
             </tr>
             <tr id="video_row_c" >
-                <td id="video_go" class="video_go" colspan="1" onclick="video_pause();document.getElementById('video_1').style.zIndex='1';/*document.getElementById('video_1').style.display='none';*/if(new_user){document.getElementById('click').style.display='block';document.getElementById('info-content').style.display='block';}">關閉影片</td>
+                <td id="video_go" class="video_go" colspan="1" onclick="video_pause();document.getElementById('video_1').style.display='none';if(new_user){document.getElementById('click').style.display='block';document.getElementById('info-content').style.display='block';}">關閉影片</td>
             </tr>   
             <tr id="video_row" style="border: none;">
                 <td style="border: none;height: 50em;"></td>
@@ -3079,7 +3075,7 @@ function reload(){
                 <td style="border: none;height: 5em;"><button style="height: 2em;width:25%;text-align:center;padding-left: 0%;background-color:#D0D0D0" type="button" onclick="document.getElementById('video_2s').load();">加載影片</button></td>
             </tr> 
             <tr id="video_row_c" >
-                <td id="video_go" class="video_go" colspan="1" onclick="video_pause();document.getElementById('video_2').style.zIndex='1';/*document.getElementById('video_2').style.display='none';*/if(new_user){document.getElementById('click').style.display='block';document.getElementById('info-content').style.display='block';}">關閉影片</td>             
+                <td id="video_go" class="video_go" colspan="1" onclick="video_pause();document.getElementById('video_2').style.display='none';if(new_user){document.getElementById('click').style.display='block';document.getElementById('info-content').style.display='block';}">關閉影片</td>             
             </tr>    
             <tr id="video_row" style="border: none;">
                 <td style="border: none;height: 50em;"></td>
@@ -3092,13 +3088,11 @@ function reload(){
 <script language="javascript" type="text/javascript">
 function video_pause(){
     if (document.getElementById("video_1s").played) {
-       //document.getElementById("video_1s").pause();
-       document.getElementById('video_1').style.zIndex='1';
+       document.getElementById("video_1s").pause();
 　　　　//document.getElementById("video_1s").setAttribute("contols","controls");
 　　} 
     if (document.getElementById("video_2s").played) {
-       //document.getElementById("video_2s").pause();
-       document.getElementById('video_2').style.zIndex='1';
+       document.getElementById("video_2s").pause();
 　　　　//document.getElementById("video_2s").setAttribute("contols","controls");
 　　}
 	
