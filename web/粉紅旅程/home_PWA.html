@@ -1348,7 +1348,7 @@ this.addEventListener('fetch', function(event) {
     // Detect iOS and if it is, add the crossorigin to the video player so that it is working as expected
         if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Mac') != -1 && navigator.userAgent.indexOf('Chrome') == -1){
             document.getElementById("video_1s").setAttribute("crossorigin", "true");
-            document.getElementById("video_2s").setAttribute("crossorigin", "true");
+            //document.getElementById("video_2s").setAttribute("crossorigin", "true");
         };
     };    
   </script>
@@ -2397,8 +2397,8 @@ function reload(){
 
     document.getElementById("video_1s").pause();
     document.getElementById("video_1s").currentTime = 0;
-    document.getElementById("video_2s").pause();
-    document.getElementById("video_2s").currentTime = 0;
+    //document.getElementById("video_2s").pause();
+    //document.getElementById("video_2s").currentTime = 0;
     document.getElementById("video_1").style.display="none";
     document.getElementById("video_2").style.display="none"; 
 
@@ -3095,12 +3095,12 @@ function reload(){
             </tr>
             <tr id="video_row" >
                 <td id="video_pic" class="video_pic" colspan="1" >
-                    <video preload="auto" id="video_2s" style='border-style:inset;' width="100%" height="540" controls=""><source src="static/video/乳房重建衛教影片 國語版 實驗組 最新版_1.mp4" type="video/mp4"></video>
+                    <!--video preload="auto" id="video_2s" style='border-style:inset;' width="100%" height="540" controls=""><source src="static/video/乳房重建衛教影片 國語版 實驗組 最新版_1.mp4" type="video/mp4"></video-->
                     <!--iframe src="https://drive.google.com/file/d/1gnrmF_N03I4zIXemGS7CDJh9l84D4eFI/preview" width="100%" height="540" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe-->
                 </td>
             </tr> 
             <tr id="video_row" style="border: none;">
-                <td style="border: none;height: 5em;"><button style="height: 2em;width:25%;text-align:center;padding-left: 0%;background-color:#D0D0D0" type="button" onclick="document.getElementById('video_2s').load();">加載影片</button></td>
+                <td style="border: none;height: 5em;"><button style="height: 2em;width:25%;text-align:center;padding-left: 0%;background-color:#D0D0D0" type="button" onclick="/*document.getElementById('video_2s').load();*/;">加載影片</button></td>
             </tr> 
             <tr id="video_row_c" >
                 <td id="video_go" class="video_go" colspan="1" onclick="video_pause();document.getElementById('video_2').style.display='none';if(new_user){document.getElementById('click').style.display='block';document.getElementById('info-content').style.display='block';}">關閉影片</td>             
@@ -3119,10 +3119,10 @@ function video_pause(){
        document.getElementById("video_1s").pause();
 　　　　//document.getElementById("video_1s").setAttribute("contols","controls");
 　　} 
-    if (document.getElementById("video_2s").played) {
+    /*if (document.getElementById("video_2s").played) {
        document.getElementById("video_2s").pause();
 　　　　//document.getElementById("video_2s").setAttribute("contols","controls");
-　　}
+　　}*/
 	
     //document.getElementById("video_1s").pause();
     //document.getElementById("video_2s").pause();
