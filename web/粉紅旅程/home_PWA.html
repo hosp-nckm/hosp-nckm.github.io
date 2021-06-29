@@ -2367,9 +2367,9 @@ function reload(){
     document.getElementById("finish").style.display="none";
     document.getElementById("menu").style.display="none"; 
 
-    document.getElementById("video_1s").pause();
+    //document.getElementById("video_1s").pause();
     document.getElementById("video_1s").currentTime = 0;
-    document.getElementById("video_2s").pause();
+    //document.getElementById("video_2s").pause();
     document.getElementById("video_2s").currentTime = 0;
     document.getElementById("video_1").style.display="none";
     document.getElementById("video_2").style.display="none"; 
@@ -3088,11 +3088,13 @@ function reload(){
 <script language="javascript" type="text/javascript">
 function video_pause(){
     if (document.getElementById("video_1s").played) {
-       document.getElementById("video_1s").pause();
+	    ;
+       //document.getElementById("video_1s").pause();
 　　　　//document.getElementById("video_1s").setAttribute("contols","controls");
 　　} 
     if (document.getElementById("video_2s").played) {
-       document.getElementById("video_2s").pause();
+	    ;
+       //document.getElementById("video_2s").pause();
 　　　　//document.getElementById("video_2s").setAttribute("contols","controls");
 　　}
 	
