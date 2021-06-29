@@ -1315,13 +1315,32 @@ table tr.sorting-row td {background-color: #8b8;}
       });
     }
   </script>
-<script>
+<!--script>
 this.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request).then(function (response) {
 		  return response;
     })
   );
+}); 
+</script-->
+<script>
+    self.addEventListener('fetch', event => {
+	const dataUrl = 'https://hosp-nckm.github.io/web/%E7%B2%89%E7%B4%85%E6%97%85%E7%A8%8B/';
+	event.respondWith(
+		caches.match(event.request).then(function (response) {
+			return response || fetch(event.request).then(res =>
+				// 存 caches 之前，要先打開 caches.open(dataCacheName)
+				caches.open(dataCacheName)
+				.then(function(cache) {
+					// cache.put(key, value)
+					// 下一次 caches.match 會對應到 event.request
+					cache.put(event.request, res.clone());
+					return res;
+				})
+			);
+		})
+	);
 }); 
 </script>
 <script>
