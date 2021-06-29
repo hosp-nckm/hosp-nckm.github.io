@@ -1306,11 +1306,11 @@ table tr.sorting-row td {background-color: #8b8;}
           });
        
         // 附上刪除sw.js的寫法
-        navigator.serviceWorker.getRegistrations().then(function(reg) {
+        /*navigator.serviceWorker.getRegistrations().then(function(reg) {
           for(var reg of reg) {
             reg.unregister()
           }
-        });
+        });*/
         
       });
     }
@@ -3045,7 +3045,7 @@ function reload(){
                     </td>
             </tr>   
             <tr id="video_row" style="border: none;">
-                <td style="border: none;height: 5em;" onclick="alert('video load');document.getElementById('video_1s').load();">reload n</td>
+                <td style="border: none;height: 5em;"><button style="height: 2em;width:25%;text-align:center;padding-left: 0%;" type="button" onclick="document.getElementById('video_1s').load();">加載影片</button></td>
             </tr>
             <tr id="video_row_c" >
                 <td id="video_go" class="video_go" colspan="1" onclick="video_pause();document.getElementById('video_1').style.display='none';if(new_user){document.getElementById('click').style.display='block';document.getElementById('info-content').style.display='block';}">關閉影片</td>
@@ -3072,7 +3072,7 @@ function reload(){
                 </td>
             </tr> 
             <tr id="video_row" style="border: none;">
-                <td style="border: none;height: 5em;" onclick="alert('video load');document.getElementById('video_2s').load();">reload n</td>
+                <td style="border: none;height: 5em;"><button style="height: 2em;width:25%;text-align:center;padding-left: 0%;" type="button" onclick="document.getElementById('video_2s').load();">加載影片</button></td>
             </tr> 
             <tr id="video_row_c" >
                 <td id="video_go" class="video_go" colspan="1" onclick="video_pause();document.getElementById('video_2').style.display='none';if(new_user){document.getElementById('click').style.display='block';document.getElementById('info-content').style.display='block';}">關閉影片</td>             
@@ -3089,11 +3089,11 @@ function reload(){
 function video_pause(){
     if (document.getElementById("video_1s").played) {
        document.getElementById("video_1s").pause();
-　　　　document.getElementById("video_1s").setAttribute("contols","controls");
+　　　　//document.getElementById("video_1s").setAttribute("contols","controls");
 　　} 
     if (document.getElementById("video_2s").played) {
        document.getElementById("video_2s").pause();
-　　　　document.getElementById("video_2s").setAttribute("contols","controls");
+　　　　//document.getElementById("video_2s").setAttribute("contols","controls");
 　　}
 	
     //document.getElementById("video_1s").pause();
