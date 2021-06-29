@@ -3045,7 +3045,7 @@ function reload(){
                     </td>
             </tr>   
             <tr id="video_row" style="border: none;">
-                <td style="border: none;height: 5em;" onclick="alert('video load');document.getElementById('video_1s').load();">reload no</td>
+                <td style="border: none;height: 5em;" onclick="alert('video load');document.getElementById('video_1s').load();">reload n</td>
             </tr>
             <tr id="video_row_c" >
                 <td id="video_go" class="video_go" colspan="1" onclick="video_pause();document.getElementById('video_1').style.display='none';if(new_user){document.getElementById('click').style.display='block';document.getElementById('info-content').style.display='block';}">關閉影片</td>
@@ -3072,7 +3072,7 @@ function reload(){
                 </td>
             </tr> 
             <tr id="video_row" style="border: none;">
-                <td style="border: none;height: 5em;" onclick="alert('video load');document.getElementById('video_2s').load();">reload no</td>
+                <td style="border: none;height: 5em;" onclick="alert('video load');document.getElementById('video_2s').load();">reload n</td>
             </tr> 
             <tr id="video_row_c" >
                 <td id="video_go" class="video_go" colspan="1" onclick="video_pause();document.getElementById('video_2').style.display='none';if(new_user){document.getElementById('click').style.display='block';document.getElementById('info-content').style.display='block';}">關閉影片</td>             
@@ -3087,14 +3087,14 @@ function reload(){
 <!--script language="javascript" type="text/javascript" src="jquery-1.8.2.js"></script-->
 <script language="javascript" type="text/javascript">
 function video_pause(){
-   if (document.getElementById("video_1s").played) {
+    if (document.getElementById("video_1s").played) {
        document.getElementById("video_1s").pause();
-　　　　document.getElementById("video_1s").attr("contols","controls");
+　　　　document.getElementById("video_1s").setAttribute("contols","controls");
 　　} 
     if (document.getElementById("video_2s").played) {
        document.getElementById("video_2s").pause();
-　　　　document.getElementById("video_2s").attr("contols","controls");
-　　}	
+　　　　document.getElementById("video_2s").setAttribute("contols","controls");
+　　}
 	
     //document.getElementById("video_1s").pause();
     //document.getElementById("video_2s").pause();
