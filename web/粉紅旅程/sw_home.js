@@ -80,7 +80,8 @@ self.addEventListener('install', (event) => {
   "static/img/intro_item.PNG",
   "static/video/乳房重建 台語版 最新版1_1.mp4",
   "static/video/乳房重建衛教影片 國語版 實驗組 最新版_1.mp4",
-  "https://code.jquery.com/jquery-3.5.0.js"
+  "https://code.jquery.com/jquery-3.5.0.js",
+  "home_PWA.html"
       ]);
     })
   );
