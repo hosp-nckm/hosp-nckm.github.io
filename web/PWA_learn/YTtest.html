@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <META NAME="Author" CONTENT="ARTER">
+  <meta charset="utf-8" />
+  <title>最基本的空白網頁</title>
+  <!-- CSS 樣式 -->
+  <style type="text/css">
+
+  </style>
+
+  <!-- JavaScript -->
+  <script>
+    
+  </script>
+</head>
+<body>
+
+<div class="embed-responsive embed-responsive-16by9">
+  <div id="player"></div>
+</div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  var player;
+  function onYouTubeIframeAPIReady() {
+    // 一般使用 影片的id寫在js裡
+    player = new YT.Player('player', {
+      height: '390', // 高度預設值為390，css會調成responsive
+      width: '640', // 寬度預設值為640，css會調成responsive
+      videoId: 'mrIyB_U2JrQ',
+      events: {
+        'onReady': onPlayerReady
+      }
+    });
+  }
+  function onPlayerReady(e) {
+    // 為確保瀏覽器上可以自動播放，要把影片調成靜音
+    e.target.mute().playVideo();
+  }
+</script>
+
+  <!-- 網頁內文 -->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mrIyB_U2JrQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</body>
+</html>
