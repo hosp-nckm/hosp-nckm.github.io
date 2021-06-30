@@ -30,7 +30,6 @@ var cacheFiles = [
   "static/img/intro_item.PNG",
   "static/video/乳房重建 台語版 最新版1_1.mp4",
   "static/video/乳房重建衛教影片 國語版 實驗組 最新版_1.mp4",
-  "https://www.youtube.com/embed/mrIyB_U2JrQ",
   "https://code.jquery.com/jquery-3.5.0.js",
   {
     url: './home_PWA.html',
@@ -38,3 +37,13 @@ var cacheFiles = [
   }
 ];
 workbox.precaching.precacheAndRoute(cacheFiles); 
+
+// Not shown: install and activate handlers to keep app-shell.html
+// cached and up to date.
+self.addEventListener('fetch', event => {
+  if (event.request.mode === 'navigate') {
+    // Always respond to navigations with the cached app-shell.html,
+    // regardless of the underlying event.request.url value.
+    event.respondWith(caches.match('app-shell.html'));
+  }
+});
