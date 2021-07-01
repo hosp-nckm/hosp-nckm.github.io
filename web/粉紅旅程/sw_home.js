@@ -31,6 +31,7 @@ var cacheFiles = [
   "static/video/乳房重建 台語版 最新版1_1.mp4",
   "static/video/乳房重建衛教影片 國語版 實驗組 最新版_1.mp4",
   "https://code.jquery.com/jquery-3.5.0.js",
+  "home_PWA.html",
   {
     url: './home_PWA.html',
     revision: '00000001' // 加revision，版本改了以後，sw.js 在 application 上會更新
@@ -49,13 +50,13 @@ workbox.precaching.precacheAndRoute(cacheFiles);
 });*/
 
 
-/*self.addEventListener('fetch', event => {
+self.addEventListener('fetch', event => {
 	const dataUrl = 'https://hosp-nckm.github.io/web/%E7%B2%89%E7%B4%85%E6%97%85%E7%A8%8B/';
 	event.respondWith(
 		caches.match(event.request).then(function (response) {
 			return response || fetch(event.request).then(res =>
 				// 存 caches 之前，要先打開 caches.open(dataCacheName)
-				caches.open(dataCacheName)
+				caches.open('v1')
 				.then(function(cache) {
 					// cache.put(key, value)
 					// 下一次 caches.match 會對應到 event.request
@@ -65,8 +66,8 @@ workbox.precaching.precacheAndRoute(cacheFiles);
 			);
 		})
 	);
-});*/
-self.addEventListener('fetch', function(event) {
+});
+/*self.addEventListener('fetch', function(event) {
     event.respondWith(
         caches.match(event.request).then(function(response) {
             if(response) {
@@ -76,7 +77,7 @@ self.addEventListener('fetch', function(event) {
             }
         })
     );
-});
+});*/
 
 
 self.addEventListener('install', (event) => {
