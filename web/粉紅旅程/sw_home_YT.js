@@ -31,7 +31,7 @@ var cacheFiles = [
   "https://code.jquery.com/jquery-3.5.0.js",
   "home_YT.html",
   "https://www.youtube.com/embed/Q6kZRQcj048?enablejsapi=1&allowsInlineMediaPlayback=true&playsinline=1&origin＝https://hosp-nckm.github.io/",
-  "https://www.youtube.com/embed/6nmiBS3WKww?enablejsapi=1&allowsInlineMediaPlayback=true&playsinline=1&origin＝https://hosp-nckm.github.io/"
+  "https://www.youtube.com/embed/6nmiBS3WKww?enablejsapi=1&allowsInlineMediaPlayback=true&playsinline=1&origin＝https://hosp-nckm.github.io/",
   {
     url: './home_YT.html',
     revision: '00000001' // 加revision，版本改了以後，sw.js 在 application 上會更新
