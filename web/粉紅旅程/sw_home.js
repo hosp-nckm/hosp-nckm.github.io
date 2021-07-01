@@ -40,12 +40,31 @@ workbox.precaching.precacheAndRoute(cacheFiles);
 
 // Not shown: install and activate handlers to keep app-shell.html
 // cached and up to date.
-self.addEventListener('fetch', event => {
+/*self.addEventListener('fetch', event => {
   if (event.request.mode === 'navigate') {
     // Always respond to navigations with the cached app-shell.html,
     // regardless of the underlying event.request.url value.
     event.respondWith(cacheFiles.match('home_PWA.html'));
   }
+});*/
+
+
+self.addEventListener('fetch', event => {
+	const dataUrl = 'https://hosp-nckm.github.io/web/%E7%B2%89%E7%B4%85%E6%97%85%E7%A8%8B/';
+	event.respondWith(
+		caches.match(event.request).then(function (response) {
+			return response || fetch(event.request).then(res =>
+				// 存 caches 之前，要先打開 caches.open(dataCacheName)
+				caches.open(dataCacheName)
+				.then(function(cache) {
+					// cache.put(key, value)
+					// 下一次 caches.match 會對應到 event.request
+					cache.put(event.request, res.clone());
+					return res;
+				})
+			);
+		})
+	);
 });
 
 
