@@ -1,0 +1,21 @@
+{
+  "short_name": "粉紅旅程_影片",
+  "name": "粉紅旅程_影片",
+  "icons": [
+    {
+      "src": "/web/粉紅旅程/static/img/icon_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/web/粉紅旅程/static/img/icon_128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    }
+  ],
+  "start_url": "home_video.html?source=pwa",
+  "background_color": "#FFECEC",
+  "display": "standalone",
+  "scope": "/web/粉紅旅程/",
+  "theme_color": "#000000"
+}
