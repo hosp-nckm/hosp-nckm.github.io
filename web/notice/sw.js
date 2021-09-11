@@ -72,3 +72,9 @@ self.addEventListener('install', (event) => {
     })
   );
 });
+
+self.addEventListener('push', (event) => {
+  event.waitUntil(self.registration.showNotification('Title', {
+    body: 'Hello, World'
+  }));
+});
