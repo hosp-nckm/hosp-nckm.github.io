@@ -9,9 +9,9 @@ var cacheFiles = [
   "static/img/icon_192.png",
   "static/img/icon_128.png",
   "https://code.jquery.com/jquery-3.5.0.js",
-  "home_PWA.html",
+  "home.html",
   {
-    url: './home_PWA.html',
+    url: './home.html',
     revision: '00000001' // 加revision，版本改了以後，sw.js 在 application 上會更新
   }
 ];
@@ -67,7 +67,7 @@ self.addEventListener('install', (event) => {
   "static/img/icon_192.png",
   "static/img/icon_128.png",
   "https://code.jquery.com/jquery-3.5.0.js",
-  "home_PWA.html"
+  "home.html"
       ]);
     })
   );
