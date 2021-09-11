@@ -23,13 +23,13 @@ workbox.precaching.precacheAndRoute(cacheFiles);
   if (event.request.mode === 'navigate') {
     // Always respond to navigations with the cached app-shell.html,
     // regardless of the underlying event.request.url value.
-    event.respondWith(cacheFiles.match('home_PWA.html'));
+    event.respondWith(cacheFiles.match('home.html'));
   }
 });*/
 
 
 self.addEventListener('fetch', event => {
-	const dataUrl = 'https://hosp-nckm.github.io/web/%E7%B2%89%E7%B4%85%E6%97%85%E7%A8%8B/';
+	const dataUrl = 'https://hosp-nckm.github.io/web/notice/';
 	event.respondWith(
 		caches.match(event.request).then(function (response) {
 			return response || fetch(event.request).then(res =>
