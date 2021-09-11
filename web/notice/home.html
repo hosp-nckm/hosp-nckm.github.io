@@ -89,20 +89,20 @@ this.addEventListener('fetch', function(event) {
 	});
 	
 	// 推送通知
-	title="看診提醒通知";
+	title="看診提醒通知1";
 	
 	var notification = new Notification(title)
 	// 通知訊息
-	var n = new Notification('狀態更新提醒',{
-		body: '你看診提醒通知測試，請忽略',
-		tag: 'n',
+	var n = new Notification('看診提醒通知1',{
+		body: '你看診提醒通知測試1，請忽略',
+		tag: 'a',
 		icon: 'static/img/icon_128.png',
 		requireInteraction: true
 	})
 	
 	// 關閉通知
-	var n = new Notification('狀態更新提醒',{
-		body: '你看診提醒通知測試，請忽略'
+	var n = new Notification('看診提醒通知1',{
+		body: '你看診提醒通知測試1，請忽略'
 	})
 	setTimeout(function() {
 		n.close();
@@ -110,8 +110,8 @@ this.addEventListener('fetch', function(event) {
 	
 </script>
 <body>
-    <h1>看診提醒</h1>
-    <p>看診提醒通知</p>
+    <h1>看診提醒1</h1>
+    <p>看診提醒通知1</p>
   
 </body>
 </html>
