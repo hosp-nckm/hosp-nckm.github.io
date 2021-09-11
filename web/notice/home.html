@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>看診提醒💌(runoob.com)</title>
+<title>看診提醒💌</title>
 <link rel="manifest" href="manifest.json">	
 <link href="static/img/icon_192.png" rel="shortcut icon">
 
@@ -68,6 +68,44 @@ this.addEventListener('fetch', function(event) {
 		})
 	);
 }); 
+</script>
+<script>
+	// 查看使用者許可權
+	if(Notification.permission === 'granted'){
+		console.log('使用者允許通知');
+	}else if(Notification.permission === 'denied'){
+		console.log('使用者拒絕通知');
+	}else{
+		console.log('使用者還沒選擇，去向使用者申請許可權吧');
+	}
+	
+	// 請求許可權
+	Notification.requestPermission().then(function(permission) {
+	if(permission === 'granted'){
+		console.log('使用者允許通知');
+	}else if(permission === 'denied'){
+		console.log('使用者拒絕通知');
+	}
+	});
+	
+	// 推送通知
+	var notification = new Notification(title, options)
+	// 通知訊息
+	var n = new Notification('狀態更新提醒',{
+		body: '你的朋友圈有3條新狀態，快去檢視吧',
+		tag: 'linxin',
+		icon: 'https://codertw.com/wp-content/uploads/2018/05/20180527144122-5b0ac39228361.jpg',
+		requireInteraction: true
+	})
+	
+	// 關閉通知
+	var n = new Notification('狀態更新提醒',{
+		body: '你的朋友圈有3條新狀態，快去檢視吧'
+	})
+	setTimeout(function() {
+		n.close();
+	}, 3000);
+	
 </script>
 <body>
     <h1>看診提醒</h1>
