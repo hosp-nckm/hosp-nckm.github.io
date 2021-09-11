@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>看診提醒0💌</title>
+<link rel="manifest" href="manifest.json">	
+<link href="static/img/icon_192.png" rel="shortcut icon">
+
+<link rel="Bookmark" href="static/img/favicon.ico"/>
+    
+<link rel="icon" sizes="192x192" href="static/img/icon_192.png">
+<link rel="icon" sizes="128x128" href="static/img/icon_128.png">
+<link rel="apple-touch-icon" sizes="128x128" href="static/img/icon_128.png">
+<link rel="apple-touch-icon-precomposed" sizes="128x128" href="static/img/icon_128.png">
+
+</head>
+    <script>
+    // 支援serviceWorker才存入sw.js檔
+    if('serviceWorker' in navigator) {
+      
+      // window load後才執行，以免增加頁面讀取的時間
+      window.addEventListener('load', function() {
+        
+        // 建立sw.js
+        navigator.serviceWorker.register('https://hosp-nckm.github.io/web/notice/sw.js')
+          .then(function(reg) {
+            console.log(reg.scope); // 看這支sw.js執行的範圍
+          })
+          // 註冊失敗
+          .catch(function(err) {
+            console.log('error: ', err);
+          });
+       
+        // 附上刪除sw.js的寫法
+        /*navigator.serviceWorker.getRegistrations().then(function(reg) {
+          for(var reg of reg) {
+            reg.unregister()
+          }
+        });*/
+        
+      });
+    }
+  </script>
+<!--script>
+this.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request).then(function (response) {
+		  return response;
+    })
+  );
+}); 
+</script-->
+<script>
+    self.addEventListener('fetch', event => {
+	const dataUrl = 'https://hosp-nckm.github.io/web/notice/';
+	event.respondWith(
+		caches.match(event.request).then(function (response) {
+			return response || fetch(event.request).then(res =>
+				// 存 caches 之前，要先打開 caches.open(dataCacheName)
+				caches.open(dataCacheName)
+				.then(function(cache) {
+					// cache.put(key, value)
+					// 下一次 caches.match 會對應到 event.request
+					cache.put(event.request, res.clone());
+					return res;
+				})
+			);
+		})
+	);
+}); 
+</script>
+<script>
+	/*// 查看使用者許可權
+	if(Notification.permission === 'granted'){
+		console.log('使用者允許通知');
+	}else if(Notification.permission === 'denied'){
+		console.log('使用者拒絕通知');
+	}else{
+		console.log('使用者還沒選擇，去向使用者申請許可權吧');
+	}
+	
+	// 請求許可權
+	Notification.requestPermission().then(function(permission) {
+	if(permission === 'granted'){
+		console.log('使用者允許通知');
+	}else if(permission === 'denied'){
+		console.log('使用者拒絕通知');
+	}
+	});
+	
+	// 推送通知
+	title="看診提醒通知1";
+	
+	var notification = new Notification(title)
+	// 通知訊息
+	var n = new Notification('看診提醒通知1',{
+		body: '你看診提醒通知測試1，請忽略',
+		tag: 'a',
+		icon: 'static/img/icon_128.png',
+		requireInteraction: true
+	})
+	
+	// 關閉通知
+	var n = new Notification('看診提醒通知1',{
+		body: '你看診提醒通知測試1，請忽略'
+	})
+	setTimeout(function() {
+		n.close();
+	}, 3000);*/
+  
+  // 檢查瀏覽器是否支援通知
+  if (!('Notification' in window)) {
+  alert('This browser does not support notification');
+}
+  // 請求授權
+  if (Notification.permission === 'default' || Notification.permission === 'undefined') {
+  Notification.requestPermission(function(permission) {
+    // permission 可為「granted」（同意）、「denied」（拒絕）和「default」（未授權）
+    // 在這裡可針對使用者的授權做處理
+  });
+}
+  
+   // 建立通知
+  var notifyConfig = {
+  body: '\\ ^o^ /', // 設定內容
+  icon: 'static/img/favicon.ico', // 設定 icon
+  tag: 'newFeature' // 設定標籤
+};
+ 
+if (Notification.permission === 'default' || Notification.permission === 'undefined') {
+  Notification.requestPermission(function(permission) {
+    if (permission === 'granted') {
+      // 使用者同意授權
+      var notification = new Notification('看診咯！', notifyConfig); // 建立通知      
+      alert("使用者同意");
+      
+      // 點擊通知
+      notification.onclick = function(e) { // 綁定點擊事件
+      e.preventDefault(); // prevent the browser from focusing the Notification's tab
+      window.open('https://hosp-nckm.github.io/web/%E7%B2%89%E7%B4%85%E6%97%85%E7%A8%8B/home.html'); // 打開特定網頁
+      }
+      
+      // 錯誤處理
+      notification.onerror = function(e) {
+        (alert("有error");// error handling
+      };
+    }
+  });
+}
+	
+</script>
+<body>
+    <h1>看診提醒0</h1>
+    <p>看診提醒通知0</p>
+  
+</body>
+</html>
