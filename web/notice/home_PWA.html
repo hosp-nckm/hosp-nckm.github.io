@@ -1,1 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+    <h1>我的第一个标题</h1>
+    <p>我的第一个段落。</p>
+  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDjH5D5sc6l2z5JsFNUm6GEy-bzTjM89eM",
+    authDomain: "nckm-notice.firebaseapp.com",
+    projectId: "nckm-notice",
+    storageBucket: "nckm-notice.appspot.com",
+    messagingSenderId: "555952557765",
+    appId: "1:555952557765:web:8dedd1ee54fa719ee5aaac",
+    measurementId: "G-GWG9PXLGNZ"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+    
+  var database = firebase.database();
+  var messaging = firebase.messaging();
+  messaging.usePublicVapidKey('BBk1TgoRTlEJl5l9u42-3IYRinkXZCUFu2_ACLHXyz7A1MO-T2tHuozggbB5n94FxBmytdSoC1riL6W4MrR1rMA
+');
+</script>
+</body>
+</html>
