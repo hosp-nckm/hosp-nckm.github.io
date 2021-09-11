@@ -89,18 +89,20 @@ this.addEventListener('fetch', function(event) {
 	});
 	
 	// 推送通知
-	var notification = new Notification(title, options)
+	title="看診提醒通知";
+	
+	var notification = new Notification(title)
 	// 通知訊息
 	var n = new Notification('狀態更新提醒',{
-		body: '你的朋友圈有3條新狀態，快去檢視吧',
-		tag: 'linxin',
-		icon: 'https://codertw.com/wp-content/uploads/2018/05/20180527144122-5b0ac39228361.jpg',
+		body: '你看診提醒通知測試，請忽略',
+		tag: 'n',
+		icon: 'static/img/icon_128.png',
 		requireInteraction: true
 	})
 	
 	// 關閉通知
 	var n = new Notification('狀態更新提醒',{
-		body: '你的朋友圈有3條新狀態，快去檢視吧'
+		body: '你看診提醒通知測試，請忽略'
 	})
 	setTimeout(function() {
 		n.close();
