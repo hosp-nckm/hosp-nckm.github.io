@@ -2,39 +2,76 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>菜鸟教程(runoob.com)</title>
-</head>
-<body>
-    <h1>我的第一个标题</h1>
-    <p>我的第一个段落。</p>
-  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+<title>看診提醒💌(runoob.com)</title>
+<link rel="manifest" href="manifest.json">	
+<link href="static/img/icon_192.png" rel="shortcut icon">
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDjH5D5sc6l2z5JsFNUm6GEy-bzTjM89eM",
-    authDomain: "nckm-notice.firebaseapp.com",
-    projectId: "nckm-notice",
-    storageBucket: "nckm-notice.appspot.com",
-    messagingSenderId: "555952557765",
-    appId: "1:555952557765:web:8dedd1ee54fa719ee5aaac",
-    measurementId: "G-GWG9PXLGNZ"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+<link rel="Bookmark" href="static/img/favicon.ico"/>
     
-  var database = firebase.database();
-  var messaging = firebase.messaging();
-  messaging.usePublicVapidKey('BBk1TgoRTlEJl5l9u42-3IYRinkXZCUFu2_ACLHXyz7A1MO-T2tHuozggbB5n94FxBmytdSoC1riL6W4MrR1rMA
-');
+<link rel="icon" sizes="192x192" href="static/img/icon_192.png">
+<link rel="icon" sizes="128x128" href="static/img/icon_128.png">
+<link rel="apple-touch-icon" sizes="128x128" href="static/img/icon_128.png">
+<link rel="apple-touch-icon-precomposed" sizes="128x128" href="static/img/icon_128.png">
+
+</head>
+    <script>
+    // 支援serviceWorker才存入sw.js檔
+    if('serviceWorker' in navigator) {
+      
+      // window load後才執行，以免增加頁面讀取的時間
+      window.addEventListener('load', function() {
+        
+        // 建立sw.js
+        navigator.serviceWorker.register('https://hosp-nckm.github.io/web/notice/sw_home.js')
+          .then(function(reg) {
+            console.log(reg.scope); // 看這支sw.js執行的範圍
+          })
+          // 註冊失敗
+          .catch(function(err) {
+            console.log('error: ', err);
+          });
+       
+        // 附上刪除sw.js的寫法
+        /*navigator.serviceWorker.getRegistrations().then(function(reg) {
+          for(var reg of reg) {
+            reg.unregister()
+          }
+        });*/
+        
+      });
+    }
+  </script>
+<!--script>
+this.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request).then(function (response) {
+		  return response;
+    })
+  );
+}); 
+</script-->
+<script>
+    self.addEventListener('fetch', event => {
+	const dataUrl = 'https://hosp-nckm.github.io/web/notice/';
+	event.respondWith(
+		caches.match(event.request).then(function (response) {
+			return response || fetch(event.request).then(res =>
+				// 存 caches 之前，要先打開 caches.open(dataCacheName)
+				caches.open(dataCacheName)
+				.then(function(cache) {
+					// cache.put(key, value)
+					// 下一次 caches.match 會對應到 event.request
+					cache.put(event.request, res.clone());
+					return res;
+				})
+			);
+		})
+	);
+}); 
 </script>
+<body>
+    <h1>看診提醒</h1>
+    <p>看診提醒通知</p>
+  
 </body>
 </html>
