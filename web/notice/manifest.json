@@ -1,1 +1,22 @@
-
+{
+  "short_name": "看診提醒",
+  "name": "看診提醒",
+  "icons": [
+    {
+      "src": "/web/notice/static/img/icon_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/web/notice/static/img/icon_128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    }
+  ],
+  "start_url": "home_PWA.html?source=pwa",
+  "background_color": "#FFECEC",
+  "display": "standalone",
+  "scope": "/web/notice/",
+  "theme_color": "#000000",
+  "gcm_sender_id": "103953800507"
+}
