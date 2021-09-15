@@ -392,6 +392,9 @@ marquee {
 .place_num {
 	width:3%;
 }
+font {
+	color:rgb(255, 166, 0);
+}
 
 /* 醫師資料表 */
 .dr_info {
