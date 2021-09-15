@@ -562,7 +562,7 @@ tfoot {
 }
 
 @media screen and (min-width: 320px) and (max-width: 480px){
-	#menu a,.dropdown-content,.dr_info_type,tbody tr td,.post .entry,.post .sign,.place  {
+	#menu a,.dropdown-content,.dr_info_type,tbody tr td,.post .entry,.post .sign,.place ,.rel_link {
 		font-size: 30px;
 		font-weight: 500;
 		-webkit-text-size-adjust:none; 
@@ -576,16 +576,16 @@ tfoot {
 	.dr_AM,.dr_PM {
 		font-size: 20px;
 	}
-	#header,#header-placehold {
+	/*#header,#header-placehold {
 		height: 234px;
 	}
 	#menu {
 		height: 43px;
-	}
+	}*/
 }
 	
 @media only screen and (min-width: 321px) and (max-width: 1024px){
-	#menu a,.dropdown-content,.dr_info_type,tbody tr td,.post .entry,.post .sign,.place  {
+	#menu a,.dropdown-content,.dr_info_type,tbody tr td,.post .entry,.post .sign,.place ,.rel_link  {
 		font-size: 30px;
 		font-weight: 500;
 	}
@@ -595,10 +595,12 @@ tfoot {
 	.dr_AM,.dr_PM  {
 		font-size: 20px;
 	}	
-	#header,#header-placehold {
-		height: 234px;
+	/*#header,#header-placehold {
+		height: 234px;		
+		width: 100%;
 	}
 	#menu {
 		height: 43px;
-	}
+		width: 100%;
+	}*/
 }
