@@ -338,6 +338,9 @@ img.aligncenter {
 	text-align: justify;
 	margin-bottom: 25px;
 	padding: 10px 0px 0px 0px;
+	background-size: contain;
+	background-position: center top;
+	background-repeat:no-repeat;
 }
 .post .sign {
 	text-align: center;
