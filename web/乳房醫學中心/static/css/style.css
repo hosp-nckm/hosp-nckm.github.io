@@ -591,12 +591,13 @@ tfoot {
 	.dr_AM,.dr_PM {
 		font-size: 20px;
 	}
-	/*#header,#header-placehold {
+	#header,#header-placehold {
 		height: 234px;
 	}
 	#menu {
 		height: 43px;
-	}*/
+		padding: 0px 30px 0px 30px;
+	}
 }
 	
 @media only screen and (min-width: 321px) and (max-width: 1024px){
@@ -610,12 +611,11 @@ tfoot {
 	.dr_AM,.dr_PM  {
 		font-size: 20px;
 	}	
-	/*#header,#header-placehold {
-		height: 234px;		
-		width: 100%;
+	#header,#header-placehold {
+		height: 234px;	
 	}
 	#menu {
 		height: 43px;
-		width: 100%;
-	}*/
+		padding: 0px 30px 0px 30px;
+	}
 }
