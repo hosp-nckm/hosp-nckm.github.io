@@ -96,13 +96,11 @@ img.aligncenter {
 #header-placehold {
 	width: 1000px;
 	height: 259px;
-	margin: 0 auto;
-	
+	margin: 0 auto;	
 	/*background: url(../img/header.jpg) no-repeat left top;*/	
 	/*box-shadow: 2px 2px 10px rgb(156, 242, 253);*/
-	/*background-size: cover;*/
-	
-
+	/*background-size: cover;*/	
+	box-shadow: 2px 2px 10px rgb(91, 95, 95);
 }
 
 /* Logo */
@@ -540,7 +538,8 @@ tfoot {
 	/*background: #EAEAEA url(../img/img04.jpg) no-repeat left top;*/
 	font-family: Arial, Helvetica, sans-serif;
 	border-radius: 10px;
-	background:linear-gradient(#0d9947, #08883d, #0d9947);
+	background:linear-gradient(#0d9947, #08883d, #0d9947);	
+	box-shadow: 2px 2px 10px rgb(91, 95, 95);
 }
 
 #footer p {
