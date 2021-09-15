@@ -82,6 +82,7 @@ img.aligncenter {
 	box-shadow: 2px 2px 10px rgb(156, 242, 253);
 	background-size: cover;
 	animation: changeBg 10s infinite;
+	box-shadow: 2px 2px 10px rgb(91, 95, 95);
 }
 @keyframes changeBg{
 	0%,100%  {background-image: url("../img/header.jpg") ;}	
@@ -100,7 +101,6 @@ img.aligncenter {
 	/*background: url(../img/header.jpg) no-repeat left top;*/	
 	/*box-shadow: 2px 2px 10px rgb(156, 242, 253);*/
 	/*background-size: cover;*/	
-	box-shadow: 2px 2px 10px rgb(91, 95, 95);
 }
 
 /* Logo */
@@ -190,6 +190,7 @@ img.aligncenter {
 	border-radius: 10px;
 	/*background: url(../img/img02.jpg) repeat-x left bottom;*/
 	background-color: #FF8400;
+	box-shadow: 2px 2px 10px rgb(91, 95, 95);
 }
 
 #menu ul {
