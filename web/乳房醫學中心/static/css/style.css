@@ -407,6 +407,43 @@ font {
 	background-position: center;
 	background-repeat:no-repeat;
 }
+
+/* 研究主題 */
+.study_topic{
+	width:75%;
+}
+
+/* 院內專用 */
+.IRB_pro{
+	width:12%;
+}
+.study_phase_pro{
+	width:8%;
+}
+.study_topic_pro{
+	width:25%;
+}
+.study_cancer_type_pro{
+	width:5%;
+}
+.study_stage_pro{
+	width:10%;
+}
+.study_host_pro{
+	width:17%;
+}
+.study_nurse_pro{
+	width:8%;
+}
+.study_state_pro{
+	width:13%;	
+}
+/* 院內專用check box */
+.container {
+	margin: 10px auto;
+	max-width: 640px;
+}
+
 th {	
 	font-size: 25px;
 }
