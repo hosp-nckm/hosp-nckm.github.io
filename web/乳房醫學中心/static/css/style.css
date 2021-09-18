@@ -649,7 +649,7 @@ tfoot {
 	#menu a {
 		padding: 0px 7px 5px 7px;
 	}
-	#menu #last{		
+	#menu #header_last{		
 		border-right:none;
 	}
 	#page {
@@ -677,7 +677,7 @@ tfoot {
 	#menu a {
 		padding: 0px 7px 5px 7px;
 	}
-	#menu #last{		
+	#menu #header_last{		
 		border-right:none;
 	}
 	#page {
