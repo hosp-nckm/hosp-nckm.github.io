@@ -224,7 +224,7 @@ marquee {
 	display: block;
 	height: 33px;
 	margin-right: 1px;
-	padding: 5px 30px 0px 30px;
+	padding: 5px 20px 0px 20px;
 	text-decoration: none;
 	text-transform: uppercase;
 	text-shadow: #8A5608 -1px 1px 1px;
@@ -638,7 +638,7 @@ tfoot {
 		height: 43px;
 	}
 	#menu a {
-		padding: 0px 30px 5px 30px;
+		padding: 0px 20px 5px 20px;
 	}
 	#page {
 		margin-top: 50px;
@@ -663,7 +663,7 @@ tfoot {
 		height: 43px;
 	}
 	#menu a {
-		padding: 0px 30px 5px 30px;
+		padding: 0px 20px 5px 20px;
 	}
 	#page {
 		margin-top: 50px;
