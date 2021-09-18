@@ -72,7 +72,7 @@ var data=[
             "黃書絹<br><br>81527-1286",
             "目前收案0人，預計收案人數4人"
         ],
-        "search":["High risk","Node-Postive","HR+, HER2+","Early breast cancer"]
+        "search":["High risk","Node-Postive","HR+","HER2+","Early breast cancer"]
     },
     {
         "id":"6",
@@ -222,7 +222,7 @@ var data=[
             "侯謹鏵<br><br>81527-1151",
             "目前收案人數66人，預計收案人數500人"
         ],
-        "search":["所有侵襲性乳癌","不限類別"]
+        "search":["所有侵襲性乳癌 不限類別"]
     },
     {
         "id":"16",
