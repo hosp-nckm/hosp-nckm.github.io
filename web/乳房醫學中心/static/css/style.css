@@ -640,6 +640,9 @@ tfoot {
 	#menu a {
 		padding: 0px 7px 5px 7px;
 	}
+	#menu #last{		
+		border-right:none;
+	}
 	#page {
 		margin-top: 50px;
 	}
@@ -664,6 +667,9 @@ tfoot {
 	}
 	#menu a {
 		padding: 0px 7px 5px 7px;
+	}
+	#menu #last{		
+		border-right:none;
 	}
 	#page {
 		margin-top: 50px;
