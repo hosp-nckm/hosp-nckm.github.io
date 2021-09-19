@@ -39,8 +39,8 @@ p, ul, ol {
 	line-height: 180%;
 }
 
-ul, ol {
-}
+/*ul, ol {
+}*/
 
 a {
 	text-decoration: none;
@@ -106,7 +106,7 @@ img.aligncenter {
  }
 #header-placehold {
 	width: 1000px;
-	height: 259px;
+	height: 365px;
 	margin: 0 auto;	
 	/*background: url(../img/header.jpg) no-repeat left top;*/	
 	/*box-shadow: 2px 2px 10px rgb(156, 242, 253);*/
@@ -209,7 +209,7 @@ marquee {
 
 #menu {
 	width: 1000px;
-	height: 39px;
+	height: 142.857px;
 	margin: 0 auto;
 	padding: 0;
 	border-radius: 10px;
@@ -230,10 +230,12 @@ marquee {
 }
 
 #menu a {
+	text-align: center;
 	display: block;
 	height: 33px;
+	width: 135px;
 	margin-right: 1px;
-	padding: 5px 20px 0px 20px;
+	padding: 5px 0px 105px 0px;
 	text-decoration: none;
 	text-transform: uppercase;
 	text-shadow: #8A5608 -1px 1px 1px;
@@ -244,6 +246,10 @@ marquee {
 	border: none;
 	border-right:3px rgb(248, 215, 153) solid;
 	/*box-shadow: 2px 1px 2px rgb(14, 13, 13);*/
+	
+	background-position: center bottom;
+    	background-repeat:no-repeat;        
+    	background-size: 100% 80%;
 }
 #menu a:hover {	
 	background-color: black;
@@ -290,8 +296,8 @@ marquee {
 	font-weight: 700;
   }
 
-#menu .current_page_item a {
-}
+/*#menu .current_page_item a {
+}*/
 
 #menu a:hover {
 	text-decoration: none;
@@ -320,7 +326,7 @@ marquee {
 }
 
 #page-bgbtm {
-	margin: 0px;
+	margin: 0px auto;
 	padding: 40px 30px 0px 30px;
 }
 
@@ -355,8 +361,8 @@ marquee {
 	font-style: italic;
 }
 
-.post .meta a {
-}
+/*.post .meta a {
+}*/
 
 .post .entry {
 	text-align: justify;
@@ -575,8 +581,8 @@ tfoot {
 
 /* Calendar */
 
-#calendar {
-}
+/*#calendar {
+}*/
 
 #calendar_wrap {
 	padding: 20px;
@@ -642,12 +648,15 @@ tfoot {
 	}
 	#header,#header-placehold {
 		height: 234px;
-	}
+	}	
+    	#header-placehold {
+        	height: 334px;
+    	}    
 	#menu {
-		height: 43px;
+		height: 143px;
 	}
 	#menu a {
-		padding: 0px 20px 5px 20px;
+		padding: 0px 0px 110px 0px;
 	}
 	/*#menu #header_last{		
 		border-right:none;
@@ -671,11 +680,14 @@ tfoot {
 	#header,#header-placehold {
 		height: 234px;	
 	}
+   	 #header-placehold {
+        	height: 334px;
+    	}
 	#menu {
-		height: 43px;
+		height: 143px;
 	}
 	#menu a {
-		padding: 0px 20px 5px 20px;
+		padding: 0px 0px 110px 0px;
 	}
 	/*#menu #header_last{		
 		border-right:none;
