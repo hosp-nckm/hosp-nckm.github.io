@@ -85,33 +85,49 @@ img.aligncenter {
 	animation: changeBg 17s infinite;
 	box-shadow: 2px 2px 10px rgb(91, 95, 95);	
 	background-position: center top;
-	background-repeat:no-repeat;		
-	background-size: 100% 100%;
+	background-repeat:no-repeat;       
+    /*background-size: 100% 150%;*/
 }
 @keyframes changeBg{
-	0%,100%  {background-image: url("../img/header.jpg") ;}	
-	15%  {background-image: url("../img/header.jpg") ;}
-	20%  {background-image: url("../img/header_1.jpg") ;}
-	35%  {background-image: url("../img/header_1.jpg") ;}
-	40% {background-image: url("../img/header_2.jpg");}
-	55% {background-image: url("../img/header_2.jpg");}
-	60% {background-image: url("../img/header_3.jpg");}
-	75% {background-image: url("../img/header_3.jpg");}
-	80% {background-image: url("../img/header_4.jpg");	
-		/*background-size: contain;*/
-	}
-	99% {background-image: url("../img/header_4.jpg");}
-	/*50% {background-image: url("../img/header_3.jpg");}
-	75% {background-image: url("../img/header_4.jpg");}*/
+    0%,100%  {background-image: url("../img/header.jpg") ;                
+        background-size: 100% 180%;
+    }   
+    15%  {background-image: url("../img/header.jpg") ;}
+    20%  {background-image: url("../img/header_1.jpg") ;
+        background-size: 100% 180%;
+    }
+    35%  {background-image: url("../img/header_1.jpg") ;
+        background-size: 100% 180%;
+    }
+    40% {background-image: url("../img/header_2.jpg");
+        background-size: 100% 100%;
+    }
+    55% {background-image: url("../img/header_2.jpg");}
+    60% {background-image: url("../img/header_3.jpg");
+        background-size: 100% 100%;
+    }
+    75% {background-image: url("../img/header_3.jpg");    
+        background-size: 100% 100%;
+    }
+    80% {background-image: url("../img/header_4.jpg");    
+        background-size: 100% 180%;
+    }
+    99% {background-image: url("../img/header_4.jpg");
+        background-size: 100% 130%;
+    }
+    /*50% {background-image: url("../img/header_3.jpg");}
+    75% {background-image: url("../img/header_4.jpg");}*/
  }
 #header-placehold {
 	width: 1000px;
-	height: 365px;
+	height: 425px;
 	margin: 0 auto;	
 	/*background: url(../img/header.jpg) no-repeat left top;*/	
 	/*box-shadow: 2px 2px 10px rgb(156, 242, 253);*/
 	/*background-size: cover;*/	
 }
+
+/* 跑馬燈 */
 marquee {
     background-color: rgb(250, 252, 177);
     bottom: 0px;
@@ -119,13 +135,13 @@ marquee {
     color:black;
     text-shadow: #74022e -1px 1px 1px;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
+    font-size: 50px;
     font-weight: 500;
     border: none;
     box-shadow: 0px 0px 10px 8px rgb(246, 247, 243);
-    position: relative;
-    top: 70px;
-    height: 40px;   
+    /*position: relative;
+    top: 70px;*/
+    height: 60px;   
 }
 
 /* Logo */
@@ -650,7 +666,7 @@ tfoot {
 		height: 234px;
 	}	
     	#header-placehold {
-        	height: 334px;
+        	height: 394px;
     	}    
 	#menu {
 		height: 143px;
@@ -681,7 +697,7 @@ tfoot {
 		height: 234px;	
 	}
    	 #header-placehold {
-        	height: 334px;
+        	height: 394px;
     	}
 	#menu {
 		height: 143px;
