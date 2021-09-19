@@ -476,6 +476,22 @@ font {
 	width:13%;	
 }
 /* 院內專用check box */
+.cancer_type_sel{
+    background-color: white;
+    border: 0.1px inset;    
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    line-height: 1.5;
+    width:100%;
+}
+.cancer_type_sel_btn{
+    /*background-color: white;
+    border: 0.1px inset;    */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    line-height: 1.5;
+    width:20%;
+}
 .container {
 	margin: 10px auto;
 	max-width: 640px;
@@ -519,19 +535,20 @@ tfoot {
 /* 乳房相關網站 */
 .rel_link {	
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 18px;
+	font-size: 25px;
+    	font-weight: 600;
 	line-height: 1.5;
 	color: rgb(115, 10, 124);
 }
 .rel_link:hover {	
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 20px;
+	font-size: 28px;
 	line-height: 1.5;
 	color: rgb(230, 9, 250);
 }
 .rel_link:active {	
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 20px;
+	font-size: 28px;
 	line-height: 1.5;
 	color: rgb(230, 9, 250);
 }
