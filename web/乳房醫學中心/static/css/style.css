@@ -421,7 +421,8 @@ marquee {
 .dr_AM,.dr_PM{
 	text-align: center;	
 	width:8.9%;
-	font-size: 16px;
+	font-size: 16px;		
+	font-weight: 700;
 }
 .place {
 	width:8%;
@@ -684,7 +685,8 @@ tfoot {
 		font-size: 25px;
 	}
 	.dr_AM,.dr_PM {
-		font-size: 20px;
+		font-size: 20px;		
+		font-weight: 700;
 	}
 	#header,#header-placehold {
 		height: 234px;
@@ -719,7 +721,8 @@ tfoot {
 		font-size: 25px;
 	}
 	.dr_AM,.dr_PM  {
-		font-size: 20px;
+		font-size: 20px;		
+		font-weight: 700;
 	}	
 	#header,#header-placehold {
 		height: 234px;	
