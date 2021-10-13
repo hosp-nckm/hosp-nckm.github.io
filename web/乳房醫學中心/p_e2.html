@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta name="keywords" content="乳房醫學, 乳房醫學中心, 成大醫院, 成大, 成功大學醫學院附設醫院, 臨床, 臨床試驗, NCKU, 成功大學, 乳房, 乳癌, 乳房手術, 臨床試驗, 台灣乳房醫學會, 中華民國癌症醫學會, 臺灣乳房腫瘤手術暨重建醫學會, 中華民國乳癌教育暨防治學會, 台灣福爾摩沙衛教學會" />
+<meta name="description" content="國立成功大學（NCKU）醫學院附設醫院乳房醫學中心，雲嘉南地區，乳房診斷及治療中心。從術前診斷、檢查到乳癌手術及乳 房重建手術; 術後治療、門診追蹤等，另有多項臨床試驗。" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>成大-乳房醫學中心-臨床試驗(院內專用)</title>
+<!-- icon -->
+<link href="static/img/logo/favicon.ico" rel="shortcut icon"/>
+<link rel="Bookmark" href="static/img/logo/favicon.ico"/>
+    
+<link rel="icon" sizes="192x192" href="static/img/logo/logo_192.jpg">
+<link rel="icon" sizes="128x128" href="static/img/logo/logo_128.jpg">
+<link rel="apple-touch-icon" sizes="128x128" href="static/img/logo/logo_128.jpg">
+<link rel="apple-touch-icon-precomposed" sizes="128x128" href="static/img/logo/logo_128.jpg">
+
+
+<!-- iphone -->
+<!--主要I是強制讓文件的寬度與裝置寬度保持1:1，最大寬度1.0，禁止螢幕縮放。-->
+<!---meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport"==>
+<!這個也是iphone私有標籤，允許全屏瀏覽。-->
+<!--meta content="yes" name="apple-mobile-web-app-capable"-->
+<!--iphone的私有標籤，iphone頂端狀態條的樣式。-->
+<meta content="black" name="apple-mobile-web-app-status-bar-style"-->
+<!--禁止數字自動識別為電話號碼，這個比較有用，因為一串數字在iphone上會顯示成藍色，樣式加成別的顏色也是不生效的。-->
+<!--meta content="telephone=no" name="format-detection"-->
+<!--禁止email識別-->
+<meta content="email=no" name="format-detection">
+
+<link href="./static/css/style.css" rel="stylesheet" type="text/css" media="screen" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script-->
+<script src="./static/js/data.js"></script>
+
+</head>
+<!-- 1 START ///////////////////////////////////////-->
+<script>
+	//var cancer_type;
+	$(function(){
+		$("#header-placehold").load("./header.html");
+		$("#footer-placehold").load("./footer.html");
+
+		const cancer_type_set = new Set();
+
+		for(var i=0;i<data.length;i++){
+
+			var row = document.createElement("tr");
+			row.innerHTML='<td class="IRB_pro">'+data[i]["IRB編號"]+'</td><td class="study_phase_pro">'+data[i]["pro"][0]+'</td> <td class="study_topic_pro">'+data[i]["pro"][1]+'</td> <td class="study_cancer_type_pro">'+data[i]["pro"][2]+'</td><td class="study_stage_pro">'+data[i]["pro"][3]+'</td><td class="study_host_pro">'+data[i]["pro"][4]+'</td> <td class="study_nurse_pro">'+data[i]["pro"][5]+'</td><td class="study_state_pro">'+data[i]["pro"][6]+'</td>'
+			/*row .append(topic,stage)*/		
+			document.getElementById("study_general").appendChild(row);
+			
+			for(var j=0;j<data[i]["search"].length;j++){
+				if(data[i]["search"][j]!="")
+				cancer_type_set.add(data[i]["search"][j])
+			}
+		}
+		//alert(cancer_type[a]);
+		cancer_type =Array.from(cancer_type_set);
+		//console.log(cancer_type);
+	//alert(cancer_type);
+
+    // 加入癌症類別選線
+	for(var k=0;k<cancer_type.length;k++){
+			//alert(cancer_type[k]);
+			var sel=document.createElement('div');
+			sel.innerHTML=('<p class="menu_list" onclick="select(this);"> ☐ '+cancer_type[k]+'</p>').trim();
+			//console.log(sel.childNodes);
+			document.getElementById("cancer_type").appendChild(sel);
+
+
+            //<p class="menu_list" onclick="select(this);"> ☐ 乳房外科+整形外科</p>
+		}
+	});		
+
+    // 勾選 癌症類別選線
+            var cancer_type_Placeholder;
+            var key_2= new Set();
+            function select(x){
+                //alert(x.innerText.substring(2));
+                var new_click=x.innerText.substring(2);
+				if(!key_2.has(new_click)){
+                    //alert(x.innerText.substring(2));
+                    key_2.add(new_click);
+                    x.innerText="✅ "+new_click;
+                }
+                else{
+                    key_2.delete(new_click);
+                    x.innerText="☐ "+new_click;
+                }
+                
+		        cancer_type_Placeholder =Array.from(key_2);
+                document.getElementById("cancer_type_sel").value=cancer_type_Placeholder;
+                console.log(key_2);
+                //alert(cancer_type_Placeholder);
+                //alert(x.innerText.substring(2));
+
+            }
+
+    // 顯示搜尋結果
+	function show(){
+ 	 	var num=0;
+		//console.log($("#cancer_type").val());
+		//alert($("#cancer_type").val());
+		document.getElementById("study_general").innerHTML = '';
+
+		var key=cancer_type_Placeholder//$("#cancer_type").val();
+		for(var i=0;i<data.length;i++){
+			for(var j=0;j<data[i]["search"].length;j++){
+				if(key.indexOf(data[i]["search"][j])>=0){
+					var sel_row = document.createElement("tr");
+                    
+					sel_row.innerHTML=
+                    '<td class="IRB_pro">'+data[i]["IRB編號"]+
+                        '</td><td class="study_phase_pro">'+data[i]["pro"][0]+
+                            '</td> <td class="study_topic_pro">'+data[i]["pro"][1]+
+                                '</td> <td class="study_cancer_type_pro">'+data[i]["pro"][2]+
+                                    '</td><td class="study_stage_pro">'+data[i]["pro"][3]+
+                                        '</td><td class="study_host_pro">'+data[i]["pro"][4]+
+                                            '</td> <td class="study_nurse_pro">'+data[i]["pro"][5]+
+                                                '</td><td class="study_state_pro">'+data[i]["pro"][6]+'</td>';
+					/*sel_row.innerHTML=
+                    '<td class="IRB_pro">'+data[i]["IRB編號"]+
+                        '</td><td class="study_phase_pro">'+data[i]["pro"][0]+
+                            '</td> <td class="study_topic_pro">'+data[i]["pro"][1]+'</td> <td class="study_cancer_type_pro">';
+                                for(var k=0;k<data[i]["search"].length;k++){                                    
+				                    if(key.indexOf(data[i]["search"][j])>=0){   
+                                        sel_row.innerHTML=sel_row.innerHTML+'<font style="color:red;">'+data[i]["search"][k]+'</font>'
+                                    }
+                                    else{
+                                        sel_row.innerHTML=sel_row.innerHTML+data[i]["search"][k];
+                                    }    
+                                    if(k<data[i]["search"].length){
+                                        sel_row.innerHTML=sel_row.innerHTML+'<br><br>';
+                                    }                        
+                                }
+                                sel_row.innerHTML=sel_row.innerHTML+
+                                    '</td><td class="study_stage_pro">'+data[i]["pro"][3]+
+                                        '</td><td class="study_host_pro">'+data[i]["pro"][4]+
+                                            '</td> <td class="study_nurse_pro">'+data[i]["pro"][5]+
+                                                '</td><td class="study_state_pro">'+data[i]["pro"][6]+'</td>'*/
+					document.getElementById("study_general").appendChild(sel_row);
+                    num=num+1;
+					break;
+				}
+			}			
+		}
+        alert("共 "+num.toString()+" 筆搜尋結果\n顯示如下方表格");
+	}
+
+	//alert(data[0]["id"]);	
+
+</script>
+<body>
+<div id="wrapper">
+	<div id="header-placehold">
+	<!--object align="center" width="100%" height="100%" data="header.html" ></object-->
+
+	</div>
+	<!--<form method="POST" action="file:///home/kitty/%E6%A1%8C%E9%9D%A2/temp/BEST/templated-interchange/index%20(%E5%89%AF%E6%9C%AC).html#">
+        <input type="submit" value="首頁" />	-->
+	<!-- end #menu -->
+	<div id="page">
+		<div id="page-bgtop">
+			<div id="page-bgbtm">
+				<div id="content">					
+							
+					<div class="post">
+						<h2 class="首頁"><a href="#">臨床試驗(院內專用) </a></h2>						
+						<p>&nbsp;</p>
+
+						<div class="entry">
+        <!--div  id='D5' style="padding-top: 5px;"-->
+        
+        <h3 class="title" style="color: #E6700E;font-weight: 500;">請選擇 乳癌類別 </h3>
+        <div class="current_page_item dropdown">
+            <input id="cancer_type_sel" class="cancer_type_sel" placeholder="乳癌類別選單(多選)" readonly="true"/><button class="cancer_type_sel_btn" style="padding-bottom: 0px"onclick="show();">確定</button>
+							
+                <div class="dropdown-content" id="cancer_type">
+                    <!--p class="menu_list" onclick="select(this);"> ☐ 乳房外科+整形外科</p>
+                    <p class="menu_list" onclick="select(this);"> ☐ 1乳房外科+整形外科</p-->
+                  </div>
+        </div>
+        <br>
+							<!--<label class="col-lg-1 control-label" style="width: 200px;">
+								乳癌類別選單(多選)
+							</label><button id='D5_b' class="col-lg-1" style="padding-bottom: 0px"onclick="show();">確定</button>
+							<select  id="cancer_type" class="selectpicker show-menu-arrow form-control" multiple>	
+								<!-option value="精神科" >容易緊張</option->
+							</select>-->
+						<!--/div-->
+						
+					
+
+
+
+							<table class="dr_date_info" cellspacing="1"  style="table-layout:fixed;">
+								<thead>
+									<tr>										
+										<th style="width:19%;" class="IRB" colspan="1" >IRB編號</th>
+										<th style="width:6%;" class="study_phase" colspan="1">試驗期別</th>							
+										<th style="width:23%;" class="study_topic_p" colspan="1" >試驗名稱</th>							
+										<th style="width:12%;" class="study_cancer_type" colspan="1" >乳癌類別</th>
+										<th style="width:9%;" class="study_stage" colspan="1">治療階段</th>
+										<th style="width:12%;" class="study_host" colspan="1">計畫主持人</th>							
+										<th style="width:12%;" class="study_nurse" colspan="1" >研究護理師</th>
+										<th style="width:10%;" class="study_state" colspan="1">收案狀態</th>								
+									</tr>
+								</thead>
+								<tbody id="study_general">
+									<!--tr>
+										<td class="IRB_pro">IRB編號</td>
+										<td class="study_phase_pro">試驗期別</td>							
+										<td class="study_topic_pro">試驗名稱</td>							
+										<td class="study_cancer_type_pro">乳癌類別</td>
+										<td class="study_stage_pro">治療階段</td>
+										<td class="study_host_pro">計畫主持人</td>							
+										<td class="study_nurse_pro">研究護理師</td>
+										<td class="study_state_pro">收案狀態</td>
+									</tr-->
+								</tbody>
+							</table>
+														
+						</div>
+						<!--div class="entry" style="font-weight: 700;font-size: 18px;color:rgb(68, 0, 255)">	
+							已於院外切片確診乳癌或入研究病人約診或看診相關問題，預約電話06-2353535轉4663洪小姐或請總機代轉
+						</div-->
+					</div>
+
+					<div style="clear: both;">&nbsp;</div>
+				</div>
+				<!-- end #content -->
+				<!-- end #sidebar -->
+				<div style="clear: both;">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<!-- end #page -->	
+</div>
+<div id="footer-placehold">
+</div>
+</html>
