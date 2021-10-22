@@ -70,3 +70,21 @@ self.addEventListener('install', (event) => {
     })
   );
 });
+self.addEventListener('push', (event) => {
+  event.waitUntil(self.registration.showNotification('Title', {    
+            body: 'PWA的世界',
+            icon: 'static/img/dog.jpg',
+            image: 'static/img/dog.jpg',
+            dir: 'ltr',
+            lang: 'zh-Hant', //BCP 47
+            vibrate: [100, 50, 200],
+            badge: 'static/img/dog.jpg',
+            tag: 'confirm-notification',
+            renotify: true,
+            actions: [
+                { action: 'confirm', title: '確認', icon: 'static/img/cat.jpg'},
+                { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
+            ]
+  }));
+});
+
