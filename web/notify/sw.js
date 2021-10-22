@@ -33,7 +33,7 @@ self.addEventListener('fetch', event => {
 		caches.match(event.request).then(function (response) {
 			return response || fetch(event.request).then(res =>
 				// 存 caches 之前，要先打開 caches.open(dataCacheName)
-				caches.open('v1')
+				caches.open('notify_v1')
 				.then(function(cache) {
 					// cache.put(key, value)
 					// 下一次 caches.match 會對應到 event.request
@@ -59,7 +59,7 @@ self.addEventListener('fetch', event => {
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open('v1').then((cache) => {
+    caches.open('notify_v1').then((cache) => {
       return cache.addAll([
   "static/img/icon_192.jpg",
   "static/img/icon_128.jpg",
@@ -70,6 +70,7 @@ self.addEventListener('install', (event) => {
     })
   );
 });
+
 self.addEventListener('push', (event) => {
   event.waitUntil(self.registration.showNotification('Title', {    
             body: 'PWA的世界',
