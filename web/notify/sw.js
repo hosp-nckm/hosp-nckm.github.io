@@ -61,8 +61,8 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open('notify_v1').then((cache) => {
       return cache.addAll([
-  "static/img/icon_192.jpg",
-  "static/img/icon_128.jpg",
+  "static/img/logo_192.jpg",
+  "static/img/logo_128.jpg",
   "static/img/dog.jpg",
   "static/img/cat.jpg",
   "test.html"
