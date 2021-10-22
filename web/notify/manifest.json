@@ -3,13 +3,13 @@
   "name": "notify_app",
   "icons": [
     {
-      "src": "/web/notify/static/img/icon_192.png",
-      "type": "image/png",
+      "src": "/web/notify/static/img/icon_192.jpg",
+      "type": "image/jpg",
       "sizes": "192x192"
     },
     {
-      "src": "/web/notify/static/img/icon_128.png",
-      "type": "image/png",
+      "src": "/web/notify/static/img/icon_128.jpg",
+      "type": "image/jpg",
       "sizes": "128x128"
     }
   ],
