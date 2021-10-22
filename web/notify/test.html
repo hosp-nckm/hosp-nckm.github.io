@@ -3,6 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title>My test page</title>
+    
+    <link rel="manifest" href="manifest.json">	
+    <link href="static/img/dog.jpg" rel="shortcut icon">
   </head>
   <style>
       .enable-notifications{
@@ -14,6 +17,33 @@
     <!--img src="images/firefox-icon.png" alt="My test image"-->
   </body>
   
+<script>
+    // 支援serviceWorker才存入sw.js檔
+    if('serviceWorker' in navigator) {
+      
+      // window load後才執行，以免增加頁面讀取的時間
+      window.addEventListener('load', function() {
+        
+        // 建立sw.js
+        navigator.serviceWorker.register('https://hosp-nckm.github.io/web/notify/sw.js')
+          .then(function(reg) {
+            console.log(reg.scope); // 看這支sw.js執行的範圍
+          })
+          // 註冊失敗
+          .catch(function(err) {
+            console.log('error: ', err);
+          });
+       
+        // 附上刪除sw.js的寫法
+        /*navigator.serviceWorker.getRegistrations().then(function(reg) {
+          for(var reg of reg) {
+            reg.unregister()
+          }
+        });*/
+        
+      });
+    }
+  </script>
   <script>
     /*alert('Notification' in window);*/
     var enableNotifications = document.querySelectorAll('.enable-notifications');
