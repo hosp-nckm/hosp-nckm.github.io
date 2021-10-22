@@ -26,9 +26,9 @@
       enableNotifications[i].addEventListener('click', askForNotificationPermission);
   }
 }
-function displayNotification(){
+/*function displayNotification(){
    new Notification('訂閱成功！！！');
-}
+}*/
 
 function askForNotificationPermission() {
     Notification.requestPermission(function(status){
@@ -40,7 +40,7 @@ function askForNotificationPermission() {
         }
     });
 }
-/*function displayNotification(){
+function displayNotification(){
     if('serviceWorker' in navigator){
         var options = {
             body: '歡迎進入30天PWA的世界'           
@@ -51,6 +51,6 @@ function askForNotificationPermission() {
             })
     }  
      
-}*/
+}
 </script>
 </html>
