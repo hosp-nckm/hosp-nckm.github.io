@@ -4,12 +4,12 @@
   "icons": [
     {
       "src": "/web/notify/static/img/icon_192.jpg",
-      "type": "image/jpg",
+      "type": "image/jpeg",
       "sizes": "192x192"
     },
     {
       "src": "/web/notify/static/img/icon_128.jpg",
-      "type": "image/jpg",
+      "type": "image/jpeg",
       "sizes": "128x128"
     }
   ],
