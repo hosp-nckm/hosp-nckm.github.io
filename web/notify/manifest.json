@@ -1,0 +1,21 @@
+{
+  "short_name": "notify_app",
+  "name": "notify_app",
+  "icons": [
+    {
+      "src": "/web/notify/static/img/icon_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/web/notify/static/img/icon_128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    }
+  ],
+  "start_url": "test.html?source=pwa",
+  "background_color": "#FFECEC",
+  "display": "standalone",
+  "scope": "/web/notify/",
+  "theme_color": "#000000"
+}
