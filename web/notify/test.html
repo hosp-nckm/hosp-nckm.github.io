@@ -65,7 +65,7 @@ function askForNotificationPermission() {
         if (status !== 'granted') {
             console.log('推播允許被拒絕了!');
         } else {
-            displayNotification();
+            setPushSubscribe();//displayNotification();
         }
     });
 }
@@ -81,5 +81,27 @@ function displayNotification(){
     }  
      
 }
+    
+//從伺服器發出訊息不管使用者是不是正在瀏覽網站
+function setPushSubscribe(){
+  if (!('serviceWorker' in navigator)) 
+        return;
+    
+    navigator.serviceWorker.ready
+        .then(function(sw){
+          return sw.pushManager.getSubscription();
+        })
+        .then(function(sub){
+            if(sub === null){
+                //建立新的訂閱
+                reg.pushManager.subscribe();
+            }else{
+                //已經訂閱
+            }
+        });
+}
+reg.pushManager.subscribe({
+    userVisibleOnly: true
+});
 </script>
 </html>
