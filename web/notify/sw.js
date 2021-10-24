@@ -89,3 +89,15 @@ self.addEventListener('push', (event) => {
   }));
 });
 
+self.addEventListener('notificationclick', function(event) {
+    var notification = event.notification;
+    var action = event.action;
+    
+    console.log(notification);
+    if(action === 'confirm') {
+        console.log('使用者點選確認');
+        notification.close();
+    } else {
+        console.log(action);
+    }
+});
