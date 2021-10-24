@@ -101,3 +101,7 @@ self.addEventListener('notificationclick', function(event) {
         console.log(action);
     }
 });
+
+self.addEventListener('notificationclose', function(event){
+    console.log('使用者沒興趣',event);
+});
