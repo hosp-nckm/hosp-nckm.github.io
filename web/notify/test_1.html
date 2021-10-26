@@ -89,11 +89,12 @@ function setPushSubscribe(){
     
     navigator.serviceWorker.ready
         .then(function(sw){
-      console.log("sw : ",sw);
+          console.log("sw : ",sw);
+          reg = sw;
           return sw.pushManager.getSubscription();
         })
         .then(function(sub){
-      console.log("sub : ",sub);
+            console.log("sub : ",sub);
             if(sub === null){
                 //建立新的訂閱
                 /*reg.pushManager.subscribe({
@@ -103,7 +104,8 @@ function setPushSubscribe(){
                   //建立新的訂閱
                   var vapidPKey = 'BIXV6a4fs-lgvVTZ3o-1UZOL2S9Fes8-pujFvLIZLjE-uR71MrE2W2YMcz-0DzYj4FMbCWwnQ3hZjgZf-9plzKc';
                       var convertedVapidPKey = urlBase64ToUint8Array(vapidPKey);
-                      return sub.pushManager.subscribe({
+                      console.log("reg : ",reg);
+                      return reg.pushManager.subscribe({
                           userVisibleOnly: true,
                           applicationServerKey: convertedVapidPKey
                       }).then(function(newSub){
