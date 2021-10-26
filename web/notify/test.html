@@ -94,7 +94,7 @@ function setPushSubscribe(){
         .then(function(sub){
             if(sub === null){
                 //建立新的訂閱
-                reg.pushManager.subscribe({
+                sub.pushManager.subscribe({
                     userVisibleOnly: true
                 });
             }else{
