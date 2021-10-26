@@ -104,23 +104,23 @@ function setPushSubscribe(){
                       return sub.pushManager.subscribe({
                           userVisibleOnly: true,
                           applicationServerKey: convertedVapidPKey
-                      }).then(function(newSub){                      
-                      console.log(newSub);
-                      return fetch('https://notify-95b9f.firebaseio.com/subscriptions.json', {
-                          method: 'POST',
-                          headers: {
-                              'Content-TYpe': 'application/json',
-                              'Accept': 'application/json'
-                          },
-                          body: JSON.stringify(newSub)
-                      }).then(function(response){
-                          if(response.ok)
-                              displayNotification();
-                      })
-                      .catch(function(err){
-                          console.log('訂閱失敗',err);
-                      });
-                  });
+                      }).then(function(newSub){
+                            console.log(newSub);
+                            return fetch('https://notify-95b9f.firebaseio.com/subscriptions.json', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-TYpe': 'application/json',
+                                    'Accept': 'application/json'
+                                },
+                                body: JSON.stringify(newSub)
+                            });
+                        }).then(function(response){
+                                if(response.ok)
+                                    displayNotification();
+                            })
+                            .catch(function(err){
+                                console.log('訂閱失敗',err);
+                            });
                   
             }else{
                 //已經訂閱
