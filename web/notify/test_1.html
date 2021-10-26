@@ -101,7 +101,7 @@ function setPushSubscribe(){
                   //建立新的訂閱
                   var vapidPKey = 'BIXV6a4fs-lgvVTZ3o-1UZOL2S9Fes8-pujFvLIZLjE-uR71MrE2W2YMcz-0DzYj4FMbCWwnQ3hZjgZf-9plzKc';
                       var convertedVapidPKey = urlBase64ToUint8Array(vapidPKey);
-                      return reg.pushManager.subscribe({
+                      return sub.pushManager.subscribe({
                           userVisibleOnly: true,
                           applicationServerKey: convertedVapidPKey
                       }).then(function(newSub){
