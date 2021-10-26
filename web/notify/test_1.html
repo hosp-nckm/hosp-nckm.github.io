@@ -104,7 +104,8 @@ function setPushSubscribe(){
                       return sub.pushManager.subscribe({
                           userVisibleOnly: true,
                           applicationServerKey: convertedVapidPKey
-                      }).then(function(newSub){
+                      }).then(function(newSub){                      
+                      console.log(newSub);
                       return fetch('https://notify-95b9f.firebaseio.com/subscriptions.json', {
                           method: 'POST',
                           headers: {
