@@ -71,7 +71,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-self.addEventListener('push', (event) => {
+/*self.addEventListener('push', (event) => {
   event.waitUntil(self.registration.showNotification('Title', {    
             body: 'PWA的世界',
             icon: 'static/img/dog.jpg',
@@ -86,6 +86,20 @@ self.addEventListener('push', (event) => {
                 { action: 'confirm', title: '確認', icon: 'static/img/cat.jpg'},
                 { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
             ]
+  }));
+});*/
+self.addEventListener('push', (event) => {  
+  pushConfig={
+    "endpoint": "https://fcm.googleapis.com/fcm/send/ek45rG8fz4U:APA91bFyGgXEBki5uM6ewHo_fJC9REyXDVopuaRGJVDoT_FjxxXBWQDnUjy5zWZUp6LrcOei-u-JKJENs7COE71iWks1J_2kHMX6HDawFTxRh47ZDiFmWm5wtnlicKqqS6p1aYS1Ensh",
+    "expirationTime": null,
+    "keys": {
+        "p256dh": "BKC2UQSiQN70NfhYnDImsc5B5c0z3Q6KbD3QdByWLoK5XLXa4gqHVtCOyY13zvVVqyF7EofFon5SYGw1DrM-bOA",
+        "auth": "p929DZ6VUq1nlYq46aupPg"
+    }
+}
+  event.waitUntil(self.registration.sendNotification(pushConfig, JSON.stringify({title: '回來逛逛哦', content: '再撐一下就到30天啦'}))
+  .catch(function(err){
+      console.log('Server 推播失敗',err);
   }));
 });
 
