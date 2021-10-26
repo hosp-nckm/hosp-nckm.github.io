@@ -89,9 +89,11 @@ function setPushSubscribe(){
     
     navigator.serviceWorker.ready
         .then(function(sw){
+      console.log("sw : ",sw);
           return sw.pushManager.getSubscription();
         })
         .then(function(sub){
+      console.log("sub : ",sub);
             if(sub === null){
                 //建立新的訂閱
                 /*reg.pushManager.subscribe({
@@ -105,7 +107,7 @@ function setPushSubscribe(){
                           userVisibleOnly: true,
                           applicationServerKey: convertedVapidPKey
                       }).then(function(newSub){
-                            console.log(newSub);
+                            console.log("newSub : ",newSub);
                             return fetch('https://notify-95b9f.firebaseio.com/subscriptions.json', {
                                 method: 'POST',
                                 headers: {
