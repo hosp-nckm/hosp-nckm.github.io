@@ -72,8 +72,8 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('push', (event) => {
-  event.waitUntil(self.registration.showNotification('Title', {    
-            body: 'PWA的世界',
+  event.waitUntil(self.registration.showNotification('看診提醒', {    
+            body: '提醒您今天要回診，\n檢查項目為：超音波檢查抽血',
             icon: 'static/img/dog.jpg',
             image: 'static/img/dog.jpg',
             dir: 'ltr',
@@ -83,8 +83,8 @@ self.addEventListener('push', (event) => {
             tag: 'confirm-notification',
             renotify: true,
             actions: [
-                { action: 'confirm', title: '確認', icon: 'static/img/cat.jpg'},
-                { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
+                { action: 'confirm', title: '了解', icon: 'static/img/cat.jpg'},
+                /*{ action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}*/
             ]
   }));
 });
