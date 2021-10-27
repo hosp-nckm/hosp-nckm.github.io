@@ -114,7 +114,7 @@ function displayDiv() {
         
     }
 }
-setInterval(displayDiv, 5000);
+setInterval(displayDiv, 5000000);
 
 
 
