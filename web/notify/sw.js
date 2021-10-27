@@ -114,7 +114,7 @@ function displayDiv() {
     Notify_ontime=new Date(formatDate(d).replace(/\-/g, "/"));
 
     //if(12 === d.getHours()){
-    if(Math.floor((parseInt(Notify_ontime - Notify_start) / 1000 / 60))==5){
+    if(Math.floor((parseInt(Notify_ontime - Notify_start) / 1000 / 60))==3){
         console.log("Y");//idMain.style.display = 'block';        
         self.registration.showNotification('Title', {    
           body: 'PWA的世界',
