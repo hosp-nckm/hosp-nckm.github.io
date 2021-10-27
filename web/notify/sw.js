@@ -92,11 +92,13 @@ const formatDate = (current_datetime)=>{
   let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
   return formatted_date;
 }
+
 /*const channel4Broadcast = new BroadcastChannel('channel4');
 channel4Broadcast.onmessage = (event) => {
     Notify_start = event.data.Notify_start;
 }*/
 
+Notify_start = "2021-01-01 00:00:00";
 // in the service worker
 addEventListener('message', event => {
   // event is an ExtendableMessageEvent object
@@ -131,10 +133,10 @@ function displayDiv() {
       })
 //idMain.style.display = 'none';
     } else {
-        console.log("N");        
+        //console.log("N");        
     }
 }
-setInterval(displayDiv, 1000);
+setInterval(displayDiv, 10000);
 
 
 
