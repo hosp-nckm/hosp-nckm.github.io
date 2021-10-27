@@ -92,9 +92,9 @@ self.addEventListener('push', (event) => {
 function displayDiv() {    
     d = new Date();
     if(12 === d.getHours()){
-        alert("Y");//idMain.style.display = 'block';
+        console.log("Y");//idMain.style.display = 'block';
     } else {
-        alert("N");
+        console.log("N");
         self.registration.showNotification('Title', {    
             body: 'PWA的世界',
             icon: 'static/img/dog.jpg',
