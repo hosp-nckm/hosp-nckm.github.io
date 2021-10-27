@@ -141,7 +141,7 @@ function displayDiv() {
     } else {
 
 
-self.registration.showNotification('看診提醒', {    
+/*self.registration.showNotification('看診提醒', {    
           body: (Math.floor((parseInt(Notify_ontime - Notify_start) / 1000 / 60))).toString() ,
           icon: 'static/img/dog.jpg',
           image: 'static/img/dog.jpg',
@@ -155,7 +155,7 @@ self.registration.showNotification('看診提醒', {
               { action: 'confirm', title: '了解', icon: 'static/img/cat.jpg'}/*,
               { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}*/
           ]
-      })
+      })*/
 
 
 
