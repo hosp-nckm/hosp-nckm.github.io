@@ -88,33 +88,41 @@ self.addEventListener('push', (event) => {
             ]
   }));
 });
+const formatDate = (current_datetime)=>{
+  let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
+  return formatted_date;
+}
 
 function displayDiv() {    
     d = new Date();
-    if(12 === d.getHours()){
-        console.log("Y");//idMain.style.display = 'block';
-    } else {
-        console.log("N");
+    
+    Notify_start=localStorage.getItem('Notify_start');
+    Notify_ontime=formatDate(d);
+
+    //if(12 === d.getHours()){
+    if((parseInt(Notify_ontime - Notify_start) / 1000 / 60)==1){
+        console.log("Y");//idMain.style.display = 'block';        
         self.registration.showNotification('Title', {    
-            body: 'PWA的世界',
-            icon: 'static/img/dog.jpg',
-            image: 'static/img/dog.jpg',
-            dir: 'ltr',
-            lang: 'zh-Hant', //BCP 47
-            vibrate: [100, 50, 200],
-            badge: 'static/img/dog.jpg',
-            tag: 'confirm-notification',
-            renotify: true,
-            actions: [
-                { action: 'confirm', title: '確認', icon: 'static/img/cat.jpg'},
-                { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
-            ]
-        })
-  //idMain.style.display = 'none';
-        
+          body: 'PWA的世界',
+          icon: 'static/img/dog.jpg',
+          image: 'static/img/dog.jpg',
+          dir: 'ltr',
+          lang: 'zh-Hant', //BCP 47
+          vibrate: [100, 50, 200],
+          badge: 'static/img/dog.jpg',
+          tag: 'confirm-notification',
+          renotify: true,
+          actions: [
+              { action: 'confirm', title: '確認', icon: 'static/img/cat.jpg'},
+              { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
+          ]
+      })
+//idMain.style.display = 'none';
+    } else {
+        console.log("N");        
     }
 }
-setInterval(displayDiv, 5000000);
+setInterval(displayDiv, 1000);
 
 
 
