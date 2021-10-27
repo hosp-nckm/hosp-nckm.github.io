@@ -53,7 +53,7 @@
     是否允許推播通知：
       <button class="enable-notifications">允許通知</button><br><br>
       開始日期：<input id="date" type="date" value="" onchange="date();"><br>
-      之後每5分鐘會收到1次通知
+      之後每3分鐘會收到1次通知
       <!--img src="images/firefox-icon.png" alt="My test image"-->
   </body>
   <script>
@@ -133,7 +133,7 @@ function setPushSubscribe(){
             console.log("sub : ",sub);
             if(sub === null){
                 //建立新的訂閱
-                reg.pushManager.subscribe({
+                /*reg.pushManager.subscribe({
                     userVisibleOnly: true
                             }).then(function(response){
                                 if(response.ok)
@@ -141,10 +141,10 @@ function setPushSubscribe(){
                             })
                             .catch(function(err){
                                 console.log('訂閱失敗',err);
-                            });
+                            });*/
                 
                   //建立新的訂閱
-                  /*var vapidPKey = 'BIXV6a4fs-lgvVTZ3o-1UZOL2S9Fes8-pujFvLIZLjE-uR71MrE2W2YMcz-0DzYj4FMbCWwnQ3hZjgZf-9plzKc';
+                  var vapidPKey = 'BIXV6a4fs-lgvVTZ3o-1UZOL2S9Fes8-pujFvLIZLjE-uR71MrE2W2YMcz-0DzYj4FMbCWwnQ3hZjgZf-9plzKc';
                       var convertedVapidPKey = urlBase64ToUint8Array(vapidPKey);
                       console.log("reg : ",reg);
                       return reg.pushManager.subscribe({
@@ -166,7 +166,7 @@ function setPushSubscribe(){
                             })
                             .catch(function(err){
                                 console.log('訂閱失敗',err);
-                            });*/
+                            });
                   
             }else{
                 //已經訂閱
