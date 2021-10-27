@@ -114,7 +114,7 @@ function displayDiv() {
     Notify_ontime=new Date(formatDate(d).replace(/\-/g, "/"));
 
     //if(12 === d.getHours()){
-    if((parseInt(Notify_ontime - Notify_start) / 1000 / 60)==1){
+    if(Math.floor((parseInt(Notify_ontime - Notify_start) / 1000 / 60))==1){
         console.log("Y");//idMain.style.display = 'block';        
         self.registration.showNotification('Title', {    
           body: 'PWA的世界',
@@ -131,6 +131,8 @@ function displayDiv() {
               { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
           ]
       })
+	    dn = new Date();    
+    	Notify_start=new Date(formatDate(dn).replace(/\-/g, "/"));
 //idMain.style.display = 'none';
     } else {
         console.log("time : ",(parseInt(Notify_ontime - Notify_start) / 1000 / 60));        
