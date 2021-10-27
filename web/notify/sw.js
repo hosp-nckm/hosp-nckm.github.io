@@ -103,7 +103,7 @@ Notify_start = "2021-01-01 00:00:00".replace(/\-/g, "/");
 addEventListener('message', event => {
   // event is an ExtendableMessageEvent object
   console.log(`The client sent me a message: ${event.data}`);
-  Notify_start = event.data.replace(/\-/g, "/");
+  Notify_start = new Date(event.data.replace(/\-/g, "/"));
   /*event.source.postMessage("Hi client");*/
 });
 
@@ -111,7 +111,7 @@ function displayDiv() {
     d = new Date();
     
     //Notify_start=localStorage.getItem('Notify_start');
-    Notify_ontime=formatDate(d);
+    Notify_ontime=new Date(formatDate(d).replace(/\-/g, "/"));
 
     //if(12 === d.getHours()){
     if((parseInt(Notify_ontime - Notify_start) / 1000 / 60)==1){
