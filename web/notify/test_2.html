@@ -53,16 +53,16 @@
     是否允許推播通知：
       <button class="enable-notifications">允許通知</button><br><br>
       開始日期：<input id="date" type="date" value="" onchange="date();"><br>
-      設定開始日期之後，每2分鐘會收到1次看診通知
+      設定開始日期之後，<br>每2分鐘會收到1次看診通知
       <!--img src="images/firefox-icon.png" alt="My test image"-->
   </body>
   <script>
     /*alert('Notification' in window);*/
     function date(){
       var dateControl = document.querySelector('input[type="date"]');
-      //alert(dateControl.value);
+      alert(dateControl.value);
       var dt = new Date();
-      //alert(formatDate(dt));
+      alert(formatDate(dt));
 
       localStorage.setItem('Notify_start', formatDate(dt));
       
