@@ -133,11 +133,11 @@ setInterval(displayDiv, 5000);
   }));
 });*/
 
-getAllPosts().then(response => {
+/*getAllPosts().then(response => {
     console.log("response : ",response);
 }).catch(e => {
     console.log("e : ",e);
-});
+});*/
 
 self.addEventListener('notificationclick', function(event) {
     var notification = event.notification;
