@@ -60,9 +60,9 @@
     /*alert('Notification' in window);*/
     function date(){
       var dateControl = document.querySelector('input[type="date"]');
-      alert(dateControl.value);
+      //alert(dateControl.value);
       var dt = new Date();
-      alert(formatDate(dt));
+      //alert(formatDate(dt));
 
       localStorage.setItem('Notify_start', formatDate(dt));
       
@@ -108,11 +108,11 @@ function askForNotificationPermission() {
 function displayNotification(){
     if('serviceWorker' in navigator){
         var options = {
-            body: '歡迎進入30天PWA的世界'           
+            body: '看診提醒'           
         };
         navigator.serviceWorker.ready
             .then(function(sw){
-                sw.showNotification('訂閱成功！！！', options);
+                sw.showNotification('開啟提醒！！！', options);
             })
     }  
      
@@ -133,12 +133,18 @@ function setPushSubscribe(){
             console.log("sub : ",sub);
             if(sub === null){
                 //建立新的訂閱
-                /*reg.pushManager.subscribe({
+                reg.pushManager.subscribe({
                     userVisibleOnly: true
-                });*/
+                            }).then(function(response){
+                                if(response.ok)
+                                    displayNotification();
+                            })
+                            .catch(function(err){
+                                console.log('訂閱失敗',err);
+                            });
                 
                   //建立新的訂閱
-                  var vapidPKey = 'BIXV6a4fs-lgvVTZ3o-1UZOL2S9Fes8-pujFvLIZLjE-uR71MrE2W2YMcz-0DzYj4FMbCWwnQ3hZjgZf-9plzKc';
+                  /*var vapidPKey = 'BIXV6a4fs-lgvVTZ3o-1UZOL2S9Fes8-pujFvLIZLjE-uR71MrE2W2YMcz-0DzYj4FMbCWwnQ3hZjgZf-9plzKc';
                       var convertedVapidPKey = urlBase64ToUint8Array(vapidPKey);
                       console.log("reg : ",reg);
                       return reg.pushManager.subscribe({
@@ -160,7 +166,7 @@ function setPushSubscribe(){
                             })
                             .catch(function(err){
                                 console.log('訂閱失敗',err);
-                            });
+                            });*/
                   
             }else{
                 //已經訂閱
