@@ -114,7 +114,7 @@ function displayDiv() {
     Notify_ontime=new Date(formatDate(d).replace(/\-/g, "/"));
 
     //if(12 === d.getHours()){
-    if(Math.floor((parseInt(Notify_ontime - Notify_start) / 1000 / 60))==3){
+    if(Math.floor((parseInt(Notify_ontime - Notify_start) / 1000 / 60))==2){
         console.log("Y");//idMain.style.display = 'block';        
         self.registration.showNotification('看診提醒', {    
           body: '提醒您今天要回診，檢查項目為：超音波檢查抽血',
