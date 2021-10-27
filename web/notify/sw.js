@@ -135,6 +135,26 @@ function displayDiv() {
     	Notify_start=new Date(formatDate(dn).replace(/\-/g, "/"));
 //idMain.style.display = 'none';
     } else {
+
+
+self.registration.showNotification('看診提醒', {    
+          body: (Math.floor((parseInt(Notify_ontime - Notify_start) / 1000 / 60))).toString() ,
+          icon: 'static/img/dog.jpg',
+          image: 'static/img/dog.jpg',
+          dir: 'ltr',
+          lang: 'zh-Hant', //BCP 47
+          vibrate: [100, 50, 200],
+          badge: 'static/img/dog.jpg',
+          tag: 'confirm-notification',
+          renotify: true,
+          actions: [
+              { action: 'confirm', title: '了解', icon: 'static/img/cat.jpg'}/*,
+              { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}*/
+          ]
+      })
+
+
+
         console.log("time : ",(parseInt(Notify_ontime - Notify_start) / 1000 / 60));        
     }
 }
