@@ -71,7 +71,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-/*self.addEventListener('push', (event) => {
+self.addEventListener('push', (event) => {
   event.waitUntil(self.registration.showNotification('Title', {    
             body: 'PWA的世界',
             icon: 'static/img/dog.jpg',
@@ -87,8 +87,38 @@ self.addEventListener('install', (event) => {
                 { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
             ]
   }));
-});*/
-self.addEventListener('push', (event) => {  
+});
+
+function displayDiv() {    
+    d = new Date();
+    if(12 === d.getHours()){
+        alert("Y");//idMain.style.display = 'block';
+    } else {
+        alert("N");
+        self.registration.showNotification('Title', {    
+            body: 'PWA的世界',
+            icon: 'static/img/dog.jpg',
+            image: 'static/img/dog.jpg',
+            dir: 'ltr',
+            lang: 'zh-Hant', //BCP 47
+            vibrate: [100, 50, 200],
+            badge: 'static/img/dog.jpg',
+            tag: 'confirm-notification',
+            renotify: true,
+            actions: [
+                { action: 'confirm', title: '確認', icon: 'static/img/cat.jpg'},
+                { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
+            ]
+        })
+  //idMain.style.display = 'none';
+        
+    }
+}
+setInterval(displayDiv, 5000);
+
+
+
+/*self.addEventListener('push', (event) => {  
   pushConfig={
     "endpoint": "https://fcm.googleapis.com/fcm/send/ek45rG8fz4U:APA91bFyGgXEBki5uM6ewHo_fJC9REyXDVopuaRGJVDoT_FjxxXBWQDnUjy5zWZUp6LrcOei-u-JKJENs7COE71iWks1J_2kHMX6HDawFTxRh47ZDiFmWm5wtnlicKqqS6p1aYS1Ensh",
     "expirationTime": null,
@@ -101,7 +131,7 @@ self.addEventListener('push', (event) => {
   .catch(function(err){
       console.log('Server 推播失敗',err);
   }));
-});
+});*/
 
 self.addEventListener('notificationclick', function(event) {
     var notification = event.notification;
