@@ -65,6 +65,8 @@
       alert(formatDate(dt));
 
       localStorage.setItem('Notify_start', formatDate(dt));
+      const channel4Broadcast = new BroadcastChannel('channel4');
+      channel4Broadcast.postMessage({Notify_start: formatDate(dt)});
     }
     const formatDate = (current_datetime)=>{
       let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
