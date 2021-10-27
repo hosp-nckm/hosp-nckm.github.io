@@ -98,7 +98,7 @@ channel4Broadcast.onmessage = (event) => {
     Notify_start = event.data.Notify_start;
 }*/
 
-Notify_start = "2021-01-01 00:00:00".replace(/\-/g, "/");
+Notify_start = new Date("2021-01-01 00:00:00".replace(/\-/g, "/"));
 // in the service worker
 addEventListener('message', event => {
   // event is an ExtendableMessageEvent object
