@@ -104,7 +104,7 @@ addEventListener('message', event => {
 
 dn = new Date();    
     	Notify_start=new Date(formatDate(dn).replace(/\-/g, "/"));
-
+	msg=event.data
   // event is an ExtendableMessageEvent object
   //console.log(`The client sent me a message: ${event.data}`);
   //Notify_start = new Date(event.data.replace(/\-/g, "/"));
@@ -131,7 +131,7 @@ function displayDiv() {
           tag: 'confirm-notification',
           renotify: true,
           actions: [
-              { action: 'confirm', title: '了解', icon: 'static/img/cat.jpg'}/*,
+              { action: 'confirm', title: '確定', icon: 'static/img/cat.jpg'}/*,
               { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}*/
           ]
       })
@@ -141,8 +141,8 @@ function displayDiv() {
     } else {
 
 
-/*self.registration.showNotification('看診提醒', {    
-          body: (Math.floor((parseInt(Notify_ontime - Notify_start) / 1000 / 60))).toString() ,
+self.registration.showNotification('看診提醒', {    
+          body: (msg).toString() ,
           icon: 'static/img/dog.jpg',
           image: 'static/img/dog.jpg',
           dir: 'ltr',
@@ -152,10 +152,10 @@ function displayDiv() {
           tag: 'confirm-notification',
           renotify: true,
           actions: [
-              { action: 'confirm', title: '了解', icon: 'static/img/cat.jpg'}/*,
-              { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}*/
+              { action: 'confirm', title: '確定', icon: 'static/img/cat.jpg'},
+              { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
           ]
-      })*/
+      })
 
 
 
