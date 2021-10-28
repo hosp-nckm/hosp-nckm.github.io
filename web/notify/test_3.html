@@ -199,7 +199,11 @@ channel.addEventListener('message', event => {
   //alert((event.data).toString() );
   var Date_due=localStorage.getItem('Date_due');
   var Date_test=new Date(event.data.CorrentTime.replace(/\-/g, "/"));
-  
+  alert(parseInt(Date_due));
+  alert(Math.floor(Date_test.getMinutes()));
+  alert(Math.floor(Date_test.getMinutes())==parseInt(Date_due));
+
+
   if(Math.floor(Date_test.getMinutes())==parseInt(Date_due)){
     frontendNotification();
   }
@@ -213,7 +217,9 @@ function setLocalStorage(){
 }
 
 function frontendNotification(){
-    if('serviceWorker' in navigator){
+    alert("@@");
+    new Notification('前端 看診通知！！！');
+    /*if('serviceWorker' in navigator){
         var options = {
             body: '檢查項目為：超音波檢查抽血',
             icon: 'static/img/dog.jpg',
@@ -233,7 +239,7 @@ function frontendNotification(){
             .then(function(sw){
                 sw.showNotification('前端 看診通知', options);
             })
-    }  
+    }  */
 }
 </script>
 </html>
