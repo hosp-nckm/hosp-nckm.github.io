@@ -72,8 +72,8 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('push', (event) => {
-  event.waitUntil(self.registration.showNotification('看診提醒', {    
-            body: '提醒您今天要回診，\n檢查項目為：超音波檢查抽血',
+  event.waitUntil(self.registration.showNotification('看診提醒：提醒您今天要回診', {    
+            body: '檢查項目為：超音波檢查抽血',
             icon: 'static/img/dog.jpg',
             image: 'static/img/dog.jpg',
             dir: 'ltr',
@@ -121,10 +121,10 @@ function displayDiv() {
 		    Notify_ontime=new Date(formatDate(d).replace(/\-/g, "/"));
 
 		    //if(12 === d.getHours()){
-		    if(Math.floor((parseInt(Notify_ontime - Notify_start) / 1000 / 60))==2){
+		    if(Math.floor((parseInt(Notify_ontime - Notify_start) / 1000 / 60))>=2){
 			console.log("Y");//idMain.style.display = 'block';        
-			self.registration.showNotification('看診提醒', {    
-			  body: '提醒您今天要回診，\n檢查項目為：\n超音波檢查抽血',
+			self.registration.showNotification('看診提醒：提醒您今天要回診', {    
+			  body: '檢查項目為：超音波檢查抽血',
 			  icon: 'static/img/dog.jpg',
 			  image: 'static/img/dog.jpg',
 			  dir: 'ltr',
@@ -144,7 +144,7 @@ function displayDiv() {
 		    } else {
 
 
-		self.registration.showNotification('看診提醒', {    
+		/*self.registration.showNotification('看診提醒', {    
 			  body: (Math.floor((parseInt(Notify_ontime - Notify_start) / 1000 / 60))).toString() ,
 			  icon: 'static/img/dog.jpg',
 			  image: 'static/img/dog.jpg',
@@ -158,7 +158,7 @@ function displayDiv() {
 			      { action: 'confirm', title: '確定', icon: 'static/img/cat.jpg'},
 			      { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
 			  ]
-		      })
+		      })*/
 
 
 
