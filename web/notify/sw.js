@@ -192,7 +192,7 @@ self.addEventListener('notificationclose', function(event){
 });
 
 
-setInterval(Broadcast, 1000);
+setInterval(Broadcast, 10000);
 function Broadcast(){
       // From service-worker.js:
     const channel = new BroadcastChannel('sw-messages');
