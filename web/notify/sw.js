@@ -97,70 +97,74 @@ const formatDate = (current_datetime)=>{
 channel4Broadcast.onmessage = (event) => {
     Notify_start = event.data.Notify_start;
 }*/
+var msg_start=0;
 
-Notify_start = new Date("2021-01-01 00:00:00".replace(/\-/g, "/"));
+var Notify_start = new Date("2021-01-01 00:00:00".replace(/\-/g, "/"));
 // in the service worker
 addEventListener('message', event => {
 
-dn = new Date();    
+/*dn = new Date();    
     	Notify_start=new Date(formatDate(dn).replace(/\-/g, "/"));
-	msg=event.data
-  // event is an ExtendableMessageEvent object
-  //console.log(`The client sent me a message: ${event.data}`);
-  //Notify_start = new Date(event.data.replace(/\-/g, "/"));
+	msg=event.data*/
+	// event is an ExtendableMessageEvent object
+	//console.log(`The client sent me a message: ${event.data}`);
+	Notify_start = new Date(event.data.replace(/\-/g, "/"));
+	msg_start=1;
   /*event.source.postMessage("Hi client");*/
 });
 
-function displayDiv() {    
-    d = new Date();
-    
-    //Notify_start=localStorage.getItem('Notify_start');
-    Notify_ontime=new Date(formatDate(d).replace(/\-/g, "/"));
+function displayDiv() { 
+	if(msg_start){
+		    d = new Date();
 
-    //if(12 === d.getHours()){
-    if(Math.floor((parseInt(Notify_ontime - Notify_start) / 1000 / 60))==2){
-        console.log("Y");//idMain.style.display = 'block';        
-        self.registration.showNotification('看診提醒', {    
-          body: '提醒您今天要回診，檢查項目為：超音波檢查抽血',
-          icon: 'static/img/dog.jpg',
-          image: 'static/img/dog.jpg',
-          dir: 'ltr',
-          lang: 'zh-Hant', //BCP 47
-          vibrate: [100, 50, 200],
-          badge: 'static/img/dog.jpg',
-          tag: 'confirm-notification',
-          renotify: true,
-          actions: [
-              { action: 'confirm', title: '確定', icon: 'static/img/cat.jpg'},
-              { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
-          ]
-      })
-	    dn = new Date();    
-    	Notify_start=new Date(formatDate(dn).replace(/\-/g, "/"));
-//idMain.style.display = 'none';
-    } else {
+		    //Notify_start=localStorage.getItem('Notify_start');
+		    Notify_ontime=new Date(formatDate(d).replace(/\-/g, "/"));
 
-
-self.registration.showNotification('看診提醒', {    
-          body: (msg).toString() ,
-          icon: 'static/img/dog.jpg',
-          image: 'static/img/dog.jpg',
-          dir: 'ltr',
-          lang: 'zh-Hant', //BCP 47
-          vibrate: [100, 50, 200],
-          badge: 'static/img/dog.jpg',
-          tag: 'confirm-notification',
-          renotify: true,
-          actions: [
-              { action: 'confirm', title: '確定', icon: 'static/img/cat.jpg'},
-              { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
-          ]
-      })
+		    //if(12 === d.getHours()){
+		    if(Math.floor((parseInt(Notify_ontime - Notify_start) / 1000 / 60))==2){
+			console.log("Y");//idMain.style.display = 'block';        
+			self.registration.showNotification('看診提醒', {    
+			  body: '提醒您今天要回診，檢查項目為：超音波檢查抽血',
+			  icon: 'static/img/dog.jpg',
+			  image: 'static/img/dog.jpg',
+			  dir: 'ltr',
+			  lang: 'zh-Hant', //BCP 47
+			  vibrate: [100, 50, 200],
+			  badge: 'static/img/dog.jpg',
+			  tag: 'confirm-notification',
+			  renotify: true,
+			  actions: [
+			      { action: 'confirm', title: '確定', icon: 'static/img/cat.jpg'},
+			      { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
+			  ]
+		      })
+			    dn = new Date();    
+			Notify_start=new Date(formatDate(dn).replace(/\-/g, "/"));
+		//idMain.style.display = 'none';
+		    } else {
 
 
+		self.registration.showNotification('看診提醒', {    
+			  body: (msg).toString() ,
+			  icon: 'static/img/dog.jpg',
+			  image: 'static/img/dog.jpg',
+			  dir: 'ltr',
+			  lang: 'zh-Hant', //BCP 47
+			  vibrate: [100, 50, 200],
+			  badge: 'static/img/dog.jpg',
+			  tag: 'confirm-notification',
+			  renotify: true,
+			  actions: [
+			      { action: 'confirm', title: '確定', icon: 'static/img/cat.jpg'},
+			      { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
+			  ]
+		      })
 
-        console.log("time : ",(parseInt(Notify_ontime - Notify_start) / 1000 / 60));        
-    }
+
+
+			console.log("time : ",(parseInt(Notify_ontime - Notify_start) / 1000 / 60));        
+		    }
+	}
 }
 setInterval(displayDiv, 10000);
 
