@@ -17,7 +17,7 @@
           font-size: 50px;
           line-height: 60px;
       }
-      #date{
+      #date,#due{
       font-size: 45px;
       line-height: 50px;
     }
@@ -207,8 +207,9 @@ channel.addEventListener('message', event => {
 });
 
 function setLocalStorage(){
-    var dateControl = document.querySelector('input[id="due"]');
-    localStorage.setItem('Date_due', dateControl);
+    var due = document.querySelector('input[id="due"]').value;
+    //alert(due);
+    localStorage.setItem('Date_due', due);
 }
 
 function frontendNotification(){
