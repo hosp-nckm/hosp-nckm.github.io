@@ -131,8 +131,8 @@ function displayDiv() {
           tag: 'confirm-notification',
           renotify: true,
           actions: [
-              { action: 'confirm', title: '確定', icon: 'static/img/cat.jpg'}/*,
-              { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}*/
+              { action: 'confirm', title: '確定', icon: 'static/img/cat.jpg'},
+              { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
           ]
       })
 	    dn = new Date();    
