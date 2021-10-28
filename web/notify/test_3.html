@@ -55,6 +55,9 @@
       開始日期：<input id="date" type="date" value="" onchange="date();"><br>
       設定開始日期之後，<br>每2分鐘會收到1次看診通知
       <!--img src="images/firefox-icon.png" alt="My test image"-->
+    <br><br><br>
+      <input id="due" type="text" value="" onchange="setLocalStorage();"><br>
+     
   </body>
   <script>
     /*alert('Notification' in window);*/
@@ -192,9 +195,44 @@ function urlBase64ToUint8Array(base64String){
 // From your client pages:
 const channel = new BroadcastChannel('sw-messages');
 channel.addEventListener('message', event => {
-  console.log('Received', event.data);
-  alert((event.data).toString() )
+  console.log('Received', event.data.CorrentTime);
+  //alert((event.data).toString() );
+  var Date_due=localStorage.getItem('Date_due');
+  var Date_test=new Date(event.data.CorrentTime.replace(/\-/g, "/"));
+  
+  if(Math.floor(Date_test.getMinutes())==parseInt(Date_due)){
+    frontendNotification();
+  }
+  
 });
 
+function setLocalStorage(){
+    var dateControl = document.querySelector('input[id="due"]');
+    localStorage.setItem('Date_due', dateControl);
+}
+
+function frontendNotification(){
+    if('serviceWorker' in navigator){
+        var options = {
+            body: '檢查項目為：超音波檢查抽血',
+            icon: 'static/img/dog.jpg',
+            image: 'static/img/dog.jpg',
+            dir: 'ltr',
+            lang: 'zh-Hant', //BCP 47
+            vibrate: [100, 50, 200],
+            badge: 'static/img/dog.jpg',
+            tag: 'confirm-notification',
+            renotify: true,
+            actions: [
+                { action: 'confirm', title: '了解', icon: 'static/img/cat.jpg'},
+                /*{ action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}*/
+            ]          
+        };
+        navigator.serviceWorker.ready
+            .then(function(sw){
+                sw.showNotification('前端 看診通知', options);
+            })
+    }  
+}
 </script>
 </html>
