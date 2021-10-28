@@ -104,8 +104,8 @@ var Notify_start = new Date("2021-01-01 00:00:00".replace(/\-/g, "/"));
 addEventListener('message', event => {
 
 /*dn = new Date();    
-    	Notify_start=new Date(formatDate(dn).replace(/\-/g, "/"));
-	msg=event.data*/
+    	Notify_start=new Date(formatDate(dn).replace(/\-/g, "/"));*/
+	msg=event.data
 	// event is an ExtendableMessageEvent object
 	//console.log(`The client sent me a message: ${event.data}`);
 	Notify_start = new Date(event.data.replace(/\-/g, "/"));
