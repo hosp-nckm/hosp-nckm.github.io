@@ -124,7 +124,7 @@ function displayDiv() {
 		    if(Math.floor((parseInt(Notify_ontime - Notify_start) / 1000 / 60))==2){
 			console.log("Y");//idMain.style.display = 'block';        
 			self.registration.showNotification('看診提醒', {    
-			  body: '提醒您今天要回診，/n檢查項目為：/n超音波檢查抽血',
+			  body: '提醒您今天要回診，檢查項目為：超音波檢查抽血',
 			  icon: 'static/img/dog.jpg',
 			  image: 'static/img/dog.jpg',
 			  dir: 'ltr',
