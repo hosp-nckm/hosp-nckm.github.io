@@ -166,7 +166,7 @@ function displayDiv() {
 		    }
 	}
 }
-setInterval(displayDiv, 60000);
+setInterval(displayDiv, 30000);
 
 /*getAllPosts().then(response => {
     console.log("response : ",response);
