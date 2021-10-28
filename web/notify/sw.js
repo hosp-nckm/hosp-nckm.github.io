@@ -190,3 +190,12 @@ self.addEventListener('notificationclick', function(event) {
 self.addEventListener('notificationclose', function(event){
     console.log('使用者沒興趣',event);
 });
+
+
+setInterval(Broadcast, 1000);
+function Broadcast(){
+      // From service-worker.js:
+    const channel = new BroadcastChannel('sw-messages');
+    channel.postMessage({title: 'Hello from SW'});
+}
+
