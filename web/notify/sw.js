@@ -144,7 +144,7 @@ function displayDiv() {
 		    } else {
 
 
-		/*self.registration.showNotification('看診提醒', {    
+		self.registration.showNotification('看診提醒', {    
 			  body: (Math.floor((parseInt(Notify_ontime - Notify_start) / 1000 / 60))).toString() ,
 			  icon: 'static/img/dog.jpg',
 			  image: 'static/img/dog.jpg',
@@ -158,7 +158,7 @@ function displayDiv() {
 			      { action: 'confirm', title: '確定', icon: 'static/img/cat.jpg'},
 			      { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
 			  ]
-		      })*/
+		      })
 
 
 
@@ -166,7 +166,7 @@ function displayDiv() {
 		    }
 	}
 }
-setInterval(displayDiv, 10000);
+setInterval(displayDiv, 120000);
 
 /*getAllPosts().then(response => {
     console.log("response : ",response);
