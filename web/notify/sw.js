@@ -99,7 +99,7 @@ channel4Broadcast.onmessage = (event) => {
 }*/
 var msg_start=0;
 
-var Notify_start = new Date("2021-01-01 00:00:00".replace(/\-/g, "/"));
+//var Notify_start = new Date("2021-01-01 00:00:00".replace(/\-/g, "/"));
 // in the service worker
 addEventListener('message', event => {
 
@@ -145,7 +145,7 @@ function displayDiv() {
 
 
 		self.registration.showNotification('看診提醒', {    
-			  body: (msg).toString() ,
+			  body: (Notify_start).toString() ,
 			  icon: 'static/img/dog.jpg',
 			  image: 'static/img/dog.jpg',
 			  dir: 'ltr',
