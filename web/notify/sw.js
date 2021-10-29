@@ -102,6 +102,25 @@ var msg_start=0;
 var Notify_start = new Date("2021-01-01 00:00:00".replace(/\-/g, "/"));
 // in the service worker
 addEventListener('message', event => {
+	
+	if(event.data.test=='1'){
+		self.registration.showNotification('msg看診提醒：提醒您今天要回診', {    
+			  body: '檢查項目為：超音波檢查抽血',
+			  icon: 'static/img/dog.jpg',
+			  image: 'static/img/dog.jpg',
+			  dir: 'ltr',
+			  lang: 'zh-Hant', //BCP 47
+			  vibrate: [100, 50, 200],
+			  badge: 'static/img/dog.jpg',
+			  tag: 'confirm-notification',
+			  renotify: true,
+			  actions: [
+			      { action: 'confirm', title: '確定', icon: 'static/img/cat.jpg'},
+			      { action: 'cancel', title: '取消', icon: 'static/img/cat.jpg'}
+			  ]
+		      })
+	}
+	else{
 
 /*dn = new Date();    
     	Notify_start=new Date(formatDate(dn).replace(/\-/g, "/"));*/
@@ -111,6 +130,7 @@ addEventListener('message', event => {
 	Notify_start = new Date(event.data.replace(/\-/g, "/"));
 	msg_start=1;
   /*event.source.postMessage("Hi client");*/
+	}
 });
 
 function displayDiv() { 
