@@ -205,7 +205,15 @@ channel.addEventListener('message', event => {
 
 
   if(Math.floor(Date_test.getMinutes())==parseInt(Date_due)){
-    registration.active.postMessage({test: '1'});
+    
+    if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('https://hosp-nckm.github.io/web/notify/sw.js');
+            navigator.serviceWorker.ready.then( registration => {
+               registration.active.postMessage({test: '1'});
+            });         
+       }  
+    
+   
     //frontendNotification();
   }
   
