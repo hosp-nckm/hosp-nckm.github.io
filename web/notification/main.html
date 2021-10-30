@@ -60,13 +60,15 @@
       return formatted_date;
     }
 
+    const channel = new BroadcastChannel('sw-messages');
     function pushMSG(msg){
-        if('serviceWorker' in navigator) {
+        /*if('serviceWorker' in navigator) {
             navigator.serviceWorker.register('https://hosp-nckm.github.io/web/notification/sw.js');
             navigator.serviceWorker.ready.then( registration => {
                registration.active.postMessage({main: msg});
             });         
-       }  
+       }  */
+      channel.postMessage({main: msg}, location.origin);      
     }
 
 
@@ -75,10 +77,8 @@
     }
         
     // From your client pages:
-    const channel = new BroadcastChannel('sw-messages');
     channel.addEventListener('message', event => {
     console.log('Received', event.data);
-
     });
 </script>
 </html>
