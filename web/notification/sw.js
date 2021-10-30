@@ -144,6 +144,9 @@ channel.onmessage = function (event) {
 //Single Message
 addEventListener('message', event => {
 	console.log('BC_msg',event.data);
+	if(event.data.main=='ask'){
+		console.log("main==ask");
+	}
 	if(event.data.client=='1'){		
 		console.log("yes_due");
 		notify(event.data.day,event.data.item);
