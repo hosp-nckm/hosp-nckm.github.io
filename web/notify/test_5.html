@@ -221,8 +221,8 @@ channel.addEventListener('message', event => {
 
 function setLocalStorage(){
     var due = document.querySelector('input[id="due"]').value;
-    alert(due);
-    //localStorage.setItem('Date_due', due);
+    //alert(due);
+    localStorage.setItem('Date_due', due);
 }
 
 function frontendNotification(){
