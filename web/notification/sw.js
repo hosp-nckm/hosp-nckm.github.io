@@ -122,7 +122,7 @@ function notify(day,item) {
 
 function Broadcast(msg_s2c){
 	// From service-worker.js:
-  const channel = new BroadcastChannel('sw-messages');
+  //const channel = new BroadcastChannel('sw-messages');
   channel.postMessage({Broadcast_s2c: msg_s2c});
 }
 
