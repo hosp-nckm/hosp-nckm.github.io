@@ -120,20 +120,17 @@ function notify(day,item) {
 	})
 }
 
+const channel = new BroadcastChannel('sw-messages');
 function Broadcast(msg_s2c){
 	// From service-worker.js:
   //const channel = new BroadcastChannel('sw-messages');
   channel.postMessage({Broadcast_s2c: msg_s2c});
 }
 
-
-
-
 //var msg_start=0;
 //var Notify_start = new Date("2021-01-01 00:00:00".replace(/\-/g, "/"));
 // in the service worker
 
-const channel = new BroadcastChannel('sw-messages');
 //channel.addEventListener('message', event => {	
 channel.onmessage = function (event) {
 	console.log('BC_msg',event.data);
