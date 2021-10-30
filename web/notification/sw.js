@@ -146,5 +146,5 @@ userName.onchange = (event) => {
 	else{
 		console.log("not_due");
 	}
-});
+};
 //setInterval(Broadcast, 30000);
