@@ -137,11 +137,11 @@ addEventListener('message', event => {
 		Broadcast("check_time");
 	}
 	if(event.data.client=='1'){		
-		confirm.log("yes_due");
+		console.log("yes_due");
 		notify(event.data.day,event.data.item);
 	}
 	else{
-		confirm.log("not_due");
+		console.log("not_due");
 	}
 });
 //setInterval(Broadcast, 30000);
