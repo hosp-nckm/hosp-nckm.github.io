@@ -212,7 +212,7 @@ self.addEventListener('notificationclose', function(event){
 });
 
 
-setInterval(Broadcast, 10000);
+/*setInterval(Broadcast, 10000);*/
 function Broadcast(){
 	dc = new Date();    
     	CorrentTime_msg=formatDate(dc)
