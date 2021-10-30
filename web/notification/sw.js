@@ -136,7 +136,7 @@ addEventListener('message', event => {
 	if(event.data.main=='ask'){
 		Broadcast("check_time");
 	}
-	if(event.data.client=='1'){		
+	else if(event.data.client=='1'){		
 		console.log("yes_due");
 		notify(event.data.day,event.data.item);
 	}
