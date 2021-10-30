@@ -132,7 +132,10 @@ function Broadcast(msg_s2c){
 //var msg_start=0;
 //var Notify_start = new Date("2021-01-01 00:00:00".replace(/\-/g, "/"));
 // in the service worker
-addEventListener('message', event => {	
+
+const channel = new BroadcastChannel('sw-messages');
+//addEventListener('message', event => {	
+channel.onmessage = function(event) {
 	if(event.data.main=='ask'){
 		Broadcast("check_time");
 	}
