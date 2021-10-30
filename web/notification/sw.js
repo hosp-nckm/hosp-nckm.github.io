@@ -132,27 +132,31 @@ function Broadcast(msg_s2c){
 // in the service worker
 //Broadcast Message
 channel.onmessage = function (event) {
-	console.log('BC_msg',event.data);
+	//console.log('BC_msg',event.data);
+        if(event.data.client=='1'){		
+		console.log("Broadcast rec =1");
+		//notify(event.data.day,event.data.item);
+	}
 	if(event.data.main=='ask'){
 		Broadcast("check_time");
 	}
 	else{
-		console.log("main_wrong");
+		console.log("main_wrong",event.data);
 	}
 };
 
 //Single Message
 addEventListener('message', event => {
-	console.log('BC_msg',event.data);
+	//console.log('BC_msg',event.data);
 	if(event.data.main=='ask'){
-		console.log("main==ask");
+		console.log("single rec =ask");
 	}
 	if(event.data.client=='1'){		
 		console.log("yes_due");
 		notify(event.data.day,event.data.item);
 	}
 	else{
-		console.log("not_due");
+		console.log("not_due",event.data);
 	}
 });
 //setInterval(Broadcast, 30000);
