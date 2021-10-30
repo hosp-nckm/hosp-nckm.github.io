@@ -135,7 +135,7 @@ function Broadcast(msg_s2c){
 
 const channel = new BroadcastChannel('sw-messages');
 //addEventListener('message', event => {	
-channel.onmessage = function(event) {
+userName.onchange = (event) => {
 	if(event.data.main=='ask'){
 		Broadcast("check_time");
 	}
