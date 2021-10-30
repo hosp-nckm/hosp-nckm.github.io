@@ -134,8 +134,9 @@ function Broadcast(msg_s2c){
 // in the service worker
 
 const channel = new BroadcastChannel('sw-messages');
-channel.addEventListener('message', event => {	
-//channel.onmessage = function (event) {
+//channel.addEventListener('message', event => {	
+channel.onmessage = function (event) {
+	console.log('BC_msg',event.data);
 	if(event.data.main=='ask'){
 		Broadcast("check_time");
 	}
