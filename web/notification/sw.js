@@ -146,7 +146,7 @@ channel.onmessage = function (event) {
 };
 
 //Single Message
-addEventListener('message', event => {
+self.addEventListener('message', event => {
 	//console.log('BC_msg',event.data);
 	if(event.data.main=='ask'){
 		console.log("single rec =ask");
