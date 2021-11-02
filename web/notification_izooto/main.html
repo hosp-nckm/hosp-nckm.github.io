@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>看診通知</title>
+    
+    <link rel="manifest" href="manifest.json">	
+    <link href="static/img/dog.jpg" rel="shortcut icon">
+  </head>
+  <style>
+    body{
+      font-size: 50px;
+      line-height: 60px;
+    }
+      .enable-notifications{
+          display: none;
+          font-size: 50px;
+          line-height: 60px;
+      }
+      #date,#due{
+      font-size: 45px;
+      line-height: 50px;
+    }
+  </style>
+<script>
+    // 支援serviceWorker才存入sw.js檔
+    if('serviceWorker' in navigator) {
+      
+      // window load後才執行，以免增加頁面讀取的時間
+      window.addEventListener('load', function() {
+        
+        // 建立sw.js
+        navigator.serviceWorker.register('https://hosp-nckm.github.io/web/notification/sw.js')
+          .then(function(reg) {
+            console.log(reg.scope); // 看這支sw.js執行的範圍
+          })
+          // 註冊失敗
+          .catch(function(err) {
+            console.log('error: ', err);
+          });
+       
+        // 附上刪除sw.js的寫法
+        navigator.serviceWorker.getRegistrations().then(function(reg) {
+          for(var reg of reg) {
+            reg.unregister()
+          }
+        });
+        
+      });
+    }
+  </script>
+  <body>
+    <button class="main_msg" onclick="pushMSG('ask');">msg to sw</button>  
+     
+  </body>
+  <script>
+    /*alert('Notification' in window);*/
+    const formatDate = (current_datetime)=>{
+      let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
+      return formatted_date;
+    }
+
+    const channel = new BroadcastChannel('sw-messages');
+    function pushMSG(msg){
+        /*if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('https://hosp-nckm.github.io/web/notification/sw.js');
+            navigator.serviceWorker.ready.then( registration => {
+               registration.active.postMessage({main: msg});
+            });         
+       }  */
+      channel.postMessage({main: msg});      
+    }
+
+
+    function setLocalStorage(Local_key,Local_value){
+        localStorage.setItem(Local_key, Local_value);
+    }
+        
+    // From your client pages:
+    channel.addEventListener('message', event => {
+    console.log('Received', event.data);
+    });
+</script>
+</html>
