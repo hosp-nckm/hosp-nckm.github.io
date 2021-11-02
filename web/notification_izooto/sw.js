@@ -1,3 +1,4 @@
+importScripts(['https://ga.getresponse.com/wpn/gr_sw.js']);
 // 引用workbox build
 /*importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
