@@ -131,7 +131,7 @@ function Broadcast(msg_s2c){
 //var Notify_start = new Date("2021-01-01 00:00:00".replace(/\-/g, "/"));
 // in the service worker
 //Broadcast Message
-channel.onmessage = function (event) {
+/*channel.onmessage = function (event) {
 	//console.log('BC_msg',event.data);
         if(event.data.client=='1'){		
 		console.log("Broadcast rec =1");
@@ -143,14 +143,14 @@ channel.onmessage = function (event) {
 	else{
 		console.log("main_wrong",event.data);
 	}
-};
+};*/
 
 //Single Message
 self.addEventListener('message', event => {
 	//console.log('BC_msg',event.data);
-	if(event.data.main=='ask'){
+	/*if(event.data.main=='ask'){
 		console.log("single rec =ask");
-	}
+	}*/
 	if(event.data.client=='1'){		
 		console.log("yes_due");
 		notify(event.data.day,event.data.item);
@@ -159,4 +159,4 @@ self.addEventListener('message', event => {
 		console.log("not_due",event.data);
 	}
 });
-//setInterval(Broadcast, 30000);
+setInterval(Broadcast("check_time");, 7200000);
