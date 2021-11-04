@@ -163,6 +163,7 @@
     // From your client pages:
     const channel = new BroadcastChannel('sw-messages');
     channel.addEventListener('message', event => {
+      alert(event.data.Broadcast_s2c);
       console.log('Received', event.data);
       //alert((event.data).toString() );
           if(event.data.Broadcast_s2c=="check_time"){
