@@ -257,7 +257,12 @@
 			  }
           }
 		  else if(event.data.Broadcast_s2c=="sure"){
-			localStorage.setItem(event.data.day, "0");
+			  if(localStorage.getItem(LS[i])!="0"){
+				localStorage.setItem(event.data.day, "0");
+			  }
+			  else{				  
+				localStorage.setItem('Date_due_2', "0");
+			  }
 		  }
       
     });
