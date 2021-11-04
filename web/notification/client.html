@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>看診提醒</title>
+<link href="./static/css/style.css" rel="stylesheet" type="text/css" media="screen" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="manifest" href="manifest.json">	
+    <link href="static/img/dog.jpg" rel="shortcut icon">
+	
+</head>
+<script>
+    // 支援serviceWorker才存入sw.js檔
+    if('serviceWorker' in navigator) {
+      
+      // window load後才執行，以免增加頁面讀取的時間
+      window.addEventListener('load', function() {
+        
+        // 建立sw.js
+        navigator.serviceWorker.register('https://hosp-nckm.github.io/web/notification/sw.js')
+          .then(function(reg) {
+            console.log(reg.scope); // 看這支sw.js執行的範圍
+          })
+          // 註冊失敗
+          .catch(function(err) {
+            console.log('error: ', err);
+          });
+       
+        // 附上刪除sw.js的寫法
+        navigator.serviceWorker.getRegistrations().then(function(reg) {
+          for(var reg of reg) {
+            reg.unregister()
+          }
+        });
+        
+      });
+    }
+  </script>
+<!-- 1 START ///////////////////////////////////////-->
+<script>
+	$(function(){
+		showForNotificationPermission();
+		//alert(Notification.permission);
+		//$("#header-placehold").load("./header.html");
+		//$("#footer-placehold").load("./footer.html");
+	});
+
+</script>
+<body>
+<div id="wrapper">
+	<div id="header-placehold">
+	<!--object align="center" width="100%" height="100%" data="header.html" ></object-->
+
+	</div>
+	<!--<form method="POST" action="file:///home/kitty/%E6%A1%8C%E9%9D%A2/temp/BEST/templated-interchange/index%20(%E5%89%AF%E6%9C%AC).html#">
+        <input type="submit" value="首頁" />	-->
+	<!-- end #menu -->
+	<div id="page">
+		<div id="page-bgtop">
+			<div id="page-bgbtm_0">
+				<div id="content">					
+							
+					<div class="post">
+						<h2 class="首頁"><a class="a_0" href="#">看診提醒<br><br>是否允許推播通知： </a></h2><br><br>
+							<div class="entry">
+								<button class="enable-notifications">允許通知</button><br><br>
+							<br>
+						</div>
+					</div>
+
+					<div style="clear: both;">&nbsp;</div>
+				</div>
+				<div style="clear: both;">&nbsp;</div>
+			</div>
+			
+			<div id="page-bgbtm">
+				<div id="content">					
+							
+					<div class="post">
+						<h2 class="首頁"><a href="#">看診提醒 </a></h2><br><br>
+							<div class="entry">
+								開始日期：<input id="Date_due_1" type="date" value="" onchange="setLocalStorage();"><br>
+							<br>
+						</div>
+					</div>
+
+					<div style="clear: both;">&nbsp;</div>
+				</div>
+				<div style="clear: both;">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<!-- end #page -->	
+</div>
+<div id="footer-placehold">
+</div>
+<script>
+    var enableNotifications = document.querySelectorAll('.enable-notifications');
+    console.log(enableNotifications.length);
+    if ('Notification' in window) {
+          /*console.log(enableNotifications[i].style.display);*/
+      for (var i= 0; i < enableNotifications.length; i++) {
+          console.log(enableNotifications[i].style.display);
+          enableNotifications[i].style.display = 'inline-block';
+          enableNotifications[i].addEventListener('click', askForNotificationPermission);
+      }
+    }
+	else{
+		alert("此留爛氣不支援推播通知功能，請改用chorm瀏覽");
+	}
+
+    function askForNotificationPermission() {
+        Notification.requestPermission(function(status){
+            console.log('User Choice', status);
+            if (status !== 'granted') {
+                console.log('推播允許被拒絕了!');
+				//alert(Notification.permission);
+            } else {
+				showForNotificationPermission();
+                setPushSubscribe();//displayNotification();
+            }
+        });
+    }
+	function showForNotificationPermission() {
+		//alert(Notification.permission);
+            if (Notification.permission == 'granted') {
+                document.getElementById("page-bgbtm_0").style.display="none";
+                document.getElementById("page-bgbtm").style.display="block";
+            } else {                
+                document.getElementById("page-bgbtm_0").style.display="block";
+            }
+    }
+
+	
+    function displayNotification(){
+        if('serviceWorker' in navigator){
+            var options = {
+                body: '成功開啟提醒！！！'           
+            };
+            navigator.serviceWorker.ready
+                .then(function(sw){
+                    sw.showNotification('看診提醒', options);
+                })
+        }  
+        
+    }
+        
+    //從伺服器發出訊息不管使用者是不是正在瀏覽網站
+    function setPushSubscribe(){
+      if (!('serviceWorker' in navigator)) 
+            return;
+        
+        navigator.serviceWorker.ready
+            .then(function(sw){
+              console.log("sw : ",sw);
+              reg = sw;
+              return sw.pushManager.getSubscription();
+            })
+            .then(function(sub){
+                console.log("sub : ",sub);
+                if(sub === null){
+                      //建立新的訂閱
+                      var vapidPKey = 'BIXV6a4fs-lgvVTZ3o-1UZOL2S9Fes8-pujFvLIZLjE-uR71MrE2W2YMcz-0DzYj4FMbCWwnQ3hZjgZf-9plzKc';
+                          var convertedVapidPKey = urlBase64ToUint8Array(vapidPKey);
+                          console.log("reg : ",reg);
+                          return reg.pushManager.subscribe({
+                              userVisibleOnly: true,
+                              applicationServerKey: convertedVapidPKey
+                          }).then(function(newSub){
+                                console.log("newSub : ",newSub);
+                                /*return fetch('https://notify-95b9f.firebaseio.com/subscriptions.json', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-TYpe': 'application/json',
+                                        'Accept': 'application/json'
+                                    },
+                                    body: JSON.stringify(newSub)
+                                });*/
+                            }).then(function(response){
+                                    if(response.ok)
+                                        displayNotification();
+                                })
+                                .catch(function(err){
+                                    console.log('訂閱失敗',err);
+                                });
+                      
+                }else{
+                    //已經訂閱
+                }
+            });
+    }
+
+    function urlBase64ToUint8Array(base64String){
+        var padding = '='.repeat((4 - base64String.length % 4) % 4);
+        var base64 = (base64String + padding)
+            .replace(/\-/g, '+')
+            .replace(/_/g,'/');
+        var rawData = window.atob(base64);
+        var outputArr = new Uint8Array(rawData.length);
+
+        for (var i = 0; i < rawData.length; ++i ){
+            outputArr[i] = rawData.charCodeAt(i);
+        }    
+        return outputArr;
+    }    
+
+    function setLocalStorage(){
+        var due = document.querySelector('input[type="date"]');
+		//alert(due.value);
+        //alert(due.value);
+		// add a day
+		var date=new Date(due.value);
+		
+		var date_2=new Date(due.value);
+
+		var duration=1;
+		date.setDate(date.getDate() + duration);
+		//alert(date);
+		var duration_2=2;
+		date_2.setDate(date_2.getDate() + duration_2);
+
+        localStorage.setItem(due.id, formatDate(date).substr(0,10));
+		localStorage.setItem("Date_due_2", formatDate(date_2).substr(0,10));
+    }
+
+    // From your client pages:
+    const channel = new BroadcastChannel('sw-messages');
+    channel.addEventListener('message', event => {
+      alert(event.data.Broadcast_s2c);
+      console.log('Received', event.data);
+      //alert((event.data).toString() );
+	  var LS=['Date_due_1','Date_due_2'];
+          if(event.data.Broadcast_s2c=="check_time"){
+			  for(var i=0;i<LS.length;i++){
+					if(localStorage.getItem(LS[i])!="0"){
+							var Date_due=new Date(localStorage.getItem(LS[i]).replace(/\-/g, "/"));
+							var Date_test=new Date();
+
+							if(Date_test.getDate()==Date_due.getDate()){
+							
+							if('serviceWorker' in navigator) {
+									navigator.serviceWorker.register('https://hosp-nckm.github.io/web/notification/sw.js');
+									navigator.serviceWorker.ready.then( registration => {
+										registration.active.postMessage({client:'1' ,
+																		day:localStorage.getItem('Date_due_1'),
+																		item:"超音波檢查抽血"
+																		});
+									});         
+								} 
+							}
+							else{
+								break;
+							}
+					}
+			  }
+          }
+		  else if(event.data.Broadcast_s2c=="sure"){
+			localStorage.setItem(event.data.day, "0");
+		  }
+      
+    });
+
+	
+	
+    
+    /*channel.onmessage = function (event) {
+      console.log('BC_msg',event.data);
+    };*/
+    
+    const formatDate = (current_datetime)=>{
+      let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
+      return formatted_date;
+    }
+</script>
+</html>
