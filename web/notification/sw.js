@@ -159,4 +159,8 @@ self.addEventListener('message', event => {
 		console.log("not_due",event.data);
 	}
 });
-setInterval(Broadcast("check_time"), 30000);
+
+function ask(){
+	Broadcast("check_time");
+}
+setInterval(ask(), 3000);
