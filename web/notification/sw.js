@@ -85,7 +85,8 @@ self.addEventListener('notificationclick', function(event) {
     console.log(notification);
     if(action === 'confirm') {
         console.log('使用者點選確認');
-        notification.close();
+	Broadcast_reply("sure",'Date_due_1')
+        /*notification.close();*/
     } else {
         console.log(action);
     }
@@ -125,6 +126,12 @@ function Broadcast(msg_s2c){
 	// From service-worker.js:
   //const channel = new BroadcastChannel('sw-messages');
   channel.postMessage({Broadcast_s2c: msg_s2c});
+}
+function Broadcast_reply(msg_s2c,msg_day){
+	// From service-worker.js:
+  //const channel = new BroadcastChannel('sw-messages');
+  channel.postMessage({Broadcast_s2c: msg_s2c,
+		      day:msg_day});
 }
 
 //var msg_start=0;
