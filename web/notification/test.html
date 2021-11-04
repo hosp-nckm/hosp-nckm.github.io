@@ -165,27 +165,29 @@
     channel.addEventListener('message', event => {
       console.log('Received', event.data);
       //alert((event.data).toString() );
-      var Date_due=new Date(localStorage.getItem('Date_due_1').replace(/\-/g, "/"));
-      var Date_test=new Date();
+          if(event.data.Broadcast_s2c=="check_time"){
+                var Date_due=new Date(localStorage.getItem('Date_due_1').replace(/\-/g, "/"));
+                var Date_test=new Date();
 
-      if(Date_test.getDate()==Date_due.getDate()){
-        
-        if('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('https://hosp-nckm.github.io/web/notification/sw.js');
-                navigator.serviceWorker.ready.then( registration => {
-                  registration.active.postMessage({client:'1' ,
-                                                    day:localStorage.getItem('Date_due_1'),
-                                                    item:"超音波檢查抽血"
-                                                    });
-                });         
-          } 
-      }
+                if(Date_test.getDate()==Date_due.getDate()){
+                  
+                  if('serviceWorker' in navigator) {
+                          navigator.serviceWorker.register('https://hosp-nckm.github.io/web/notification/sw.js');
+                          navigator.serviceWorker.ready.then( registration => {
+                            registration.active.postMessage({client:'1' ,
+                                                              day:localStorage.getItem('Date_due_1'),
+                                                              item:"超音波檢查抽血"
+                                                              });
+                          });         
+                    } 
+                }
+          }
       
     });
     
-    channel.onmessage = function (event) {
+    /*channel.onmessage = function (event) {
       console.log('BC_msg',event.data);
-    };
+    };*/
     
     const formatDate = (current_datetime)=>{
       let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
