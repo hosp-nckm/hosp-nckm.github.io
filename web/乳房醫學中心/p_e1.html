@@ -39,15 +39,20 @@
 		$("#header-placehold").load("./header.html");
 		$("#footer-placehold").load("./footer.html");
 
+		try { // statements to try
 
+			for(var i=0;i<data.length;i++){
 
-		for(var i=0;i<data.length;i++){
-
-		var row = document.createElement("tr");
-		row.innerHTML='<tr><td class="study_topic_text">'+data[i]["general"][0]+'</td><td class="study_stage_text">'+data[i]["general"][1]+'</td></tr>';
-		/*row .append(topic,stage)*/		
-		document.getElementById("study_general").appendChild(row);
-	}
+			var row = document.createElement("tr");
+			row.innerHTML='<tr><td class="study_topic_text">'+data[i]["general"][0]+'</td><td class="study_stage_text">'+data[i]["general"][1]+'</td></tr>';
+			/*row .append(topic,stage)*/		
+			document.getElementById("study_general").appendChild(row);
+			}
+		}
+		catch (e) {
+			window.location.replace("p_error.html");
+		}	
+			
 	});
 
 	//alert(data[0]["id"]);
