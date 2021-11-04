@@ -131,11 +131,11 @@ function Broadcast(msg_s2c){
 //var Notify_start = new Date("2021-01-01 00:00:00".replace(/\-/g, "/"));
 // in the service worker
 //Broadcast Message
-/*channel.onmessage = function (event) {
+channel.onmessage = function (event) {
 	//console.log('BC_msg',event.data);
         if(event.data.client=='1'){		
 		console.log("Broadcast rec =1");
-		//notify(event.data.day,event.data.item);
+		notify(event.data.day,event.data.item);
 	}
 	if(event.data.main=='ask'){
 		Broadcast("check_time");
@@ -143,7 +143,7 @@ function Broadcast(msg_s2c){
 	else{
 		console.log("main_wrong",event.data);
 	}
-};*/
+};
 
 //Single Message
 self.addEventListener('message', event => {
@@ -159,4 +159,4 @@ self.addEventListener('message', event => {
 		console.log("not_due",event.data);
 	}
 });
-setInterval(Broadcast("check_time"), 60000);
+setInterval(Broadcast("check_time"), 0000);
