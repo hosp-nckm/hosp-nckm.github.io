@@ -40,37 +40,45 @@
 	$(function(){
 		$("#header-placehold").load("./header.html");
 		$("#footer-placehold").load("./footer.html");
+		
+		try { // statements to try
 
-		const cancer_type_set = new Set();
+			const cancer_type_set = new Set();
 
-		for(var i=0;i<data.length;i++){
+			for(var i=0;i<data.length;i++){
 
-			var row = document.createElement("tr");
-			row.innerHTML='<td class="IRB_pro">'+data[i]["IRB編號"]+'</td><td class="study_phase_pro">'+data[i]["pro"][0]+'</td> <td class="study_topic_pro">'+data[i]["pro"][1]+'</td> <td class="study_cancer_type_pro">'+data[i]["pro"][2]+'</td><td class="study_stage_pro">'+data[i]["pro"][3]+'</td><td class="study_host_pro">'+data[i]["pro"][4]+'</td> <td class="study_nurse_pro">'+data[i]["pro"][5]+'</td><td class="study_state_pro">'+data[i]["pro"][6]+'</td>'
-			/*row .append(topic,stage)*/		
-			document.getElementById("study_general").appendChild(row);
-			
-			for(var j=0;j<data[i]["search"].length;j++){
-				if(data[i]["search"][j]!="")
-				cancer_type_set.add(data[i]["search"][j])
+				var row = document.createElement("tr");
+				row.innerHTML='<td class="IRB_pro">'+data[i]["IRB編號"]+'</td><td class="study_phase_pro">'+data[i]["pro"][0]+'</td> <td class="study_topic_pro">'+data[i]["pro"][1]+'</td> <td class="study_cancer_type_pro">'+data[i]["pro"][2]+'</td><td class="study_stage_pro">'+data[i]["pro"][3]+'</td><td class="study_host_pro">'+data[i]["pro"][4]+'</td> <td class="study_nurse_pro">'+data[i]["pro"][5]+'</td><td class="study_state_pro">'+data[i]["pro"][6]+'</td>'
+				/*row .append(topic,stage)*/		
+				document.getElementById("study_general").appendChild(row);
+
+				for(var j=0;j<data[i]["search"].length;j++){
+					if(data[i]["search"][j]!="")
+					cancer_type_set.add(data[i]["search"][j])
+				}
 			}
+			//alert(cancer_type[a]);
+			cancer_type =Array.from(cancer_type_set);
+			//console.log(cancer_type);
+		//alert(cancer_type);
+
+	    // 加入癌症類別選線
+		for(var k=0;k<cancer_type.length;k++){
+				//alert(cancer_type[k]);
+				var sel=document.createElement('div');
+				sel.innerHTML=('<p class="menu_list" onclick="select(this);"> ☐ '+cancer_type[k]+'</p>').trim();
+				//console.log(sel.childNodes);
+				document.getElementById("cancer_type").appendChild(sel);
+
+
+		    //<p class="menu_list" onclick="select(this);"> ☐ 乳房外科+整形外科</p>
+			}
+		
 		}
-		//alert(cancer_type[a]);
-		cancer_type =Array.from(cancer_type_set);
-		//console.log(cancer_type);
-	//alert(cancer_type);
-
-    // 加入癌症類別選線
-	for(var k=0;k<cancer_type.length;k++){
-			//alert(cancer_type[k]);
-			var sel=document.createElement('div');
-			sel.innerHTML=('<p class="menu_list" onclick="select(this);"> ☐ '+cancer_type[k]+'</p>').trim();
-			//console.log(sel.childNodes);
-			document.getElementById("cancer_type").appendChild(sel);
-
-
-            //<p class="menu_list" onclick="select(this);"> ☐ 乳房外科+整形外科</p>
-		}
+		catch (e) {
+			window.location.replace("p_error.html");
+		}	
+			
 	});		
 
     // 勾選 癌症類別選線
