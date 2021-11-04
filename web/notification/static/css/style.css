@@ -357,11 +357,11 @@ marquee {
 #page-bgbtm,#page-bgbtm_0 {
 	margin: 0px auto;
 	padding: 40px 30px 0px 30px;
-	/*display:none;*/
+	display:none;
 }
 #page-bgbtm_0 {
 	background-color: #fcc1aa;/*rgb(252, 250, 240);*/
-	/*display:block;*/
+	display:block;
 }
 
 /* Content */
