@@ -42,6 +42,13 @@
 <script>
 	$(function(){
 		showForNotificationPermission();
+		if(localStorage.getItem('Date_due_0')!=""){
+		    document.querySelector('input[type="date"]').value=localStorage.getItem('Date_due_0');
+		}else{
+		    document.querySelector('Date_due_0')="";
+		    document.querySelector('Date_due_1')="";
+		    document.querySelector('Date_due_2')="";
+		}
 		//alert(Notification.permission);
 		//$("#header-placehold").load("./header.html");
 		//$("#footer-placehold").load("./footer.html");
@@ -223,6 +230,7 @@
 
         localStorage.setItem(due.id, formatDate(date).substr(0,10));
 		localStorage.setItem("Date_due_2", formatDate(date_2).substr(0,10));
+		localStorage.setItem("Date_due_0", due.value);
     }
 
     // From your client pages:
