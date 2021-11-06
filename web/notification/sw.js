@@ -170,4 +170,4 @@ self.addEventListener('message', event => {
 function ask(){
 	Broadcast("check_time");
 }
-setInterval(ask, 3600000);
+setInterval(ask, 300000);
