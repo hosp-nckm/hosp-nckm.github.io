@@ -83,14 +83,14 @@ img.aligncenter {
     /*background-size: 100% 150%;*/
 }
 @keyframes changeBg{
-    0%,100%  {background-image: url("../img/header/header_0.jpg") ;                
+    0%,100%  {background-image: url("../img/header/header_2.jpg") ;                
         background-size: 100% 180%;
     }   
-    20%  {background-image: url("../img/header/header_0.jpg") ;}
-    25%  {background-image: url("../img/header/header_1.jpg") ;
+    20%  {background-image: url("../img/header/header_2.jpg") ;}
+    25%  {background-image: url("../img/header/header_2.jpg") ;
         background-size: 100% 130%;
     }
-    45%  {background-image: url("../img/header/header_1.jpg") ;
+    45%  {background-image: url("../img/header/header_2.jpg") ;
         background-size: 100% 130%;
     }
     /*40% {background-image: url("../img/header_2.jpg");
@@ -103,13 +103,13 @@ img.aligncenter {
     70% {background-image: url("../img/header/header_2.jpg");    
         background-size: 100% 100%;
     }
-    75% {background-image: url("../img/header/header_3.jpg");    
+    75% {background-image: url("../img/header/header_2.jpg");    
         background-size: 100% 180%;
     }	
-    85% {background-image: url("../img/header/header_3.jpg");
+    85% {background-image: url("../img/header/header_2.jpg");
         background-size: 100% 125%;
     }
-    99% {background-image: url("../img/header/header_3.jpg");
+    99% {background-image: url("../img/header/header_2.jpg");
         background-size: 100% 125%;
     }
  }
